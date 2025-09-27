@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | MonkeyPOS</title>
+    <link rel="stylesheet" href="style.">
+</head>
+<body>
+    <form id="login-form" novalidate>
+        <h2>MonkeyPOS</h2>
+        <p>Masukkan ID dan Kata Sandi Karyawan Anda.</p>
+
+        <div class="input-login-form">
+            <label for="employee-id">ID Karyawan</label>
+            <input type="text" id="employee-id" placeholder="Masukkan ID Anda" required>
+        </div>
+
+        <div class="input-login-form">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Masukkan password" required>
+        </div>
+
+        <button type="submit" class="login-button">Sign in</button>
+
+        <p id="error-message" class="error-message"></p>
+    </form>
+    <script src="login.js"></script>
+</body>
+</html>
