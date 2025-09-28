@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | MonkeyPOS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <form id="login-form" novalidate>
+            <h2 class="login-subtitle">Sign In</h2>
+            <p class="login-teks">Silakan masukkan ID dan Kata Sandi Karyawan Anda.</p>
+            
+            <div class="login-input-group">
+                <label for="employee-id">ID Karyawan</label>
+                <input type="text" id="employee-id" name="employee-id" placeholder="Masukkan ID" required>
+            </div>
+            
+            <div class="login-input-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan Password" required>
+            </div>
+            
+            <button type="submit" class="login-button">Masuk</button>
+            
+            <p id="login-error-message" class="login-error-message"></p>
+        </form>
+    </div>
+</body>
+</html>
