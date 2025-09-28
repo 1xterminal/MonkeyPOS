@@ -34,6 +34,7 @@ body {
   line-height: 1.5;
 }
 
+/* Login Page */
 /* Teks login form */
 .login-subtitle {
     margin-top: 0;
@@ -104,4 +105,163 @@ body {
     font-size: 14px;
     height: 20px;
     font-weight: bold;
+}
+
+/* Dashboard Page */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    display: flex;
+    flex: 0 0 250px;
+    flex-direction: column;
+    background-color: var(--color-background-offset);
+    padding: 2rem;
+    border-right: 1px solid #e0e0e0;
+}
+
+.sidebar-header {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.sidebar-header span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+/* Navigation */
+.nav-list {
+    list-style: none;
+}
+
+.nav-item {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem;
+    display: block;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+    background-color: var(--color-secondary-highlight);
+    color: var(--color-text-highlight);
+}
+
+/* Logout Button */
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.logout-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: 1px;
+    border-radius: 8px;
+    
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: var(--color-primary-shadow);
+    color: var(--color-text-highlight);
+}
+
+/* Konten Utama (Kolom Kanan) */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.main-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+/* Statistik */
+.stats-cards {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 220px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.card-value {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+/* Grafik */
+.chart-section {
+    margin-top: 2.5rem;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.filter-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.chart-placeholder {
+    height: 350px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    background-color: var(--color-background-offset);
 }
