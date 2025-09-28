@@ -1,0 +1,35 @@
+:root {
+  /* primary colors */
+  --color-primary: #FFCD42;
+  --color-primary-shadow: #F3A62B;
+  --color-primary-highlight: #FFEC70;
+
+  /* secondary colors */
+  --color-secondary: #FFE8BD;
+  --color-secondary-shadow: #EFCE9E;
+  --color-secondary-highlight: #FFF6C7;
+
+  /* background */
+  --color-background: #FFFFFF;
+  --color-background-offset: #EEF7FD;
+
+  /* text */
+  --color-text: #082C4C;
+  --color-text-shadow: #000000;
+  --color-text-highlight: #225F74;
+}
+
+/* basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body styling */
+body {
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.5;
+}
