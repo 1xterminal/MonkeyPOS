@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonkeyPOS Members List</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <div class="members-container">
+        <div class="members-navbar">
+            <h2><a href="dashboard.html">MonkeyPOS</a></h2>
+            <nav>
+                <ul>
+                    <a href="pos_terminal.html"><li>Penjualan Baru</li></a>
+                    <a href="products_list.html"><li>Manajemen Produk</li></a>
+                    <a href="sales_history.html"><li>Riwayat Penjualan</li></a>
+                    <a href="members_list.html"><li>Daftar Member</li></a>
+                    <a href="report.html"><li>Halaman Laporan</li></a>
+                </ul>
+            </nav>
+        </div>
+        <div class="members-content">
+            <input type="text" placeholder="Cari nama atau nomor telepon member">
+            <button type="submit">Cari</button>
+            <div class="members-table">
+                <table>
+                    <thead>
+                        <tr>Nomor</tr>
+                        <tr>Nama Member</tr>
+                        <tr>Nomor Telepon</tr>
+                        <tr>Email</tr>
+                        <tr>Ubah</tr>
+                        <tr>Hapus</tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="members-add">
+                <h2>Tambah Member Baru</h2>
+                <form action="">
+                    <input type="text" placeholder="Nama Member">
+                    <input type="text" placeholder="Nomor Telepon">
+                    <input type="text" placeholder="Email">
+                    <button type="submit">Tambah</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
