@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | MonkeyPOS</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -16,24 +19,32 @@
             </div>
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="#" class="nav-link">Penjualan Baru</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Manajemen Produk</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Riwayat Penjualan</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Member</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Laporan</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fi fi-rr-layout-fluid"></i> Penjualan Baru</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fi fi-rs-boxes"></i> Manajemen Produk</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fi fi-rr-time-past"></i> Riwayat Penjualan</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class='bx bx-id-card'></i> Member</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class='bx bx-bar-chart-square'></i> Laporan</a></li>
                 </ul>
             </nav>
-
-            <div class="sidebar-footer">
-                <button type="submit" class="logout-btn">Log Out</button>
-            </div>
         </aside>
 
 
         <main class="main-content">
             <header class="main-header">
-                <h2>Selamat Datang, EMP1234</h2>
-            </header>
+                <div class="header-title">
+                    <h1>Dashboard</h1>
+                </div>
+            
+                <div class="header-actions">
+                    <div class="welcome-group">
+                        <i class='bx bxs-user'></i>
+                        <span class="welcome-message">Selamat Datang, EMP1234</span>
+                    </div>
+                    <button class="logout-button" title="Log Out">
+                        <i class='bx bx-log-out'></i>
+                    </button>
+                </div>
+                </header>
 
             <section class="stats-cards">
                 <div class="card">
