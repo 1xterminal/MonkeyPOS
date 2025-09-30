@@ -60,7 +60,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Tabel input */
+/* Tabel login input */
 .login-input-group {
     margin-bottom: 20px;
     text-align: left;
@@ -120,7 +120,7 @@ body {
     flex-direction: column;
     background-color: var(--color-secondary-highlight);
     padding: 2rem;
-    border-right: 1px solid var(--color-secondary-shadow);
+    border-right: 1px solid var(--color-primary-highlight);
     box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.15);
 }
 
@@ -173,37 +173,10 @@ body {
     font-size: 1.1rem;
 }
 
-.nav-link:hover {
-    background-color: var(--color-secondary-highlight);
-    color: var(--color-text-highlight);
-}
-
-/* Logout Button */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.header-title h1 {
-    font-size: 2rem;
-    font-weight: 600;
+.nav-link:hover, .nav-link.active {
+    background-color: var(--color-primary);
     color: var(--color-text);
-    margin: 0;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.welcome-message {
-    font-size: 1rem;
-    color: var(--color-text-highlight);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* Tombol Logout */
@@ -232,71 +205,112 @@ body {
     font-size: 1rem;
 }
 
-/* Konten Utama (Kolom Kanan) */
-.main-content {
+/* Konten di kanan */
+.dashboard-main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-header-title h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.dashboard-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.dashboard-welcome-message {
+    font-size: 1rem;
+    color: var(--color-text-highlight);
+    font-weight: 500;
+}
+
+.dashboard-main-content {
     flex-grow: 1;
     padding: 2rem;
     overflow-y: auto;
 }
 
-.main-header h2 {
+.dashboard-main-header h2 {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 2rem;
 }
 
-/* Statistik */
-.stats-cards {
+/* Status card */
+.dashboard-stats-cards {
     display: flex;
     gap: 1.5rem;
     flex-wrap: wrap;
 }
 
-.card {
+.dashboard-card {
     flex: 1;
     min-width: 220px;
     background-color: var(--color-secondary-highlight);
     padding: 1.5rem;
-    border: 2px solid var(--color-secondary);
+    border: 2px solid var(--color-primary-highlight);
     border-radius: 8px;
+    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.15);
 }
 
-.card-title {
+.dashboard-card-title {
     font-size: 0.9rem;
     color: var(--color-text);
     margin-bottom: 0.5rem;
 }
 
-.card-value {
+.dashboard-card-value {
     font-size: 1.75rem;
     font-weight: bold;
     color: var(--color-text);
 }
 
 /* Grafik */
-.chart-section {
+.dashboard-chart-section {
     margin-top: 2.5rem;
 }
 
-.chart-header {
+.dashboard-chart-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.filter-button {
+.dashboard-chart-title-group h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.dashboard-chart-title-group p {
+    font-size: 1rem;
+    color: var(--color-text-highlight);
+    font-weight: 600;
+}
+
+.dashboard-filter-button {
     margin-left: 4px;
     padding: 0.6rem 1.2rem;
-    border: 1px solid var(--color-secondary-shadow);
+    border: 1px solid var(--color-primary-shadow);
     border-radius: 6px;
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-shadow);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3 ease;
 }
 
-.filter-button.active {
+.dashboard-filter-button.active {
     background-color: var(--color-secondary);
     color: var(--color-text);
     border-color: var(--color-secondary-shadow);
@@ -304,18 +318,19 @@ body {
     position: relative;
 }
 
-.filter-button:not(.active):hover {
+.dashboard-filter-button:not(.active):hover {
     background-color: var(--color-secondary-highlight);
     color: var(--color-text-highlight);
 }
 
-.chart-placeholder {
+.dashboard-chart-placeholder {
     height: 350px;
-    border: 1px solid var(--color-secondary-shadow);
+    border: 1px solid var(--color-primary-highlight);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-text);
     background-color: var(--color-secondary-highlight);
+    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.15);
 }

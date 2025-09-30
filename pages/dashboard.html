@@ -12,7 +12,7 @@
 <body>
 
     <div class="dashboard-container">
-
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="dashboard.html" class="logo">Monkey<span>POS</span></a>
@@ -28,15 +28,15 @@
             </nav>
         </aside>
 
-
-        <main class="main-content">
-            <header class="main-header">
-                <div class="header-title">
+        <!-- Isi Content -->
+        <main class="dashboard-main-content">
+            <header class="dashboard-main-header">
+                <div class="dashboard-header-title">
                     <h1>Dashboard</h1>
                 </div>
             
-                <div class="header-actions">
-                    <div class="welcome-group">
+                <div class="dashboard-header-actions">
+                    <div class="dashboard-welcome-group">
                         <i class='bx bxs-user'></i>
                         <span class="welcome-message">Selamat Datang, EMP1234</span>
                     </div>
@@ -46,31 +46,39 @@
                 </div>
                 </header>
 
-            <section class="stats-cards">
-                <div class="card">
-                    <p class="card-title">Total penjualan hari ini</p>
-                    <p class="card-value">Rp. 0</p>
+            <section class="dashboard-stats-cards">
+                <div class="dashboard-card">
+                    <p class="dashboard-card-title">Total penjualan hari ini</p>
+                    <p class="dashboard-card-value">Rp. 0</p>
                 </div>
-                <div class="card">
-                    <p class="card-title">Total transaksi hari ini</p>
-                    <p class="card-value">0 Transaksi</p>
+                <div class="dashboard-card">
+                    <p class="dashboard-card-title">Total transaksi hari ini</p>
+                    <p class="dashboard-card-value">0 Transaksi</p>
                 </div>
-                <div class="card">
+                <div class="dashboard-card">
                     <p class="card-title">Peringatan stok rendah</p>
                     <p class="card-value">0 Produk</p>
                 </div>
             </section>
 
-            <section class="chart-section">
-                <div class="chart-header">
-                    <button class="filter-button">1 tahun lalu</button>
-                    <button class="filter-button">1 bulan lalu</button>
-                    <button class="filter-button">30 hari lalu</button>
+            <section class="dashboard-chart-section">
+                <div class="dashboard-chart-header">
+                    <div class="dashboard-chart-title-group">
+                        <h3>Total Penjualan</h3>
+                        <p>Belum ada penjualan</p>
+                    </div>
+                    <div class="filter-group">
+                        <button class="dashboard-filter-button">3 Bulan Lalu</button>
+                        <button class="dashboard-filter-button">30 Hari Lalu</button>
+                        <button class="dashboard-filter-button">7 Hari Lalu</button>
+                    </div>
                 </div>
-                <div class="chart-placeholder">
-                    <span>Grafik Penjualan Akan Tampil di Sini</span>
+            
+                <div class="dashboard-chart-placeholder">
+                    <span>grafik penjualan</span>
                 </div>
             </section>
+        </main>
         </main>
 
     </div>
