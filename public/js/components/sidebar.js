@@ -21,7 +21,7 @@ function createSidebar(root, menus) {
       }).append(
         $("<img>", {
           "class": "logo",
-          "src": "public/img/logo/logo.svg",
+          "src": "../../public/img/logo/logo.svg",
           "alt": "logo"
         })
       ),
