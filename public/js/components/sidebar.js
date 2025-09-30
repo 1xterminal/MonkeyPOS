@@ -21,7 +21,7 @@ function createSidebar(root, menus) {
       }).append(
         $("<img>", {
           "class": "logo",
-          "src": "./logo.svg",
+          "src": "public/img/logo/logo.svg",
           "alt": "logo"
         })
       ),
@@ -51,41 +51,63 @@ $(document).ready(() => {
     [
       {
         "label": "Dashboard",
-        "icon": "point_of_sale",
-        "url": "#",
+        "icon": "dashboard",
+        "url": "dashboard.html",
         "top": true
       },
       {
-        "label": "Dashboard",
-        "icon": "dashboard",
-        "url": "#"
+        "label": "Terminal POS",
+        "icon": "point_of_sale",
+        "url": "pos_terminal.html"
       },
       {
-        "label": "Produk",
+        "label": "Daftar Produk",
         "icon": "box",
-        "url": "#"
+        "url": "product_list.html"
       },
       {
-        "label": "Riwayat",
+        "label": "Riwayat Penjualan",
         "icon": "history",
-        "url": "#"
+        "url": "sales_history.html"
       },
       {
-        "label": "Member",
+        "label": "Daftar Member",
         "icon": "badge",
-        "url": "#"
+        "url": "member_list.html"
       },
       {
         "label": "Laporan",
         "icon": "insert_chart",
-        "url": "#"
+        "url": "report.html"
       },
-      {
-        "label": "Pengaturan",
-        "icon": "settings",
-        "url": "#",
-        "bottom": true
-      },
+      // {
+      //   "label": "Pengaturan",
+      //   "icon": "settings",
+      //   "url": "#",
+      //   "bottom": true
+      // },
     ]
   );
 });
+
+
+function createMenu(data) {
+  const currentPage = window.location.pathname.split('/').pop();
+
+  const link = $("<a>", {
+    "class": "menu",
+    "href": data.url,
+    text: data.label
+  }).prepend(
+    $("<span>", {
+      "class": "material-symbols-outlined",
+      text: data.icon
+    })
+  );
+
+  if (data.url === currentPage) {
+    link.addClass("active");
+  }
+
+  return link;
+}
