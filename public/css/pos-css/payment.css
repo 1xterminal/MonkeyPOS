@@ -1,0 +1,183 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Variabel Warna dari Color Palette */
+:root {
+    --primary: #FFCD42;
+    --primary-shadow: #F3A62B;
+    --background: #FFFFFF;
+    --background-offset: #EEF7FD;
+    --text-color: #082C4C;
+    --text-highlight: #225F74;
+}
+
+/* Gaya Dasar */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--background-offset);
+    color: var(--text-color);
+}
+
+.payment-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--background);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.payment-header {
+    background-color: var(--text-color);
+    color: var(--background);
+    padding: 24px;
+    text-align: center;
+}
+
+.payment-header h1 {
+    margin-bottom: 16px;
+    font-size: 1.8rem;
+}
+
+.total-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--text-highlight);
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.total-display span {
+    font-size: 1rem;
+}
+
+.total-display strong {
+    font-size: 2.2rem;
+    margin-top: 4px;
+}
+
+.payment-body {
+    padding: 32px;
+}
+
+.payment-methods h2 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    color: var(--text-highlight);
+}
+
+.method-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.method-options label {
+    display: block;
+    position: relative;
+}
+
+.method-options input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.method-options span {
+    display: block;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.method-options input[type="radio"]:checked + span {
+    background-color: var(--primary-shadow);
+    color: var(--background);
+    border-color: var(--primary-shadow);
+    font-weight: 600;
+}
+
+.payment-details {
+    margin-top: 32px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.2rem;
+}
+
+.change-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-offset);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 24px;
+    font-size: 1.1rem;
+}
+
+.change-display strong {
+    font-size: 1.5rem;
+    color: var(--text-highlight);
+}
+
+.payment-footer {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background-color: #f7f7f7;
+}
+
+.btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--text-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-shadow);
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+}
+.btn-secondary:hover {
+    background-color: #ccc;
+}

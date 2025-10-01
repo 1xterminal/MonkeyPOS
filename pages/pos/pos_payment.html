@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - MonkeyPOS</title>
+    <link rel="stylesheet" href="../../public/css/pos-css/payment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="payment-container">
+        <header class="payment-header">
+            <h1>Detail Pembayaran</h1>
+            <div class="total-display">
+                <span>Total yang Harus Dibayar</span>
+                <strong id="total-amount">Rp 0</strong>
+            </div>
+        </header>
+
+        <main class="payment-body">
+            <section class="payment-methods">
+                <h2>Pilih Metode Pembayaran</h2>
+                <div class="method-options">
+                    <label>
+                        <input type="radio" name="payment-method" value="cash" checked>
+                        <span>Cash</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" value="card">
+                        <span>Kartu Kredit/Debit</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" value="ewallet">
+                        <span>E-Wallet</span>
+                    </label>
+                </div>
+            </section>
+
+            <section id="cash-payment-details" class="payment-details">
+                <div class="form-group">
+                    <label for="amount-received">Uang Diterima</label>
+                    <input type="number" id="amount-received" placeholder="Masukkan jumlah uang...">
+                </div>
+                <div class="change-display">
+                    <span>Uang Kembalian</span>
+                    <strong id="change-amount">Rp 0</strong>
+                </div>
+            </section>
+        </main>
+
+        <footer class="payment-footer">
+            <button id="cancel-button" class="btn btn-secondary">Batal</button>
+            <button id="complete-sale-button" class="btn btn-primary">Selesaikan Penjualan</button>
+        </footer>
+    </div>
+
+    <script src="../../public/js/pos-js/app_payment.js"></script>
+</body>
+</html>
