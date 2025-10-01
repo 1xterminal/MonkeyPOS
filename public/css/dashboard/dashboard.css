@@ -39,10 +39,10 @@ body {
 }
 
 /* --- main app layout --- */
-.container {
+.dashboard-container {
     display: flex;
     height: 100%;
-    gap: 24px; 
+    gap: 24px;
 }
 
 .content {
@@ -56,49 +56,6 @@ body {
 }
 
 /* Dashboard Page */
-.dashboard-container {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* Navigation */
-.nav-list {
-    list-style: none;
-}
-
-.main-nav {
-    flex-grow: 1;
-}
-
-.nav-item {
-    margin-bottom: 0.5rem;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--color-text);
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 0.6rem;
-    display: block;
-    border-radius: 6px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.nav-link i {
-    text-align: center;
-    font-size: 1.1rem;
-}
-
-.nav-link:hover, .nav-link.active {
-    background-color: var(--color-primary);
-    color: var(--color-text);
-    font-weight: 600;
-}
-
 /* Tombol Logout */
 .logout-button {
     display: flex;
