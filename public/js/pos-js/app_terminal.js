@@ -1,48 +1,60 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Pakai jQuery
+$(document).ready(() => {
 
-    // --- DATA DUMMY PRODUK ---
+    // --- DATA DUMMY PRODUK (masih hardcode, masih menunggu product page & functionalities nya jadi(di kerjakan javier))---
     const products = [
         { id: 1, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
         { id: 2, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 3, name: "Latte", sku: "LT003", price: 28000, image: "../../public/img/products/latte.jpg" },
-        { id: 4, name: "Roti Bakar", sku: "RB004", price: 22000, image: "../../public/img/products/roti-bakar.jpg" },
-        { id: 5, name: "Croissant", sku: "CR005", price: 18000, image: "../../public/img/products/croissant.jpg" },
-        { id: 6, name: "Teh Manis", sku: "TM006", price: 12000, image: "../../public/img/products/teh-manis.jpg" },
-
+        { id: 3, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 4, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 5, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 6, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 7, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 8, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 9, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 10, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
+        { id: 11, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
+        { id: 12, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
+        { id: 13, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
+        { id: 14, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
+        { id: 15, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
     ];
 
-    // --- VARIABEL & ELEMEN DOM ---
-    const productList = document.getElementById('product-list');
-    const cartItems = document.getElementById('cart-items');
-    const subtotalEl = document.getElementById('subtotal');
-    const taxEl = document.getElementById('tax');
-    const totalPriceEl = document.getElementById('total-price');
-    const checkoutButton = document.getElementById('checkout-button');
-    const searchInput = document.getElementById('search-product');
+    // --- VARIABEL & ELEMEN DOM (jQuery style) ---
+    const $productList = $('#product-list');
+    const $cartItems = $('#cart-items');
+    const $subtotalEl = $('#subtotal');
+    const $taxEl = $('#tax');
+    const $totalPriceEl = $('#total-price');
+    const $checkoutButton = $('#checkout-button');
+    const $searchInput = $('#search-product');
 
     let cart = [];
 
-    // --- FUNGSI-FUNGSI ---
+
+    // --- FUNCTION FUNCTION ---
+    function formatRupiah(number) {
+        return `Rp ${number.toLocaleString('id-ID')}`;
+    }
 
     function renderProducts(productData) {
-        productList.innerHTML = '';
+        $productList.empty();
         productData.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
-            productCard.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-price">Rp ${product.price.toLocaleString('id-ID')}</p>
-            `;
-            productCard.addEventListener('click', () => addProductToCart(product));
-            productList.appendChild(productCard);
+            const $productCard = $(`
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-price">${formatRupiah(product.price)}</p>
+                </div>
+            `);
+            // event listener untuk menambah product ke keranjang
+            $productCard.on('click', () => addProductToCart(product));
+            $productList.append($productCard);
         });
     }
 
-    
     function addProductToCart(product) {
         const existingItem = cart.find(item => item.id === product.id);
-
         if (existingItem) {
             existingItem.quantity++;
         } else {
@@ -51,84 +63,69 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCart();
     }
 
-    /**
-     * Fungsi untuk menampilkan item di keranjang.
-     */
     function renderCart() {
         if (cart.length === 0) {
-            cartItems.innerHTML = '<p class="empty-cart-message">Keranjang masih kosong.</p>';
+            $cartItems.html('<p class="empty-cart-message">Keranjang masih kosong.</p>');
         } else {
-            cartItems.innerHTML = '';
+            $cartItems.empty();
             cart.forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <div class="cart-item-details">
-                        <p class="cart-item-name">${item.name}</p>
-                        <p class="cart-item-price">Rp ${item.price.toLocaleString('id-ID')}</p>
+                const $cartItem = $(`
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <p class="cart-item-name">${item.name}</p>
+                            <p class="cart-item-price">${formatRupiah(item.price)}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <input type="number" class="item-quantity" value="${item.quantity}" min="1" data-id="${item.id}">
+                            <button class="remove-item-btn" data-id="${item.id}">×</button>
+                        </div>
                     </div>
-                    <div class="cart-item-actions">
-                        <input type="number" class="item-quantity" value="${item.quantity}" min="1" data-id="${item.id}">
-                        <button class="remove-item-btn" data-id="${item.id}">×</button>
-                    </div>
-                `;
-                cartItems.appendChild(cartItem);
+                `);
+                $cartItems.append($cartItem);
             });
         }
         updateTotals();
         updateCheckoutButtonState();
     }
 
-    /**
-     * Fungsi untuk menghitung dan memperbarui total.
-     */
     function updateTotals() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const tax = subtotal * 0.11; // Pajak 11%
+        const tax = subtotal * 0.11;
         const total = subtotal + tax;
 
-        subtotalEl.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-        taxEl.textContent = `Rp ${tax.toLocaleString('id-ID')}`;
-        totalPriceEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        $subtotalEl.text(formatRupiah(subtotal));
+        $taxEl.text(formatRupiah(tax));
+        $totalPriceEl.text(formatRupiah(total));
     }
 
-    /**
-     * Mengatur status tombol checkout (aktif/nonaktif).
-     */
     function updateCheckoutButtonState() {
-        checkoutButton.disabled = cart.length === 0;
+        $checkoutButton.prop('disabled', cart.length === 0);
     }
 
-    /**
-     * Menangani perubahan kuantitas atau penghapusan item dari keranjang.
-     * @param {Event} event - Event object.
-     */
     function handleCartActions(event) {
-        const target = event.target;
-        const productId = parseInt(target.dataset.id);
+        const $target = $(event.target);
+        const productId = parseInt($target.data('id'));
 
-        if (target.classList.contains('remove-item-btn')) {
+        if ($target.hasClass('remove-item-btn')) {
             cart = cart.filter(item => item.id !== productId);
         }
 
-        if (target.classList.contains('item-quantity')) {
-            const newQuantity = parseInt(target.value);
+        if ($target.hasClass('item-quantity')) {
+            const newQuantity = parseInt($target.val());
             const itemInCart = cart.find(item => item.id === productId);
             if (itemInCart && newQuantity > 0) {
                 itemInCart.quantity = newQuantity;
             } else {
-                // Jika kuantitas 0 atau kurang, hapus item
                 cart = cart.filter(item => item.id !== productId);
             }
         }
         renderCart();
     }
     
-    // --- EVENT LISTENERS ---
 
-    // Event listener untuk pencarian produk
-    searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
+    // --- EVENT LISTENERS ---
+    $searchInput.on('input', (e) => {
+        const searchTerm = $(e.target).val().toLowerCase();
         const filteredProducts = products.filter(product => 
             product.name.toLowerCase().includes(searchTerm) ||
             product.sku.toLowerCase().includes(searchTerm)
@@ -136,14 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProducts(filteredProducts);
     });
     
-    // Event listener untuk aksi di keranjang (quantity & remove)
-    cartItems.addEventListener('change', handleCartActions);
-    cartItems.addEventListener('click', handleCartActions);
+    // event delegation untuk item yang dinamis
+    $cartItems.on('change', '.item-quantity', handleCartActions);
+    $cartItems.on('click', '.remove-item-btn', handleCartActions);
 
-    // Event listener untuk tombol checkout
-    checkoutButton.addEventListener('click', () => {
+    $checkoutButton.on('click', () => {
         if (cart.length > 0) {
-            // Simpan data keranjang dan total ke localStorage
             const orderDetails = {
                 cart: cart,
                 subtotal: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
@@ -151,13 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.11,
             };
             localStorage.setItem('currentOrder', JSON.stringify(orderDetails));
-            
-            // Arahkan ke halaman pembayaran
             window.location.href = 'pos_payment.html';
         }
     });
 
-    // --- INISIALISASI ---
     renderProducts(products);
     renderCart();
 });

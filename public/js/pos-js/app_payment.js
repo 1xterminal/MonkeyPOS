@@ -1,96 +1,124 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Pake jQuery
+$(document).ready(() => {
 
-    // --- ELEMEN DOM ---
-    const totalAmountEl = document.getElementById('total-amount');
-    const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
-    const cashPaymentDetails = document.getElementById('cash-payment-details');
-    const amountReceivedInput = document.getElementById('amount-received');
-    const changeAmountEl = document.getElementById('change-amount');
-    const completeSaleButton = document.getElementById('complete-sale-button');
-    const cancelButton = document.getElementById('cancel-button');
-    
+    // --- AMBIL ELEMEN DOM ---
+    const $cartItemsEl = $('#cart-items-payment');
+    const $subtotalEl = $('#subtotal');
+    const $taxEl = $('#tax');
+    const $grandTotalEl = $('#grand-total');
+    const $paymentMethodRadios = $('input[name="payment-method"]');
+    const $cashPaymentDetails = $('#cash-payment-details');
+    const $amountReceivedInput = $('#amount-received');
+    const $changeAmountEl = $('#change-amount');
+    const $completeSaleButton = $('#complete-sale-button');
+    const $cancelButton = $('#cancel-button');
+
     let currentOrder = null;
-    let total = 0;
 
-    // --- FUNGSI-FUNGSI ---
+    function formatRupiah(number) {
+        return `Rp ${number.toLocaleString('id-ID')}`;
+    }
 
-    /**
-     * Memuat data pesanan dari localStorage.
-     */
     function loadOrderDetails() {
         const orderData = localStorage.getItem('currentOrder');
         if (orderData) {
             currentOrder = JSON.parse(orderData);
-            total = Math.round(currentOrder.total); // Bulatkan total untuk menghindari masalah desimal
-            totalAmountEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            renderAll();
         } else {
-            // Jika tidak ada data, kembali ke terminal
             alert('Tidak ada data pesanan. Kembali ke terminal.');
             window.location.href = 'pos_terminal.html';
         }
     }
-
-    /**
-     * Menangani perubahan metode pembayaran.
-     */
-    function handlePaymentMethodChange() {
-        const selectedMethod = document.querySelector('input[name="payment-method"]:checked').value;
-        if (selectedMethod === 'cash') {
-            cashPaymentDetails.style.display = 'block';
-        } else {
-            cashPaymentDetails.style.display = 'none';
-        }
-        // Reset input saat metode berganti
-        amountReceivedInput.value = '';
-        changeAmountEl.textContent = 'Rp 0';
+    
+    function renderAll() {
+        renderCartOnPaymentPage();
+        updateTotalsOnPaymentPage();
+        checkCartIsEmpty();
     }
 
-    /**
-     * Menghitung uang kembalian.
-     */
+    function renderCartOnPaymentPage() {
+        if (!currentOrder || currentOrder.cart.length === 0) {
+            $cartItemsEl.html('<p class="empty-cart-message">Keranjang kosong.</p>');
+            return;
+        }
+
+        $cartItemsEl.empty();
+        currentOrder.cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            const $cartItemDiv = $(`
+                <div class="cart-item-payment">
+                    <span class="name">${item.name}</span>
+                    <span class="qty">x${item.quantity}</span>
+                    <span class="total">${formatRupiah(itemTotal)}</span>
+                    <button class="remove-item-btn-payment" data-id="${item.id}">×</button>
+                </div>
+            `);
+            $cartItemsEl.append($cartItemDiv);
+        });
+    }
+
+    function updateTotalsOnPaymentPage() {
+        const subtotal = currentOrder.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const tax = subtotal * 0.11;
+        const total = subtotal + tax;
+
+        currentOrder.subtotal = subtotal;
+        currentOrder.tax = tax;
+        currentOrder.total = total;
+
+        $subtotalEl.text(formatRupiah(subtotal));
+        $taxEl.text(formatRupiah(tax));
+        $grandTotalEl.text(formatRupiah(total));
+    }
+
+    function handleRemoveItem(productId) {
+        currentOrder.cart = currentOrder.cart.filter(item => item.id !== productId);
+        localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+        renderAll();
+    }
+
+    function checkCartIsEmpty() {
+        const isEmpty = !currentOrder || currentOrder.cart.length === 0;
+        $completeSaleButton.prop('disabled', isEmpty);
+    }
+    
+    function handlePaymentMethodChange() {
+        const selectedMethod = $('input[name="payment-method"]:checked').val();
+        $cashPaymentDetails.toggle(selectedMethod === 'cash');
+        $amountReceivedInput.val('');
+        $changeAmountEl.text('Rp 0');
+    }
+
     function calculateChange() {
-        const amountReceived = parseFloat(amountReceivedInput.value) || 0;
+        const amountReceived = parseFloat($amountReceivedInput.val()) || 0;
+        const total = Math.round(currentOrder.total);
         if (amountReceived >= total) {
             const change = amountReceived - total;
-            changeAmountEl.textContent = `Rp ${change.toLocaleString('id-ID')}`;
+            $changeAmountEl.text(formatRupiah(change));
         } else {
-            changeAmountEl.textContent = 'Uang tidak cukup';
+            $changeAmountEl.text('Uang tidak cukup');
         }
     }
 
     // --- EVENT LISTENERS ---
-
-    // Listener untuk perubahan metode pembayaran
-    paymentMethodRadios.forEach(radio => {
-        radio.addEventListener('change', handlePaymentMethodChange);
+    $cartItemsEl.on('click', '.remove-item-btn-payment', function() {
+        const productId = parseInt($(this).data('id'));
+        handleRemoveItem(productId);
     });
 
-    // Listener untuk input uang diterima (real-time)
-    amountReceivedInput.addEventListener('input', calculateChange);
+    $paymentMethodRadios.on('change', handlePaymentMethodChange);
+    $amountReceivedInput.on('input', calculateChange);
 
-    // Listener untuk tombol "Selesaikan Penjualan"
-    completeSaleButton.addEventListener('click', () => {
-        // Simulasi penyelesaian penjualan
+    $completeSaleButton.on('click', () => {
         alert('Transaksi Berhasil!');
-        
-        // Hapus data dari localStorage setelah selesai
         localStorage.removeItem('currentOrder');
-        
-        // Arahkan ke halaman struk (jika sudah ada) atau kembali ke terminal
-        // Sesuai dokumen, halaman berikutnya adalah receipt.html
-        // window.location.href = 'receipt.html'; 
-        
-        // Untuk sekarang, kita kembali ke terminal
-        window.location.href = 'pos_terminal.html'; 
-    });
-
-    // Listener untuk tombol "Batal"
-    cancelButton.addEventListener('click', () => {
-        // Kembali ke terminal tanpa menghapus data, jadi pesanan masih ada
         window.location.href = 'pos_terminal.html';
     });
 
-    // --- INISIALISASI ---
+    $cancelButton.on('click', () => {
+        window.location.href = 'pos_terminal.html';
+    });
+
     loadOrderDetails();
-    handlePaymentMethodChange(); // Atur tampilan awal berdasarkan metode default
+    handlePaymentMethodChange();
 });
