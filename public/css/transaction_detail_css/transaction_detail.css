@@ -1,0 +1,69 @@
+/* Box informasi transaksi */
+.transaction-info {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--color-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+.transaction-info p {
+  margin: 6px 0;
+}
+
+/* Table styling */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.transaction-table thead th {
+  background: var(--color-text-highlight);
+  color: #fff;
+  padding: 12px;
+  text-align: left;
+}
+
+.transaction-table tbody tr:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+.transaction-table tbody tr:hover {
+  background: var(--color-secondary-highlight);
+}
+
+.transaction-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.transaction-table tfoot td {
+  padding: 12px;
+  font-weight: bold;
+  background: #fafafa;
+}
+
+/* Back button */
+.back-btn {
+  display: flex;
+  justify-content: left;
+}
+
+.back-btn a {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--color-primary);
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.back-btn a:hover {
+  background: var(--color-primary-highlight);
+}
