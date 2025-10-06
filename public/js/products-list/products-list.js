@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', function(){
     //getting the products list
     var products;
 
+    //getting the search bar and button
+    var searchInput = document.getElementById("search-input");
+    var searchButton = document.getElementById("search-button");
+
     if(localStorage.getItem("products") != null){
         products = JSON.parse(localStorage.getItem("products"));
     }
@@ -21,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     //render table
-    function renderProductsTable(){
+    function renderProductsTable(productsRendered){
         table.innerHTML = '';
         var thead = document.createElement('thead');
         var tbody = document.createElement('tbody');
@@ -95,6 +99,35 @@ document.addEventListener('DOMContentLoaded', function(){
 
             //delete the product
             deleteProduct(sku);
+        });
+    }
+
+    //search function
+    function searchProducts(){
+        var searchTerm = searchInput.value.toLowerCase();
+
+        //if the search bar is empty
+        if(searchTerm === ''){
+            renderProductsTable(products);
+            return;
+        }
+
+        var filteredProducts = [];
+        for(var i = 0; i < products.length; i++){
+            var productName = products[i].name.toLowerCase();
+            var productSKU = products[i].sku.toLowerCase();
+
+            if(productName.includes(searchTerm) || productSKU.includes(searchTerm)){
+                filteredProducts.push(products[i]);
+            }
+        }
+
+        renderProductsTable(filteredProducts);
+    }
+
+    if(searchButton){
+        searchButton.addEventListener("click", function(){
+            searchProducts();
         });
     }
 
