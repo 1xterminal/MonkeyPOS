@@ -50,7 +50,7 @@
 /* Back button */
 .back-btn {
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 .back-btn a {
