@@ -69,9 +69,9 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 18px; /* slightly larger for visibility */
-    color: #082C4C; /* dark navy text */
-    font-weight: 600; /* bold like in your image */
+    font-size: 18px;
+    color: #082C4C; 
+    font-weight: 600; 
 }
 
 .logout-btn {
@@ -80,17 +80,17 @@ body {
     align-items: center;
     width: 42px;
     height: 42px;
-    border: 2px solid #d9534f; /* strong reddish border */
+    border: 2px solid #d9534f;
     border-radius: 10px;
-    color: #d9534f; /* red icon color */
+    color: #d9534f;
     text-decoration: none;
     background-color: transparent;
     transition: all 0.25s ease;
 }
 
 .logout-btn:hover {
-    background-color: #fef2f2; /* soft red tint on hover */
-    border-color: #c53030; /* slightly deeper red */
+    background-color: #fef2f2;
+    border-color: #c53030;
     color: #c53030;
 }
 
