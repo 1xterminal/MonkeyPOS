@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal POS - MonkeyPOS</title>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+    <link rel="stylesheet" href="../../public/css/style.css"> 
+    <link rel="stylesheet" href="../../public/css/components/sidebar.css">
+    
+    <link rel="stylesheet" href="../../public/css/pos-css/terminal.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar"></div>
+
+        <main class="content">
+            <div class="pos-container">
+                <div class="product-section">
+                    <header class="product-header">
+                        <h1>Pilih Produk</h1>
+                        <div class="search-container">
+                            <input type="search" id="search-product" placeholder="Cari produk berdasarkan nama atau SKU...">
+                        </div>
+                    </header>
+                    <main class="product-list" id="product-list">
+                        </main>
+                </div>
+        
+                <aside class="cart-section">
+                    <header class="cart-header">
+                        <h2>Pesanan Saat Ini</h2>
+                    </header>
+                    <div class="cart-items" id="cart-items">
+                        <p class="empty-cart-message">Keranjang masih kosong.</p>
+                        </div>
+                    <footer class="cart-footer">
+                        <div class="order-summary">
+                            <div class="summary-item">
+                                <span>Subtotal</span>
+                                <span id="subtotal">Rp 0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Pajak (11%)</span>
+                                <span id="tax">Rp 0</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total Keseluruhan</span>
+                                <span id="total-price">Rp 0</span>
+                            </div>
+                        </div>
+                        <button id="checkout-button" class="checkout-button" disabled>
+                            Lanjutkan ke Pembayaran
+                        </button>
+                    </footer>
+                </aside>
+            </div>
+
+            </main>
+    </div>
+
+    <script src="../../public/js/components/sidebar.js"></script>
+    <script src="../../public/js/app.js"></script>
+
+    <script src="../../public/js/pos-js/app_terminal.js"></script>
+</body>
+</html>
