@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    $loginForm = $('login-form');
-    $empId = $('employee-id');
-    $pass = $('password');
-    $errorMessage = $('login-error-message');
+    const loginForm = $('#login-form');
+    const empId = $('#employee-id');
+    const pass = $('#password');
+    const errorMessage = $('#login-error-message');
 
-    $loginForm.addEventListener('submit', (event) => {
+    loginForm.submit(function(event) {
         // Mencegah form reload halaman berulang
         event.preventDefault();
 
         // Mengambil value dari elemen yang di input
-        const employeeId = $empId.val();
-        const password = $pass.val();
+        const employeeId = empId.val();
+        const password = pass.val();
 
         // Menghilangkan pesan error
-        $errorMessage.text('');
+        errorMessage.text('');
 
         // Validasi sederhana: pastikan input tidak kosong
         if (employeeId === '' || password === '') {
-            $errorMessage.text('ID Karyawan dan Kata Sandi tidak boleh kosong.');
+            errorMessage.text('ID Karyawan dan Kata Sandi tidak boleh kosong.');
             return;
         }
 
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cari pengguna yang cocok dengan ID dan password yang dimasukkan
         const foundUser = users.find(user => user.id === employeeId && user.password === password);
+        
         if (foundUser) {
             console.log('Login berhasil untuk user:', foundUser.name);
 
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../dashboard/dashboard.html';
 
         } else {
-            $errorMessage.text('ID Karyawan atau Kata Sandi salah.');
+            errorMessage.text('ID Karyawan atau Kata Sandi salah.');
         }
     });
 
