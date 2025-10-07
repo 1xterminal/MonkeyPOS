@@ -177,17 +177,17 @@ body {
 /* products list */
 .products-list-content{
     font-family: var(--font-family);
-    background: linear-gradient(
+    /* background: linear-gradient(
         180deg,
         #FFFBE7,#FDF0CB
-    );
+    ); */
     color: var(--color-text);
     height: 94%;
-    border: 1px solid rgba(228, 157, 0, 0.5);
+    /* border: 1px solid rgba(228, 157, 0, 0.5); */
     border-radius: 16px;
     padding: 20px;
-    box-shadow:
-        10px 10px 0px var(--color-background-offset);
+    /* box-shadow:
+        10px 10px 0px var(--color-background-offset); */
     text-align: center;
 }
 
