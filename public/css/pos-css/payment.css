@@ -43,18 +43,58 @@
     justify-content: space-between; 
     padding: 12px 0; 
     border-bottom: 1px solid #f0f0f0; 
+    gap: 15px; /* Memberi jarak antar elemen */
+}
+
+.cart-item-payment .item-info {
+    flex-grow: 1; /* Biarkan nama produk memanjang */
 }
 
 .cart-item-payment .name { 
     font-weight: 600; 
+    display: block; /* Agar nama dan harga bisa di baris berbeda */
 }
 
-.cart-item-payment .qty { 
-    color: #555; 
+.cart-item-payment .price {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.cart-item-payment .item-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Jarak antara tombol +, -, dan angka */
+}
+
+.cart-item-payment .qty {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
 }
 
 .cart-item-payment .total { 
-    font-weight: 600; 
+    font-weight: 600;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Styling untuk tombol +/- di halaman payment */
+.qty-btn-payment {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 50%; /* Membuat tombol menjadi bulat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.qty-btn-payment:hover {
+    background-color: #e0e0e0;
 }
 
 .remove-item-btn-payment { 

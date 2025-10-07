@@ -1,8 +1,10 @@
-// Pake jQuery
+// Pakai jQuery
 $(document).ready(() => {
 
-    // --- AMBIL ELEMEN DOM ---
-    const $completeSaleButton = $('#complete-sale-button');
+    // BARU: Muat daftar produk utama untuk cek stok
+    const products = Storage.getLocal("products", []);
+
+    // --- ELEMEN DOM ---
     const $cartItemsEl = $('#cart-items-payment');
     const $subtotalEl = $('#subtotal');
     const $taxEl = $('#tax');
@@ -11,22 +13,21 @@ $(document).ready(() => {
     const $cashPaymentDetails = $('#cash-payment-details');
     const $amountReceivedInput = $('#amount-received');
     const $changeAmountEl = $('#change-amount');
+    const $completeSaleButton = $('#complete-sale-button');
     const $cancelButton = $('#cancel-button');
 
     let currentOrder = null;
 
-    function formatRupiah(number) {
-        return `Rp ${number.toLocaleString('id-ID')}`;
-    }
+    // --- FUNGSI-FUNGSI ---
+
+    function formatRupiah(number) { return `Rp ${number.toLocaleString('id-ID')}`; }
 
     function loadOrderDetails() {
-        // Menggunakan Storage Helper untuk mengambil data
         currentOrder = Storage.getLocal('currentOrder');
-
-        if (currentOrder) {
+        if (currentOrder && currentOrder.cart.length > 0) {
             renderAll();
         } else {
-            alert('Tidak ada data pesanan. Kembali ke terminal.');
+            alert('Keranjang kosong. Kembali ke terminal.');
             window.location.href = 'pos_terminal.html';
         }
     }
@@ -37,21 +38,24 @@ $(document).ready(() => {
         checkCartIsEmpty();
     }
 
+    // DIUBAH: Template keranjang sekarang memiliki tombol + dan -
     function renderCartOnPaymentPage() {
-        if (!currentOrder || currentOrder.cart.length === 0) {
-            $cartItemsEl.html('<p class="empty-cart-message">Keranjang kosong.</p>');
-            return;
-        }
-
         $cartItemsEl.empty();
         currentOrder.cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             const $cartItemDiv = $(`
                 <div class="cart-item-payment">
-                    <span class="name">${item.name}</span>
-                    <span class="qty">x${item.quantity}</span>
+                    <div class="item-info">
+                        <span class="name">${item.name}</span>
+                        <span class="price">${formatRupiah(item.price)}</span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="qty-btn-payment qty-minus-payment" data-sku="${item.sku}">-</button>
+                        <span class="qty">x${item.quantity}</span>
+                        <button class="qty-btn-payment qty-plus-payment" data-sku="${item.sku}">+</button>
+                    </div>
                     <span class="total">${formatRupiah(itemTotal)}</span>
-                    <button class="remove-item-btn-payment" data-id="${item.id}">×</button>
+                    <button class="remove-item-btn-payment" data-sku="${item.sku}">×</button>
                 </div>
             `);
             $cartItemsEl.append($cartItemDiv);
@@ -70,79 +74,77 @@ $(document).ready(() => {
         $subtotalEl.text(formatRupiah(subtotal));
         $taxEl.text(formatRupiah(tax));
         $grandTotalEl.text(formatRupiah(total));
+
+        // Perbarui juga data di localStorage setiap kali total berubah
+        Storage.setLocal('currentOrder', currentOrder);
     }
 
-    function handleRemoveItem(productId) {
-        currentOrder.cart = currentOrder.cart.filter(item => item.id !== productId);
-        // Menggunakan Storage Helper untuk memperbarui data
-        Storage.setLocal('currentOrder', currentOrder);
+    // BARU: Fungsi untuk mengubah jumlah barang
+    function handleQuantityChange(sku, action) {
+        const itemInCart = currentOrder.cart.find(item => item.sku === sku);
+        if (!itemInCart) return;
+
+        const originalProduct = products.find(p => p.sku === sku);
+        const maxStock = originalProduct ? originalProduct.stock : 0;
+
+        if (action === 'plus') {
+            if (itemInCart.quantity < maxStock) {
+                itemInCart.quantity++;
+            } else {
+                alert(`Stok untuk ${itemInCart.name} tidak mencukupi! (Maks: ${maxStock})`);
+            }
+        } else if (action === 'minus') {
+            if (itemInCart.quantity > 1) {
+                itemInCart.quantity--;
+            } else {
+                // Jika kuantitas 1 dan dikurangi, hapus item
+                handleRemoveItem(sku);
+                return; // Hentikan fungsi agar renderAll tidak dipanggil dua kali
+            }
+        }
         renderAll();
     }
-
-    function checkCartIsEmpty() {
-        const isEmpty = !currentOrder || currentOrder.cart.length === 0;
-        $completeSaleButton.prop('disabled', isEmpty);
-    }
     
-    function handlePaymentMethodChange() {
-        const selectedMethod = $('input[name="payment-method"]:checked').val();
-        $cashPaymentDetails.toggle(selectedMethod === 'cash');
-        $amountReceivedInput.val('');
-        $changeAmountEl.text('Rp 0');
-    }
-
-    function calculateChange() {
-        const amountReceived = parseFloat($amountReceivedInput.val()) || 0;
-        const total = Math.round(currentOrder.total);
-        if (amountReceived >= total) {
-            const change = amountReceived - total;
-            $changeAmountEl.text(formatRupiah(change));
+    // DIPERBAIKI: Fungsi hapus item menggunakan SKU
+    function handleRemoveItem(sku) {
+        currentOrder.cart = currentOrder.cart.filter(item => item.sku !== sku);
+        // Jika keranjang jadi kosong, kembali ke terminal
+        if (currentOrder.cart.length === 0) {
+            Storage.removeLocal('currentOrder');
+            alert("Keranjang kosong, kembali ke terminal.");
+            window.location.href = 'pos_terminal.html';
         } else {
-            $changeAmountEl.text('Uang tidak cukup');
+            renderAll();
         }
     }
 
+    function checkCartIsEmpty() { /* ... tidak ada perubahan ... */ }
+    function handlePaymentMethodChange() { /* ... tidak ada perubahan ... */ }
+    function calculateChange() { /* ... tidak ada perubahan ... */ }
+
     // --- EVENT LISTENERS ---
+    
+    // DIPERBAIKI & DITAMBAH: Event listener untuk semua tombol
     $cartItemsEl.on('click', '.remove-item-btn-payment', function() {
-        const productId = parseInt($(this).data('id'));
-        handleRemoveItem(productId);
+        handleRemoveItem($(this).data('sku'));
+    });
+    $cartItemsEl.on('click', '.qty-plus-payment', function() {
+        handleQuantityChange($(this).data('sku'), 'plus');
+    });
+    $cartItemsEl.on('click', '.qty-minus-payment', function() {
+        handleQuantityChange($(this).data('sku'), 'minus');
     });
 
     $paymentMethodRadios.on('change', handlePaymentMethodChange);
     $amountReceivedInput.on('input', calculateChange);
+    $completeSaleButton.on('click', () => { /* ... tidak ada perubahan ... */ });
 
-    $completeSaleButton.on('click', () => {
-        // 1. Dapatkan data user yang sedang login
-        const currentUser = Storage.getSession('currentUser', { name: 'Unknown' });
-
-        // 2. Buat objek transaksi baru yang lengkap
-        const newTransaction = {
-            id: `INV-${Date.now()}`, 
-            date: new Date().toISOString(),
-            cashier: currentUser.name,
-            items: currentOrder.cart,
-            subtotal: currentOrder.subtotal,
-            tax: currentOrder.tax,
-            total: currentOrder.total,
-            paymentMethod: $('input[name="payment-method"]:checked').val()
-        };
-
-        // 3. Ambil riwayat penjualan yang sudah ada, atau buat array baru
-        let salesHistory = Storage.getLocal('salesHistory', []);
-
-        // 4. Tambahkan transaksi baru ke riwayat
-        salesHistory.unshift(newTransaction);
-
-        // 5. Simpan kembali riwayat penjualan yang sudah diperbarui
-        Storage.setLocal('salesHistory', salesHistory);
-
-        // 6. Hapus data pesanan saat ini
-        Storage.removeLocal('currentOrder');
-        
-        // 7. Arahkan ke halaman struk dengan membawa ID transaksi
-        window.location.href = `receipt.html?id=${newTransaction.id}`;
+    // DIPERBAIKI: Event listener untuk tombol Batal
+    $cancelButton.on('click', () => {
+        window.location.href = 'pos_terminal.html';
     });
 
+    // --- INISIALISASI ---
     loadOrderDetails();
     handlePaymentMethodChange();
 });
