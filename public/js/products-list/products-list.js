@@ -1,41 +1,32 @@
 $(document).ready(() => {
-    //getting the table
     const tableContainer = $('#product-table-container');
-
-    //getting the search input and buttons
     const searchInput = $('#search-input');
     const searchButton = $('#search-button');
 
-    //getting the products list
-    let products;
+    // Use the helper to safely get the products array
+    let products = Storage.getLocal("products", []);
 
-    if(localStorage.getItem("products") != null){
-        products = JSON.parse(localStorage.getItem("products"));
-    }
-    else{
-        products = [];
-    }
+    // dummy data for testing
+    // const products = [
+    //      { name: "Product A", sku: "A123", category: "Category 1", price: 1000, stock: 10 },
+    //      { name: "Product B", sku: "B456", category: "Category 2", price: 2000, stock: 5 },
+    //      { name: "Product C", sku: "C789", category: "Category 1", price: 1500, stock: 15 },
+    // ];
 
-    //save products to localStorage
+    // Helper to save products to localStorage
     function saveProducts() {
-        localStorage.setItem("products", JSON.stringify(products));
+        Storage.setLocal("products", products);
     }
 
-    //delete product
+    // Delete a product by its SKU
     function deleteProduct(sku) {
-        //updates the products list by filtering out the deleted product
         products = products.filter(p => p.sku !== sku);
-        
-        //save new array
         saveProducts();
-
-        //render table with updated data
         renderTable(products);
     }
 
-    //render table
+    // Main function to render the table
     function renderTable(productsToRender) {
-        //define columns for the product table
         const tableColumns = [
             { key: "name", label: "Nama Produk" },
             { key: "sku", label: "SKU" },
@@ -44,68 +35,69 @@ $(document).ready(() => {
             { key: "stock", label: "Stok" }
         ];
 
-        //define the table actions (what you can do to the data)
         const tableActions = [
             {
                 label: "Ubah",
                 icon: "edit",
-                className: "products-edit-button",
+                className: "products-list-edit-button",
                 onClick: (row) => {
-                    window.location.href = `product_edit.html?sku=${row.sku}`;
+                    // We need the original SKU to find the product
+                    const originalProduct = products.find(p => p.name === row.name);
+                    if (originalProduct) {
+                         window.location.href = `product_edit.html?sku=${originalProduct.sku}`;
+                    }
                 }
             },
             {
                 label: "Hapus",
                 icon: "delete",
-                className: "products-delete-button",
+                className: "products-list-delete-button",
                 onClick: (row) => {
-                    deleteProduct(row.sku);
+                    // We need the original SKU to delete the product
+                    const originalProduct = products.find(p => p.name === row.name);
+                    if (originalProduct && confirm(`Are you sure you want to delete ${originalProduct.name}?`)) {
+                        deleteProduct(originalProduct.sku);
+                    }
                 }
             }
         ];
-
-        //formats the price to IDR
+        
+        // Format the price into currency before rendering
         const formattedData = productsToRender.map(product => ({
             ...product,
             price: new Intl.NumberFormat('id-ID', {
                 style: 'currency',
                 currency: 'IDR',
-                minimumFractionDigits: 2
+                minimumFractionDigits: 0
             }).format(product.price)
         }));
 
-        //create table
         createTable(tableContainer, tableColumns, formattedData, tableActions);
     }
 
-    //search function
+    // Search function
     function searchProducts() {
-        var searchTerm = searchInput.val().toLowerCase();
-
-        //if the search bar is empty
+        const searchTerm = searchInput.val().toLowerCase();
         if (searchTerm === '') {
             renderTable(products);
             return;
         }
 
-        var filteredProducts = products.filter(p => {
-            var productName = p.name.toLowerCase();
-            var productSKU = p.sku.toLowerCase();
-            return productName.includes(searchTerm) || productSKU.includes(searchTerm);
-        });
-
+        const filteredProducts = products.filter(p => 
+            p.name.toLowerCase().includes(searchTerm) || 
+            p.sku.toLowerCase().includes(searchTerm)
+        );
         renderTable(filteredProducts);
     }
 
-    //event listener for the search button
+    // Event listeners
     searchButton.on("click", searchProducts);
-
-    //search when pressing enter
     searchInput.on("keypress", (e) => {
-        if (e.which === 13){
+        if (e.which === 13) { // 13 is the Enter key
             searchProducts();
         }
     });
 
+    // Initial render of the table when the page loads
     renderTable(products);
 });

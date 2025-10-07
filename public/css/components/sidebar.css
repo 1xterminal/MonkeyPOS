@@ -71,9 +71,9 @@ a {
 .sidebar .menus .menu.active {
     background-color: var(--color-primary);
     color: #442E00;
-    border: 1px solid var(--color-primary-shadow);
+    border: 3px solid var(--color-primary-shadow);
     font-weight: 600;
-    cursor: default; /* Optional: Indicates the link is already selected */
+    cursor: default;
 }
 
 .sidebar .menus.center {

@@ -45,6 +45,6 @@ $(document).ready(() => {
     Storage.setSession('currentUser', currentUser); // <-- UPDATED
 
     // Redirect to dashboard
-    window.location.href = '../dashboard/dashboard.html';
+    window.location.href = '/pages/dashboard/dashboard.html';
   });
 });

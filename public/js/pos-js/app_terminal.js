@@ -145,7 +145,9 @@ $(document).ready(() => {
                 tax: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 0.11,
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.11,
             };
-            localStorage.setItem('currentOrder', JSON.stringify(orderDetails));
+
+            // Menggunakan Storage Helper untuk menyimpan data
+            Storage.setLocal('currentOrder', orderDetails);
             window.location.href = 'pos_payment.html';
         }
     });
