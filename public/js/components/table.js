@@ -81,6 +81,8 @@ function createTable(root, columns, dataRows, actions = []) {
   }
 
   // 5. Assemble the table and render it
+  const tableWrapper = $("<div>", { "class": "table-container-wrapper" });
   table.append([tableHead, tableBody]);
-  root.empty().append(table);
+  tableWrapper.append(table);
+  root.empty().append(tableWrapper);
 }
