@@ -75,8 +75,14 @@ body {
 }
 
 .table-container-wrapper {
-  max-height: 500px; /* Adjust as needed */
-  overflow-y: auto;
+    max-height: 500px; /* Adjust as needed */
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.data-table::-webkit-scrollbar {
+    display: none;
 }
 
 .data-table thead {
@@ -362,8 +368,7 @@ body {
     flex-grow: 1;
     min-height: 0;
     overflow-y: scroll;
-    margin-top: 20px;
-    height: 65%;
+    height: 70%;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -372,7 +377,7 @@ body {
     display: none;
 }
 
-.members-table table{
+/* .members-table table{
     font-family: var(--font-family);
     width: 90%;
     margin-top: 10px;
@@ -399,7 +404,7 @@ body {
     font-family: var(--font-family);
     padding: 10px 20px;
     border: 1.5px solid var(--color-text);
-}
+} */
 
 .members-list-edit-button{
     padding: 5px;
@@ -437,7 +442,7 @@ body {
 
 .members-add-content{
     font-family: var(--font-family);
-    margin-top: 18px;
+    margin-top: 10px;
 }
 
 .members-add-content h2{
