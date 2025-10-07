@@ -5,7 +5,7 @@
     height: 100%;
 }
 
-/* --- Bagian Rincian Pesanan --- */
+/* --- BAGIAN RINCIAN PESANAN --- */
 .order-details-section {
     flex: 3; 
     display: flex; 
@@ -88,7 +88,7 @@
     margin-top: 12px; 
 }
 
-/* --- Bagian Metode Pembayaran --- */
+/* --- BAGIAN METODE PEMBAYARAN --- */
 .payment-method-section {
     flex: 2; 
     display: flex; 
@@ -135,6 +135,11 @@
     color: var(--color-text); 
 }
 
+.method-options input[type="radio"]:not(:checked) + span:hover { 
+    background-color: var(--color-secondary-highlight);
+    border-color: var(--color-secondary-shadow);
+}
+
 .payment-details { 
     margin-top: 24px; 
 }
@@ -152,9 +157,14 @@
 .form-group input { 
     width: 100%; 
     padding: 12px; 
-    border: 1px solid #e0e0e0; 
     border-radius: 8px; 
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
+    border: none;
+    background-color: var(--color-background-offset);
+}
+
+.form-group input:focus {
+    outline: 2px solid var(--color-primary);
 }
 
 .change-display { 
@@ -214,4 +224,16 @@
 
 .btn-secondary:hover { 
     background-color: #ccc; 
+}
+
+/* --- RESPONSIVE ADJUSTMENT --- */
+@media (max-width: 992px) {
+    .payment-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .order-details-section, .payment-method-section {
+        flex: none;
+    }
 }

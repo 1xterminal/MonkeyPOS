@@ -64,10 +64,12 @@ a {
     font-weight: 600;
 }
 
-.sidebar .menus .menu.active:hover {
-    cursor: default;
+.sidebar .menus .menu.active {
+    background: var(--color-primary);
+    color: var(--color-text); 
+    font-weight: 600;
 }
 
-.sidebar .menus.center {
-    flex: 1;
+.sidebar .menus .menu.active:hover {
+    background: var(--color-primary-shadow);
 }

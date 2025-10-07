@@ -54,9 +54,8 @@ body {
 .content {
     flex: 1;
     padding: 24px;
-    position: relative;
-    border: #E49D00 1px solid;
-    border-radius: 16px;
+    border: 2px solid var(--color-secondary-shadow);
+    border-radius: var(--border-radius);
 }
 
 .card {
@@ -64,6 +63,22 @@ body {
     margin-top: 20px;
 }
 
+/* --- RESPONSIVE ADJUSTMENT --- */
+@media (max-width: 992px) {
+    
+    body {
+        padding: 24px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
 /* --- TABLE --- */
 .data-table {
     width: 100%;
