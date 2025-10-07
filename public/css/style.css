@@ -70,9 +70,13 @@ body {
     margin-top: 24px;
     font-size: 15px;
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--color-border-light);
+}
+
+.table-container-wrapper {
+  max-height: 500px; /* Adjust as needed */
+  overflow-y: auto;
 }
 
 .data-table thead {
@@ -177,17 +181,17 @@ body {
 /* products list */
 .products-list-content{
     font-family: var(--font-family);
-    background: linear-gradient(
+    /* background: linear-gradient(
         180deg,
         #FFFBE7,#FDF0CB
-    );
+    ); */
     color: var(--color-text);
     height: 94%;
-    border: 1px solid rgba(228, 157, 0, 0.5);
+    /* border: 1px solid rgba(228, 157, 0, 0.5); */
     border-radius: 16px;
     padding: 20px;
-    box-shadow:
-        10px 10px 0px var(--color-background-offset);
+    /* box-shadow:
+        10px 10px 0px var(--color-background-offset); */
     text-align: center;
 }
 

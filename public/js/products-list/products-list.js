@@ -4,14 +4,14 @@ $(document).ready(() => {
     const searchButton = $('#search-button');
 
     // Use the helper to safely get the products array
-    // let products = Storage.getLocal("products", []);
+    let products = Storage.getLocal("products", []);
 
     // dummy data for testing
-    const products = [
-         { name: "Product A", sku: "A123", category: "Category 1", price: 1000, stock: 10 },
-         { name: "Product B", sku: "B456", category: "Category 2", price: 2000, stock: 5 },
-         { name: "Product C", sku: "C789", category: "Category 1", price: 1500, stock: 15 },
-    ];
+    // const products = [
+    //      { name: "Product A", sku: "A123", category: "Category 1", price: 1000, stock: 10 },
+    //      { name: "Product B", sku: "B456", category: "Category 2", price: 2000, stock: 5 },
+    //      { name: "Product C", sku: "C789", category: "Category 1", price: 1500, stock: 15 },
+    // ];
 
     // Helper to save products to localStorage
     function saveProducts() {
