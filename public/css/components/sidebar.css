@@ -62,8 +62,18 @@ a {
     transition: .2s ease-out;
 }
 
-.sidebar .menus .menu:hover {
-    background: rgba(254, 186, 0, 0.25)
+
+.sidebar .menus .menu:not(.active):hover {
+    background-color: var(--color-primary-highlight);
+    color: #442E00;
+}
+
+.sidebar .menus .menu.active {
+    background-color: var(--color-primary);
+    color: #442E00;
+    border: 3px solid var(--color-primary-shadow);
+    font-weight: 600;
+    cursor: default;
 }
 
 .sidebar .menus.center {
