@@ -20,9 +20,10 @@ $(document).ready(() => {
     }
 
     function loadOrderDetails() {
-        const orderData = localStorage.getItem('currentOrder');
-        if (orderData) {
-            currentOrder = JSON.parse(orderData);
+        // Menggunakan Storage Helper untuk mengambil data
+        currentOrder = Storage.getLocal('currentOrder');
+
+        if (currentOrder) {
             renderAll();
         } else {
             alert('Tidak ada data pesanan. Kembali ke terminal.');
@@ -73,7 +74,8 @@ $(document).ready(() => {
 
     function handleRemoveItem(productId) {
         currentOrder.cart = currentOrder.cart.filter(item => item.id !== productId);
-        localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+        // Menggunakan Storage Helper untuk memperbarui data
+        Storage.setLocal('currentOrder', currentOrder);
         renderAll();
     }
 
@@ -111,7 +113,8 @@ $(document).ready(() => {
 
     $completeSaleButton.on('click', () => {
         alert('Transaksi Berhasil!');
-        localStorage.removeItem('currentOrder');
+        // Menggunakan Storage Helper untuk menghapus data
+        Storage.removeLocal('currentOrder');
         window.location.href = 'pos_terminal.html';
     });
 
