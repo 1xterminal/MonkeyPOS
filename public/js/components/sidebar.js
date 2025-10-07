@@ -76,7 +76,7 @@ $(document).ready(() => {
       {
         "label": "Dashboard",
         "icon": "dashboard",
-        "url": "dashboard/dashboard.html",
+        "url": "../dashboard/dashboard.html",
         "top": true
       },
       {
@@ -102,7 +102,7 @@ $(document).ready(() => {
       {
         "label": "Laporan",
         "icon": "insert_chart",
-        "url": "laporan/laporan.html" 
+        "url": "../laporan/laporan.html" 
       },
     ]
   );
