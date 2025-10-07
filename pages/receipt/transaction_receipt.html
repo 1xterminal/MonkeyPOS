@@ -12,17 +12,55 @@
 <body>
 
     <div class="container">
-        <main class="content">
+        <main class="receipt-container">
             <div class="header-actions"></div>
-            <h1>Laporan</h1>
+            <div class="receipt">
+              <img src="../../public/img/logo/logo.svg" alt="logo">
+              <div class="datetime">
+                <div>
+                  <span class="material-symbols-outlined">
+                    calendar_month
+                  </span>
+                  <span class="date">
+                    Senin, 6 Oktober 2025
+                  </span>
+                </div>
+                <div>
+                  <span class="material-symbols-outlined">
+                    nest_clock_farsight_analog
+                  </span>
+                  <span class="date">
+                    21:26:44
+                  </span>
+                </div>
+              </div>
+              <div class="details">
+                <div id="carts"></div>
+                <div class="payment">
+                  <div class="total">
+                    <span class="label">Total</span>
+                    <span class="val" id="payment-total"></span>
+                  </div>
+                  <div class="receive">
+                    <span class="label">Bayar</span>
+                    <span class="val" id="payment-received"></span>
+                  </div>
+                  <div class="change">
+                    <span class="label">Kembali</span>
+                    <span class="val" id="payment-change"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
         </main>
     </div>
 
     <script src="../../public/js/helpers/storage.js"></script>
     <script src="../../public/js/components/sidebar.js"></script>
-    <script src="../../public/js/components/header.js"></script>
+    <!-- <script src="../../public/js/components/header.js"></script> -->
     <script src="../../public/js/components/table.js"></script>
     <script src="../../public/js/template/table-template.js"></script>
     <script src="../../public/js/app.js"></script>
+    <script src="../../public/js/receipt/receipt.js"></script>
 </body>
 </html>
