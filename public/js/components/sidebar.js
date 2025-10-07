@@ -1,5 +1,17 @@
+/**
+ * Creates a single menu item link.
+ * It correctly identifies the active page by comparing filenames.
+ * @param {Object} data - The menu item data { url, label, icon }.
+ * @returns {jQuery} The created <a> element.
+ */
 function createMenu(data) {
-  return $("<a>", {
+  // Get the current page's filename from the browser's URL (e.g., "dashboard.html")
+  const currentPage = window.location.pathname.split('/').pop();
+  
+  // Get the menu item's filename from its URL (e.g., "dashboard.html")
+  const menuFilename = data.url.split('/').pop();
+
+  const link = $("<a>", {
     "class": "menu",
     "href": data.url,
     text: data.label
@@ -8,9 +20,21 @@ function createMenu(data) {
       "class": "material-symbols-outlined",
       text: data.icon
     })
-  )
+  );
+
+  // Compare just the filenames. This will now work correctly.
+  if (menuFilename === currentPage) {
+    link.addClass("active");
+  }
+
+  return link;
 }
 
+/**
+ * Creates the entire sidebar component and replaces the root placeholder.
+ * @param {jQuery} root - The placeholder element to be replaced.
+ * @param {Array<Object>} menus - The array of menu item data.
+ */
 function createSidebar(root, menus) {
   root.replaceWith(
     $("<div>", {
@@ -21,7 +45,7 @@ function createSidebar(root, menus) {
       }).append(
         $("<img>", {
           "class": "logo",
-          "src": "../../public/img/logo/logo.svg",
+          "src": "../../public/img/logo/logo.svg", // Man these files are tricky
           "alt": "logo"
         })
       ),
@@ -44,11 +68,11 @@ function createSidebar(root, menus) {
   )
 }
 
-
+// This block runs when the page is ready
 $(document).ready(() => {
   createSidebar(
-    $(".sidebar"),
-[
+    $(".sidebar"), // The placeholder to target
+    [
       {
         "label": "Dashboard",
         "icon": "dashboard",
@@ -80,34 +104,6 @@ $(document).ready(() => {
         "icon": "insert_chart",
         "url": "../laporan/laporan.html" 
       },
-      // {
-      //   "label": "Pengaturan",
-      //   "icon": "settings",
-      //   "url": "#",
-      //   "bottom": true
-      // },
     ]
   );
 });
-
-
-function createMenu(data) {
-  const currentPage = window.location.pathname.split('/').pop();
-
-  const link = $("<a>", {
-    "class": "menu",
-    "href": data.url,
-    text: data.label
-  }).prepend(
-    $("<span>", {
-      "class": "material-symbols-outlined",
-      text: data.icon
-    })
-  );
-
-  if (data.url === currentPage) {
-    link.addClass("active");
-  }
-
-  return link;
-}
