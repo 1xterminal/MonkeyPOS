@@ -48,37 +48,37 @@ function createSidebar(root, menus) {
 $(document).ready(() => {
   createSidebar(
     $(".sidebar"),
-    [
+[
       {
         "label": "Dashboard",
         "icon": "dashboard",
-        "url": "dashboard.html",
+        "url": "../dashboard/dashboard.html",
         "top": true
       },
       {
         "label": "Terminal POS",
         "icon": "point_of_sale",
-        "url": "pos_terminal.html"
+        "url": "../pos/pos_terminal.html" 
       },
       {
         "label": "Daftar Produk",
-        "icon": "box",
-        "url": "product_list.html"
+        "icon": "inventory_2",
+        "url": "../products-list/products-list.html" 
       },
       {
         "label": "Riwayat Penjualan",
         "icon": "history",
-        "url": "sales_history.html"
+        "url": "../sales_history/sales_history.html" 
       },
       {
         "label": "Daftar Member",
         "icon": "badge",
-        "url": "member_list.html"
+        "url": "../members-list/member_list.html" 
       },
       {
         "label": "Laporan",
         "icon": "insert_chart",
-        "url": "report.html"
+        "url": "../laporan/laporan.html" 
       },
       // {
       //   "label": "Pengaturan",
