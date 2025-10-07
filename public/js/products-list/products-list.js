@@ -65,7 +65,7 @@ $(document).ready(() => {
         ];
 
         //formats the price to IDR
-        const formattedData = dataToRender.map(product => ({
+        const formattedData = productsToRender.map(product => ({
             ...product,
             price: new Intl.NumberFormat('id-ID', {
                 style: 'currency',
