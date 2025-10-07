@@ -147,6 +147,15 @@
     padding: 4px; 
 }
 
+.cart-item-actions .qty-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .remove-item-btn { 
     background: #ff4d4d; 
     color: var(--color-background); 

@@ -2,6 +2,7 @@
 $(document).ready(() => {
 
     // --- AMBIL ELEMEN DOM ---
+    const $completeSaleButton = $('#complete-sale-button');
     const $cartItemsEl = $('#cart-items-payment');
     const $subtotalEl = $('#subtotal');
     const $taxEl = $('#tax');
@@ -10,7 +11,6 @@ $(document).ready(() => {
     const $cashPaymentDetails = $('#cash-payment-details');
     const $amountReceivedInput = $('#amount-received');
     const $changeAmountEl = $('#change-amount');
-    const $completeSaleButton = $('#complete-sale-button');
     const $cancelButton = $('#cancel-button');
 
     let currentOrder = null;
@@ -112,14 +112,35 @@ $(document).ready(() => {
     $amountReceivedInput.on('input', calculateChange);
 
     $completeSaleButton.on('click', () => {
-        alert('Transaksi Berhasil!');
-        // Menggunakan Storage Helper untuk menghapus data
-        Storage.removeLocal('currentOrder');
-        window.location.href = 'pos_terminal.html';
-    });
+        // 1. Dapatkan data user yang sedang login
+        const currentUser = Storage.getSession('currentUser', { name: 'Unknown' });
 
-    $cancelButton.on('click', () => {
-        window.location.href = 'pos_terminal.html';
+        // 2. Buat objek transaksi baru yang lengkap
+        const newTransaction = {
+            id: `INV-${Date.now()}`, 
+            date: new Date().toISOString(),
+            cashier: currentUser.name,
+            items: currentOrder.cart,
+            subtotal: currentOrder.subtotal,
+            tax: currentOrder.tax,
+            total: currentOrder.total,
+            paymentMethod: $('input[name="payment-method"]:checked').val()
+        };
+
+        // 3. Ambil riwayat penjualan yang sudah ada, atau buat array baru
+        let salesHistory = Storage.getLocal('salesHistory', []);
+
+        // 4. Tambahkan transaksi baru ke riwayat
+        salesHistory.unshift(newTransaction);
+
+        // 5. Simpan kembali riwayat penjualan yang sudah diperbarui
+        Storage.setLocal('salesHistory', salesHistory);
+
+        // 6. Hapus data pesanan saat ini
+        Storage.removeLocal('currentOrder');
+        
+        // 7. Arahkan ke halaman struk dengan membawa ID transaksi
+        window.location.href = `receipt.html?id=${newTransaction.id}`;
     });
 
     loadOrderDetails();
