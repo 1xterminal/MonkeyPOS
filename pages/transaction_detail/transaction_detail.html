@@ -1,78 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transaction Detail</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <link rel="stylesheet" href="../../public/css/style.css"> 
-  <link rel="stylesheet" href="../../public/css/transaction_detail_css/transaction_detail.css">
-  <link rel="stylesheet" href="../../public/css/components/sidebar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Transaksi | MonkeyPOS</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/components/sidebar.css">
+    <link rel="stylesheet" href="../../public/css/transaction_detail_css/transaction_detail.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar"></div>
+    <div class="container">
+        <div class="sidebar"></div>
+        <main class="content">
+            <div class="header-actions"></div>
+            <div class="transaction-card">
+                <div class="transaction-header">
+                    <h1>Detail Transaksi</h1>
+                    <div class="transaction-info">
+                        <p><strong>ID Transaksi:</strong> <span id="transactionId"></span></p>
+                        <p><strong>Tanggal:</strong> <span id="transactionDate"></span></p>
+                        <p><strong>Waktu:</strong> <span id="transactionTime"></span></p>
+                    </div>
+                </div>
 
-    <!-- Content -->
-    <main class="content">
-      <h1>Detail Transaksi</h1>
+                <div class="items-section">
+                    <h2>Daftar Item</h2>
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Produk</th>
+                                <th>Harga Satuan</th>
+                                <th>Jumlah</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsList"></tbody>
+                    </table>
+                </div>
 
-      <!-- Informasi transaksi -->
-      <div class="transaction-info">
-        <p><strong>ID Transaksi:</strong> INV-001</p>
-        <p><strong>Tanggal:</strong> 2025-10-01</p>
-        <p><strong>Waktu:</strong> 13:00</p>
-        <p><strong>Kasir:</strong> Martin</p>
-        <p><strong>Metode Pembayaran:</strong> Tunai</p>
-      </div>
+                <div class="payment-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Pajak (11%):</span>
+                        <span id="tax"></span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Metode Pembayaran:</span>
+                        <span id="paymentMethod"></span>
+                    </div>
+                </div>
 
-      <!-- Tabel produk -->
-      <div class="table-wrapper">
-        <table class="transaction-table">
-          <thead>
-            <tr>
-              <th>Produk</th>
-              <th>Qty</th>
-              <th>Harga</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Produk A</td>
-              <td>2</td>
-              <td>Rp 2.500.000</td>
-              <td>Rp 5.000.000</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">Subtotal</td>
-              <td>Rp 5.000.000</td>
-            </tr>
-            <tr>
-              <td colspan="3">Pajak (10%)</td>
-              <td>Rp 500.000</td>
-            </tr>
-            <tr>
-              <td colspan="3"><strong>Total</strong></td>
-              <td><strong>Rp 5.500.000</strong></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+                <div class="actions">
+                    <button onclick="window.location.href='../sales_history/sales_history.html'" class="btn-back">
+                        Kembali ke Riwayat
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
 
-      <!-- Tombol kembali -->
-      <div class="back-btn">
-        <a href="../sales_history/sales_history.html" class="btn-primary">Kembali ke Riwayat</a>
-      </div>
-    </main>
-  </div>
-
-  <script src="../../public/js/components/sidebar.js"></script>
-  <script src="../../public/js/components/header.js"></script>
-  <script src="../../public/js/app.js"></script>
+    <script src="../../public/js/helpers/storage.js"></script>
+    <script src="../../public/js/components/sidebar.js"></script>
+    <script src="../../public/js/components/header.js"></script>
+    <script src="../../public/js/transaction-detail/transaction_detail.js"></script>
 </body>
 </html>
