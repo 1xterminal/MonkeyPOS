@@ -1,6 +1,6 @@
 // Pakai jQuery
 $(document).ready(() => {
-    // Mengambil data produk dari localStorage.
+    // ambil data produk dari localStorage.
     const products = Storage.getLocal("products", []);
 
     // --- VARIABEL & ELEMEN DOM ---
@@ -14,8 +14,8 @@ $(document).ready(() => {
 
     let cart = [];
 
-    // --- FUNGSI-FUNGSI ---
 
+    // --- FUNGSI-FUNGSI ---
     function formatRupiah(number) {
         return `Rp ${number.toLocaleString('id-ID')}`;
     }
@@ -23,7 +23,6 @@ $(document).ready(() => {
     function renderProducts(productData) {
         $productList.empty();
 
-        // DIPERBAIKI: Logika terpusat untuk kondisi kosong
         if (!productData || productData.length === 0) {
             $productList.addClass('empty-state');
             $productList.html(`
@@ -37,6 +36,7 @@ $(document).ready(() => {
         }
 
         $productList.removeClass('empty-state');
+        
         productData.forEach(product => {
             const imageUrl = product.image || 'https://via.placeholder.com/150/EEEEEE/000000/?text=No+Image';
             const $productCard = $(`
@@ -46,16 +46,17 @@ $(document).ready(() => {
                     <p class="product-price">${formatRupiah(product.price)}</p>
                 </div>
             `);
+
             $productCard.on('click', () => addProductToCart(product));
             $productList.append($productCard);
         });
     }
 
-    // -- Sisa fungsi lainnya tidak ada perubahan --
     function addProductToCart(product) {
         const existingItem = cart.find(item => item.sku === product.sku);
         const originalProduct = products.find(p => p.sku === product.sku);
         const maxStock = originalProduct ? originalProduct.stock : 0;
+
         if (existingItem) {
             if (existingItem.quantity < maxStock) {
                 existingItem.quantity++;
@@ -69,8 +70,10 @@ $(document).ready(() => {
                 alert(`Stok untuk ${product.name} sudah habis!`);
             }
         }
+
         renderCart();
     }
+
     function renderCart() {
         if (cart.length === 0) {
             $cartItems.html('<p class="empty-cart-message">Keranjang masih kosong.</p>');
@@ -86,9 +89,11 @@ $(document).ready(() => {
                 $cartItems.append($cartItem);
             });
         }
+
         updateTotals();
         updateCheckoutButtonState();
     }
+
     function updateTotals() {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const tax = subtotal * 0.11;
@@ -97,14 +102,18 @@ $(document).ready(() => {
         $taxEl.text(formatRupiah(tax));
         $totalPriceEl.text(formatRupiah(total));
     }
+
     function updateCheckoutButtonState() {
         $checkoutButton.prop('disabled', cart.length === 0);
     }
+
     function handleCartActions(sku, action) {
         const itemInCart = cart.find(item => item.sku === sku);
         if (!itemInCart) return;
+
         const originalProduct = products.find(p => p.sku === sku);
         const maxStock = originalProduct ? originalProduct.stock : 0;
+
         switch (action) {
             case 'remove': cart = cart.filter(item => item.sku !== sku); break;
             case 'plus':
@@ -114,28 +123,43 @@ $(document).ready(() => {
                 if (itemInCart.quantity > 1) { itemInCart.quantity--; } else { cart = cart.filter(item => item.sku !== sku); }
                 break;
         }
+
         renderCart();
     }
-    // -- Sisa Event Listener juga tidak ada perubahan --
+    
+    // --- EVENT LISTENERS ---
     $searchInput.on('input', (e) => {
         const searchTerm = $(e.target).val().toLowerCase();
         const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm));
         renderProducts(filteredProducts);
     });
-    $cartItems.on('click', '.remove-item-btn', function() { handleCartActions($(this).data('sku'), 'remove'); });
-    $cartItems.on('click', '.qty-plus', function() { handleCartActions($(this).data('sku'), 'plus'); });
-    $cartItems.on('click', '.qty-minus', function() { handleCartActions($(this).data('sku'), 'minus'); });
+
+    $cartItems.on('click', '.remove-item-btn', function() { 
+        handleCartActions($(this).data('sku'), 'remove'); 
+    });
+
+    $cartItems.on('click', '.qty-plus', function() { 
+        handleCartActions($(this).data('sku'), 'plus'); 
+    });
+
+    $cartItems.on('click', '.qty-minus', function() { 
+        handleCartActions($(this).data('sku'), 'minus'); 
+    });
+
     $cartItems.on('change', '.item-quantity', function() {
+
         const sku = $(this).data('sku');
         let newQuantity = parseInt($(this).val());
         const itemInCart = cart.find(item => item.sku === sku);
         const originalProduct = products.find(p => p.sku === sku);
         const maxStock = originalProduct ? originalProduct.stock : 0;
+        
         if (newQuantity > maxStock) {
             alert(`Stok tidak mencukupi! (Maks: ${maxStock})`);
             newQuantity = maxStock;
             $(this).val(newQuantity);
         }
+
         if (itemInCart) {
             if (newQuantity > 0) { itemInCart.quantity = newQuantity; } else { cart = cart.filter(item => item.sku !== sku); }
             renderCart();
@@ -149,12 +173,12 @@ $(document).ready(() => {
                 tax: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 0.11,
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.11,
             };
+
             Storage.setLocal('currentOrder', orderDetails);
             window.location.href = 'pos_payment.html';
         }
     });
 
-    // --- INISIALISASI (SUDAH DIPERBAIKI) ---
-    renderProducts(products); // Selalu panggil renderProducts
+    renderProducts(products);
     renderCart();
 });

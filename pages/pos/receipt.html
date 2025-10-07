@@ -12,29 +12,41 @@
     
     <link rel="stylesheet" href="../../public/css/pos-css/receipt.css">
 </head>
+
 <body>
     <div class="container">
+
         <div class="sidebar"></div>
+
         <main class="content">
+
             <div class="receipt-container">
+                
                 <div class="receipt-header">
+
                     <span class="material-symbols-outlined receipt-icon">check_circle</span>
+
                     <h1>Transaksi Berhasil!</h1>
+
                 </div>
                 
                 <div class="receipt-details">
+
                     <div class="detail-item">
                         <span>ID Transaksi:</span>
                         <strong id="receipt-id"></strong>
                     </div>
+
                     <div class="detail-item">
                         <span>Tanggal:</span>
                         <strong id="receipt-date"></strong>
                     </div>
+
                     <div class="detail-item">
                         <span>Kasir:</span>
                         <strong id="receipt-cashier"></strong>
                     </div>
+
                 </div>
 
                 <div class="receipt-items">
@@ -44,28 +56,48 @@
                 </div>
 
                 <div class="receipt-summary">
+
                     <div class="summary-item">
                         <span>Subtotal:</span>
                         <strong id="receipt-subtotal"></strong>
                     </div>
+
                     <div class="summary-item">
                         <span>Pajak (11%):</span>
                         <strong id="receipt-tax"></strong>
                     </div>
+
                     <div class="summary-item total">
                         <span>Total Dibayar:</span>
                         <strong id="receipt-total"></strong>
                     </div>
-                     <div class="summary-item">
+
+                    <div id="cash-details-receipt">
+                        
+                        <div class="summary-item">
+                            <span>Uang Diterima:</span>
+                            <strong id="receipt-amount-received"></strong>
+                        </div>
+
+                        <div class="summary-item">
+                            <span>Kembalian:</span>
+                            <strong id="receipt-change"></strong>
+                        </div>
+
+                    </div>
+                    
+                    <div class="summary-item">
                         <span>Metode Pembayaran:</span>
                         <strong id="receipt-payment-method"></strong>
                     </div>
+                    
                 </div>
 
                 <div class="receipt-actions">
                     <button id="print-receipt-btn" class="btn-secondary">Cetak Struk</button>
                     <button id="new-sale-btn" class="btn-primary">Mulai Penjualan Baru</button>
                 </div>
+
             </div>
         </main>
     </div>
