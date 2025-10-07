@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Laporan | MonkeyPOS</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
-    <link rel="stylesheet" href="../../public/css/style.css"> 
+    <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/components/sidebar.css">
-</head>
+    </head>
 <body>
 
     <div class="container">
@@ -15,12 +16,22 @@
 
         <main class="content">
             <div class="header-actions"></div>
-            <h1>Daftar Produk</h1>
-            <p>This is where Martin will add the product list table.</p>
+            <h1>Laporan</h1>
+
+            <div id="report-table-container">
+                </div>
+
+            <div id="report-summary-container">
+                </div>
+
         </main>
     </div>
+
+    <script src="../../public/js/helpers/storage.js"></script>
     <script src="../../public/js/components/sidebar.js"></script>
     <script src="../../public/js/components/header.js"></script>
+    <script src="../../public/js/components/table.js"></script>
+    <script src="../../public/js/template/table-template.js"></script> 
     <script src="../../public/js/app.js"></script>
 </body>
 </html>
