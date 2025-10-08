@@ -30,7 +30,7 @@ function createHeader(root, userData) {
   $(".logout-btn").on("click", (e) => {
     e.preventDefault();
     sessionStorage.removeItem("currentUser");
-    window.location.href = "../login/login.html";
+    window.location.href = "../../pages/login/login.html";
   });
 }
 
@@ -38,7 +38,7 @@ $(document).ready(() => {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   if (!currentUser) {
-    window.location.href = "../login/login.html";
+    window.location.href = "../../pages/login/login.html";
     return;
   }
 

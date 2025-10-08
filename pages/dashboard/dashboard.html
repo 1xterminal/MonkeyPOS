@@ -19,22 +19,8 @@
         <div class="sidebar"></div>
 
         <!-- Isi Content -->
-        <main class="content">
-            <header class="dashboard-main-header">
-                <div class="dashboard-header-title">
-                    <h1>Dashboard</h1>
-                </div>
-            
-                <div class="dashboard-header-actions">
-                    <div class="dashboard-welcome-group">
-                        <i class='bx bxs-user'></i>
-                        <span class="welcome-message">Selamat Datang, EMP1234</span>
-                    </div>
-                    <button class="logout-button" title="Log Out">
-                        <i class='bx bx-log-out'></i>
-                    </button>
-                </div>
-                </header>
+        <main class="main-content">
+            <div class="header-actions"></div>
 
             <section class="dashboard-stats-cards">
                 <div class="dashboard-card">
@@ -60,7 +46,10 @@
 
         </main>
     </div>
+
+    <script src="../../public/js/helpers/storage.js"></script>
     <script src="../../public/js/components/sidebar.js"></script>
+    <script src="../../public/js/components/header.js"></script>
     <script src="../../public/js/dashboard/dashboard.js"></script>
 </body>
 </html>
