@@ -47,7 +47,6 @@ a {
     display: flex;
     flex-direction: column;
 
-    box-sizing: border-box;
     padding: 10px;
 }
 
@@ -56,6 +55,8 @@ a {
     gap: 8px;
     align-items: center;
     padding: 10px;
+
+    box-sizing: border-box;
 
     border-radius: 6px;
 
@@ -69,10 +70,14 @@ a {
 }
 
 .sidebar .menus .menu.active {
-    background-color: var(--color-primary);
     color: #442E00;
-    border: 3px solid var(--color-primary-shadow);
+    background-color: var(--color-primary);
+
+    outline: 2px solid var(--yellow-50);
+    outline-offset: -2px;
+
     font-weight: 600;
+
     cursor: default;
 }
 

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Title</title> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
-    <link rel="stylesheet" href="../../public/css/style.css"> 
+    <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/components/sidebar.css">
 </head>
 <body>
 
     <div class="container">
-        
+
         <div class="sidebar"></div>
 
         <main class="content">
@@ -27,7 +27,7 @@
                         <input type="text" id="members-add-name" placeholder="Nama Member" required>
                         <input type="email" id="members-add-email" placeholder="Email" required>
                         <input type="number" id="members-add-phone" placeholder="No. Telepon" required>
-                        <button id="members-add-button" type="submit">Tambah</button>
+                        <button class="filled" id="members-add-button" type="submit">Tambah</button>
                     </form>
                 </div>
             </div>
@@ -43,11 +43,11 @@
                 <input type="text" id="members-edit-name" placeholder="Nama Member" required>
                 <input type="email" id="members-edit-email" placeholder="Email" required>
                 <input type="number" id="members-edit-phone" placeholder="No. Telepon" required>
-                <button id="members-edit-button" type="submit">Simpan Perubahan</button>
+                <button class="filled" id="members-edit-button" type="submit">Simpan Perubahan</button>
             </form>
         </div>
     </div>
-    
+
     <script src="../../public/js/helpers/storage.js"></script>
     <script src="../../public/js/components/sidebar.js"></script>
     <script src="../../public/js/components/header.js"></script>

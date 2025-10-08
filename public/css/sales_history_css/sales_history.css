@@ -1,5 +1,5 @@
 /* === Wrapper box untuk filter dan tabel === */
-.table-wrapper, 
+.table-wrapper,
 .filter-box {
   background: var(--color-background);
   border-radius: var(--border-radius);
@@ -19,7 +19,7 @@
 }
 
 /* Tombol filter */
-.filter-box button,
+/* .filter-box button,
 .filter-box .btn-primary {
   padding: 8px 18px;
   border: none;
@@ -36,7 +36,7 @@
 .filter-box .btn-primary:hover {
   background: var(--color-primary-highlight);
   transform: translateY(-2px);
-}
+} */
 
 /* Input search */
 .filter-box input {
