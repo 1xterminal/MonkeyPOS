@@ -152,11 +152,11 @@ body {
     color: var(--color-text);
 }
 
-/* .table-summary .add-report-btn {
+.table-summary .add-report-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 22px;
+    /* padding: 12px 22px;
     background-color: var(--color-primary);
     border: 1px solid var(--color-primary-shadow);
     border-radius: 8px;
@@ -164,9 +164,9 @@ body {
     color: var(--color-text);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; */
 }
-
+/*
 .table-summary .add-report-btn:hover {
     background-color: #FFD24C;
     box-shadow: 0 4px 8px rgba(180, 123, 0, 0.3);
@@ -203,13 +203,13 @@ body {
     box-shadow: 2px 2px 0px var(--color-secondary-shadow), 6px 6px 0px var(--color-background-offset); */
 }
 
-/* .products-list-content button{
-    font-family: var(--font-family);
+.products-list-content button{
+    /* font-family: var(--font-family);
     padding: 15px;
-    text-align: center;
+    text-align: center; */
     margin: 20px 10px;
     width: 10%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     font-weight: bold;
     outline: none;
@@ -217,32 +217,32 @@ body {
     box-shadow: 4px 4px 0px var(--color-secondary-shadow);
     color: var(--color-text);
     transition: 0.3s ease;
-    cursor: pointer;
+    cursor: pointer; */
 }
 
-.products-list-content button:hover{
+/* .products-list-content button:hover{
     font-family: var(--font-family);
     font-weight: bold;
     border: 1px solid var(--color-primary-shadow);
     background-color: var(--color-background-offset);
     transform: scale(1.05);
-}
+} */
 
 #products-list-add-product-button{
-    font-family: var(--font-family);
+    /* font-family: var(--font-family);
     padding: 15px;
-    text-align: center;
+    text-align: center; */
     margin: 20px 10px;
     width: 30%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-primary);
     box-shadow: 4px 4px 0px var(--color-primary-shadow);
-    color: var(--color-text);
+    color: var(--color-text); */
 }
 
-#products-list-add-product-button:hover{
+/* #products-list-add-product-button:hover{
     font-family: var(--font-family);
     border: 1px solid var(--color-primary-shadow);
     background-color: var(--color-primary-highlight);
@@ -322,23 +322,23 @@ body {
     box-shadow: 4px 4px 0px var(--color-secondary-shadow); */
 }
 
-/* #member-search-button{
-    font-family: var(--font-family);
+#member-search-button{
+    /* font-family: var(--font-family);
     padding: 15px;
-    text-align: center;
+    text-align: center; */
     margin: 20px 10px;
     width: 10%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-background);
     box-shadow: 4px 4px 0px var(--color-secondary-shadow);
     color: var(--color-text);
     transition: 0.3s ease;
-    cursor: pointer;
+    cursor: pointer; */
 }
 
-#member-search-button:hover{
+/* #member-search-button:hover{
     font-family: var(--font-family);
     border: 1px solid var(--color-primary-shadow);
     background-color: var(--color-background-offset);
@@ -476,23 +476,23 @@ body {
     box-shadow: 4px 4px 0px var(--color-secondary-shadow); */
 }
 
-/* #members-add-button{
-    font-family: var(--font-family);
+#members-add-button{
+    /* font-family: var(--font-family);
     padding: 10px;
-    text-align: center;
+    text-align: center; */
     margin: 20px 10px;
     width: 10%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-primary);
     box-shadow: 4px 4px 0px var(--color-secondary-shadow);
     color: var(--color-text);
     transition: 0.3s ease;
-    cursor: pointer;
+    cursor: pointer; */
 }
 
-#members-add-button:hover{
+/* #members-add-button:hover{
     font-family: var(--font-family);
     border: 1px solid var(--color-primary-shadow);
     background-color: var(--color-primary-highlight);
@@ -528,72 +528,76 @@ body {
     box-shadow: 4px 4px 10px rgba(var(--color-text-highlight), 0.7), -4px -4px 10px rgba(var(--color-text-highlight), 0.7);
 }
 
-/* #members-edit-close-button {
+#members-edit-close-button {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 12px;
+    right: 12px;
     color: var(--color-text);
     font-size: 28px;
-    font-weight: bold;
+    padding: 0;
+    line-height: 1;
+    height: 36px;
+    aspect-ratio: 1 / 1;
+    /* font-weight: bold;
     cursor: pointer;
-    transition: color 0.2s ease;
-} */
+    transition: color 0.2s ease; */
+}
 
 #members-edit-name{
-    color: var(--color-text);
+    /* color: var(--color-text);
     font-family: var(--font-family);
-    padding: 10px;
+    padding: 10px; */
     margin: 20px 10px;
     width: 40%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-background);
-    box-shadow: 4px 4px 0px var(--color-secondary-shadow);
+    box-shadow: 4px 4px 0px var(--color-secondary-shadow); */
 }
 
 #members-edit-email{
-    color: var(--color-text);
+    /* color: var(--color-text);
     font-family: var(--font-family);
-    padding: 10px;
+    padding: 10px; */
     margin: 20px 10px;
     width: 40%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-background);
-    box-shadow: 4px 4px 0px var(--color-secondary-shadow);
+    box-shadow: 4px 4px 0px var(--color-secondary-shadow); */
 }
 
 #members-edit-phone{
-    color: var(--color-text);
+    /* color: var(--color-text);
     font-family: var(--font-family);
-    padding: 10px;
+    padding: 10px; */
     margin: 5px 10px 20px 10px;
     width: 40%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-background);
-    box-shadow: 4px 4px 0px var(--color-secondary-shadow);
+    box-shadow: 4px 4px 0px var(--color-secondary-shadow); */
 }
 
-/* #members-edit-button{
-    color: var(--color-text);
+#members-edit-button{
+    /* color: var(--color-text);
     font-family: var(--font-family);
-    padding: 10px;
+    padding: 10px; */
     margin: 5px 10px 20px 10px;
     width: 40%;
-    border: 1px solid var(--color-primary-shadow);
+    /* border: 1px solid var(--color-primary-shadow);
     border-radius: 5px;
     outline: none;
     background-color: var(--color-background);
     box-shadow: 4px 4px 0px var(--color-secondary-shadow);
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.3s ease; */
 }
 
-#members-edit-button:hover{
+/* #members-edit-button:hover{
     font-family: var(--font-family);
     border: 1px solid var(--color-primary-shadow);
     background-color: var(--color-primary-highlight);
