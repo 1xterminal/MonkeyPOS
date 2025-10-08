@@ -9,8 +9,17 @@
     justify-content: center;
 }
 
+.receipt-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 420px;
+}
+
 .receipt {
-    min-width: 420px;
+    width: 100%;
     padding: 64px 32px;
 
     display: flex;
@@ -91,4 +100,34 @@
 .receipt .details .payment > div.total {
     font-weight: 700;
     font-size: 20px;
+}
+
+/* Update this existing rule */
+.receipt-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 16px;
+}
+.action-link {
+    /* Reset button styles */
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    /* Layout and styling */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    
+    color: var(--color-text-highlight); /* Use your theme's highlight color */
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.action-link:hover {
+    color: var(--color-text); /* Darken on hover */
 }
