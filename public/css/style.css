@@ -46,7 +46,7 @@ body {
 .container {
     display: flex;
     height: 100%;
-    gap: 24px; 
+    gap: 24px;
 }
 
 .content {
@@ -72,6 +72,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--color-border-light);
+    overflow: hidden;
 }
 
 .table-container-wrapper {
@@ -116,6 +117,10 @@ body {
     background-color: #FFF3D1;
 }
 
+.data-table thead th {
+    border-top: none;
+}
+
 /* --- ACTION BUTTONS --- */
 .data-table .table-actions {
     display: flex;
@@ -130,10 +135,10 @@ body {
     justify-content: center;
     gap: 6px;
     padding: 8px 12px;
-    width: 100%; 
-    border: none; 
+    width: 100%;
+    border: none;
     border-radius: 5px;
-    background-color: var(--color-primary); 
+    background-color: var(--color-primary);
     box-shadow: 4px 4px 0px var(--color-background-offset);
     color: var(--color-text);
     font-weight: 500;
@@ -143,7 +148,7 @@ body {
 
 .data-table .action-btn:hover {
     background-color: var(--color-primary-highlight);
-    transform: scale(1.05); 
+    transform: scale(1.05);
     box-shadow: 4px 4px 0px var(--color-primary-shadow);
     color: var(--color-text);
 }
@@ -275,8 +280,8 @@ body {
     align-items: center;
     gap: 8px;
     font-size: 18px;
-    color: #082C4C; 
-    font-weight: 600; 
+    color: #082C4C;
+    font-weight: 600;
 }
 
 .logout-btn {
