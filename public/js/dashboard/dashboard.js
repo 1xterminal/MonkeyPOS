@@ -95,6 +95,9 @@ $(document).ready(function() {
         lowStockCard.text(`${lowStockCount} Produk`);
     };
 
+    // Atur tombol filter hari ini menjadi default
+    $('.dashboard-filter-button[data-period="hariini"]').addClass('active');
+
     // Filter button events
     filterButtons.click(function() {
         const period = $(this).data('period');
