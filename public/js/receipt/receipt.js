@@ -1,63 +1,66 @@
-var receiptData = {
-  "carts": [
-    {
-      "name": "Nama barang",
-      "price": 5000,
-      "amount": 3
-    },
-    {
-      "name": "Nama barang",
-      "price": 20000,
-      "amount": 4
-    }
-  ],
-  "payment": 150000
-};
-
-function convertCurrency(val) {
-  return Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-
-  }).format(val).replace(',00', '');
-}
-
-function populateCarts(carts) {
-  $('#carts').append(
-    $.map(carts, (cart) => $("<div>", {
-      "class": "cart"
-    }).append([
-      $("<div>", {
-        "class": "cart-detail"
-      }).append([
-        $("<span>", {
-          "class": "product-name",
-          text: cart.name
-        }),
-        $("<span>", {
-          "class": "product-price",
-          text: `${convertCurrency(cart.price)} × ${cart.amount}`
-        })
-      ]),
-      $("<span>", {
-        "class": "total-price",
-        text: convertCurrency(cart.price * cart.amount)
-      })
-    ]))
-  );
-}
-
-function generatePayment(data) {
-  let total = data.carts.reduce((sum, item) => sum + (item.price * item.amount), 0);
-  $("#payment-total").text(convertCurrency(total));
-
-  $("#payment-received").text(convertCurrency(data.payment));
-
-  let change = data.payment - total;
-  $("#payment-change").text(convertCurrency(change));
-}
 
 $(document).ready(() => {
-  populateCarts(receiptData.carts);
-  generatePayment(receiptData);
+    const urlParams = new URLSearchParams(window.location.search);
+    const transactionId = urlParams.get('id');
+    const salesHistory = Storage.getLocal('salesHistory', []);
+    const transaction = salesHistory.find(t => t.id === transactionId);
+
+    if (!transaction) {
+        alert('Transaksi tidak ditemukan!');
+        window.location.href = '../pos/pos_terminal.html';
+        return;
+    }
+
+    function formatRupiah(number) {
+        return `Rp ${number.toLocaleString('id-ID')}`;
+    }
+
+    function populateReceipt() {
+        const {
+            date,
+            items,
+            total,
+            amountReceived,
+            change
+        } = transaction;
+
+        const formattedDate = new Date(date).toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        const formattedTime = new Date(date).toLocaleTimeString('id-ID');
+
+        $('.date').text(formattedDate);
+        $('.time').text(formattedTime);
+
+        const $carts = $('#carts');
+        $carts.empty();
+        items.forEach(item => {
+            const $cartItem = $(`
+                <div class="cart">
+                    <div class="cart-detail">
+                        <span class="product-name">${item.name}</span>
+                        <span class="product-price">${formatRupiah(item.price)} × ${item.quantity}</span>
+                    </div>
+                    <span class="total-price">${formatRupiah(item.price * item.quantity)}</span>
+                </div>
+            `);
+            $carts.append($cartItem);
+        });
+
+        $('#payment-total').text(formatRupiah(total));
+        $('#payment-received').text(formatRupiah(amountReceived || 0));
+        $('#payment-change').text(formatRupiah(change || 0));
+    }
+
+    $('#back-to-pos').on('click', () => {
+        window.location.href = '../pos/pos_terminal.html';
+    });
+
+    $('#print-receipt').on('click', () => {
+        window.print();
+    });
+
+    populateReceipt();
 });
