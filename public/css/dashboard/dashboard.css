@@ -45,11 +45,6 @@ body {
     gap: 24px;
 }
 
-.content {
-    flex: 1;
-    padding: 24px;
-}
-
 .card {
     padding: 16px;
     margin-top: 20px;
@@ -61,21 +56,22 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: transparent;
-    border: 1px solid #dcdcdc;
+    border-color: #dc3545;
+    background-color: var(--color-background-offset);
+    color: #dc3545;
     border-radius: var(--border-radius);
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--color-text-highlight);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .logout-button:hover {
-    border-color: #dc3545;
-    background-color: #fef2f2;
-    color: #dc3545;
+    border-color: #ff7784;
+    background-color: var(--color-background-offset);
+    color: #ff5062;
+    border-radius: var(--border-radius);
 }
 
 .logout-button i {
@@ -92,7 +88,7 @@ body {
 }
 
 .dashboard-header-title h1 {
-    font-size: 2rem;
+    font-size: 2.3rem;
     font-weight: 600;
     color: var(--color-text);
     margin: 0;
@@ -110,112 +106,69 @@ body {
     font-weight: 500;
 }
 
-.dashboard-main-header h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-}
-
-.main-content {
-    flex-grow: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    border: 2px solid var(--color-background-offset);
-    border-radius: var(--border-radius);
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.25);
-}
-
 /* Status card */
 .dashboard-stats-cards {
     display: flex;
     gap: 1.5rem;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .dashboard-card {
-    flex: 1;
-    min-width: 220px;
-    padding: 1.5rem;
-    border: 2px solid var(--color-background-offset);
+    padding: 2rem;
+    border: 1px solid var(--color-background-offset);
+    border-left: 6px solid var(--color-primary);
+    border-bottom: 8px solid var(--color-primary);
     border-radius: var(--border-radius);
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.25);
+    background-color: var(--color-background);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 4px 15px rgba(8, 44, 76, 0.3);
 }
 
 .dashboard-card-title {
-    font-size: 0.9rem;
-    color: var(--color-text);
+    font-size: 1.1rem;
+    color: var(--color-text-highlight);
     margin-bottom: 0.5rem;
 }
 
 .dashboard-card-value {
-    font-size: 1.75rem;
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 600;
     color: var(--color-text);
 }
 
-/* Grafik */
-.dashboard-chart-section {
+/* Filter group */
+.filter-group {
     margin-top: 2.5rem;
-}
-
-.dashboard-chart-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.dashboard-chart-title-group h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin: 0;
-}
-
-.dashboard-chart-title-group p {
-    font-size: 1rem;
-    color: var(--color-text-highlight);
-    font-weight: 600;
+    justify-content: flex-end;
+    gap: 0.75rem;
 }
 
 .dashboard-filter-button {
+    padding: 0.6rem 1.2rem;
     margin-left: 4px;
     padding: 0.6rem 1.2rem;
-    border: 1px solid rgba(228, 157, 0, 0.5);
+    border: 1px solid var(--color-secondary-shadow);
     border-radius: var(--border-radius);
-    
+    background-color: transparent;
+    color: var(--color-text-highlight);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.3 ease;
+    transition: all 0.7 ease;
 }
 
-.dashboard-filter-button.active {
-    background: linear-gradient(
-        180deg,
-        #FFFBE7,#FDF0CB
-    );
-    color: var(--color-text);
-    border-color: var(--color-secondary-shadow);
-    font-weight: 600;
-    position: relative;
+.dashboard-filter-button:hover {
+    transform: translateY(-2px);
 }
 
+.dashboard-filter-button.active,
 .dashboard-filter-button:not(.active):hover {
-    background: linear-gradient(
-        180deg,
-        #FFFBE7,#FDF0CB
-    );
-    color: var(--color-text-highlight);
-}
-
-.dashboard-chart-placeholder {
-    height: 350px;
-    border: 1px solid var((--color-primary-highlight));
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text);
-    background-color: #fffbdd;
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.15);
+     background: linear-gradient(180deg, #FFFBE7, #FDF0CB);
+     color: var(--color-text);
+     border-color: var(--color-primary-shadow);
 }
