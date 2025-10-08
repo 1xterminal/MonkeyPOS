@@ -1,162 +1,117 @@
-// public/js/transaction-detail/transaction_detail.js
-// Ambil data transaksi berdasarkan ID dari URL dan tampilkan detailnya
+// public/js/transaction/transaction_detail.js (rapi & kompatibel)
+$(document).ready(() => {
 
-(function () {
-  if (!window.Storage || typeof Storage.getLocal !== 'function') {
-    console.warn('❌ Storage helper tidak ditemukan.');
+  function formatRupiahNumber(value) {
+    const n = Number(value) || 0;
+    return new Intl.NumberFormat('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n).replace(',', '.').replace(/\.(?=.*\.)/g, ',');
+    // NOTE: above replace attempts to keep thousands & decimal in id-ID style.
+  }
+  function formatRupiah(value) {
+    return `Rp ${formatRupiahNumber(value)}`;
+  }
+
+  function readHistory() {
+    try {
+      if (window.Storage && typeof Storage.getLocal === 'function') return Storage.getLocal('salesHistory', []) || [];
+    } catch(e){}
+    try {
+      const raw = localStorage.getItem('salesHistory');
+      return raw ? JSON.parse(raw) : [];
+    } catch(e){ return []; }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const txIdParam = params.get('id');
+  if (!txIdParam) {
+    console.warn('No transaction id in URL');
     return;
   }
 
-  const fmtCurrency = v => 'Rp ' + Number(v || 0).toLocaleString('id-ID');
+  const salesHistory = readHistory();
 
-  function getTransactionId() {
-    return new URLSearchParams(window.location.search).get('id');
+  const transaction = salesHistory.find(t => {
+    const ids = [t.id, t.transactionId, t.invoiceId, t.code, t.transactionID, t.transaction_id, t.invoice_id];
+    return ids.some(i => (i != null) && String(i) === String(txIdParam));
+  });
+
+  if (!transaction) {
+    console.warn('Transaction not found for id', txIdParam);
+    // show friendly message in page if needed
+    $('#itemsList').html('<tr><td colspan="4" style="text-align:center; padding:18px">Transaksi tidak ditemukan.</td></tr>');
+    return;
   }
 
-  function loadAllTransactions() {
-    return Storage.getLocal('salesHistory', []) || [];
-  }
+  // Normalize values
+  const txId = transaction.id ?? transaction.transactionId ?? transaction.invoiceId ?? transaction.code ?? '';
+  const rawDate = transaction.date ?? transaction.datetime ?? transaction.createdAt ?? '';
+  const dt = rawDate ? new Date(rawDate) : null;
+  const dateStr = dt && !isNaN(dt.getTime()) ? dt.toLocaleDateString('id-ID') : (typeof rawDate === 'string' ? rawDate.split(' ')[0] : rawDate);
+  const timeStr = dt && !isNaN(dt.getTime()) ? dt.toLocaleTimeString('id-ID') : (transaction.time ?? '');
 
-  function computeTotals(items, tx) {
-    const subtotal = (items || []).reduce(
-      (acc, it) => acc + ((Number(it.price) || 0) * (Number(it.quantity || it.qty) || 1)),
-      0
-    );
-    const taxRate = tx?.taxRate != null ? Number(tx.taxRate) : 0.11;
-    const tax = tx?.tax != null ? Number(tx.tax) : Math.round(subtotal * taxRate);
-    const total = tx?.total != null ? Number(tx.total) : subtotal + tax;
-    return { subtotal, tax, total };
-  }
+  const cashier = transaction.cashier ?? transaction.kasir ?? transaction.user ?? '-';
+  const paymentMethod = transaction.paymentMethod ?? transaction.payment ?? transaction.method ?? transaction.metodePembayaran ?? '-';
 
-  function renderTransaction(tx) {
-    document.getElementById('detail-id').textContent = tx.id || '-';
-    const date = tx.date || tx.datetime || tx.createdAt;
-    document.getElementById('detail-date').textContent = date ? new Date(date).toLocaleString('id-ID') : '-';
+  // Write header info
+  $('#transactionId').text(txId);
+  $('#transactionDate').text(dateStr);
+  $('#transactionTime').text(timeStr);
 
-    const items = tx.items || tx.cart || [];
-    const totals = computeTotals(items, tx);
+  $('#paymentMethod').text(paymentMethod);
+  $('#transCashier').text(cashier);
 
-    document.getElementById('detail-subtotal').textContent = fmtCurrency(totals.subtotal);
-    document.getElementById('detail-tax').textContent = fmtCurrency(totals.tax);
-    document.getElementById('detail-total').textContent = fmtCurrency(totals.total);
-    document.getElementById('detail-payment-method').textContent = tx.paymentMethod || tx.method || '-';
+  // get items
+  let items = [];
+  if (Array.isArray(transaction.items)) items = transaction.items;
+  else if (Array.isArray(transaction.cart)) items = transaction.cart;
+  else if (Array.isArray(transaction.products)) items = transaction.products;
+  else if (Array.isArray(transaction.details)) items = transaction.details;
+  else if (Array.isArray(transaction.lineItems)) items = transaction.lineItems;
 
-    const tbody = document.getElementById('transaction-items-body');
-    tbody.innerHTML = '';
-
-    if (!items.length) {
-      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Tidak ada item.</td></tr>`;
-      return;
-    }
-
+  if (!items || items.length === 0) {
+    $('#itemsList').html('<tr><td colspan="4" style="text-align:center; padding:18px">Tidak ada item untuk transaksi ini.</td></tr>');
+  } else {
+    $('#itemsList').empty();
     items.forEach(it => {
-      const qty = Number(it.quantity || it.qty) || 1;
-      const price = Number(it.price) || 0;
-      const subtotal = qty * price;
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${it.name || it.product || '-'}</td>
-        <td>${qty}</td>
-        <td>${fmtCurrency(price)}</td>
-        <td>${fmtCurrency(subtotal)}</td>
-      `;
-      tbody.appendChild(tr);
+      const name = it.name ?? it.product ?? it.title ?? it.nama ?? '-';
+      const qty = Number(it.qty ?? it.quantity ?? it.q) || 0;
+      const price = Number(it.price ?? it.harga ?? it.unitPrice) || 0;
+      const subtotal = Number(it.subtotal ?? (price * qty)) || (price * qty);
+      const row = `<tr>
+        <td>${name}</td>
+        <td class="text-right">${formatRupiah(price)}</td>
+        <td class="text-center">${qty}</td>
+        <td class="text-right">${formatRupiah(subtotal)}</td>
+      </tr>`;
+      $('#itemsList').append(row);
     });
   }
 
-  function showNotFound(id) {
-    const container = document.getElementById('transaction-detail-container');
-    container.innerHTML = `
-      <div style="padding:20px; text-align:center;">
-        <p>Transaksi dengan ID <strong>${id}</strong> tidak ditemukan.</p>
-        <button onclick="window.location.href='sales_history.html'">Kembali ke Riwayat</button>
-      </div>
-    `;
+  // compute totals if missing
+  let subtotal = Number(transaction.subtotal ?? transaction.subTotal ?? 0);
+  if ((!subtotal || subtotal === 0) && items.length > 0) {
+    subtotal = items.reduce((s, it) => {
+      const p = Number(it.price ?? it.harga ?? 0) || 0;
+      const q = Number(it.qty ?? it.quantity ?? it.q) || 0;
+      return s + (p * q);
+    }, 0);
   }
 
-  function init() {
-    const id = getTransactionId();
-    if (!id) return showNotFound('(tanpa ID)');
-
-    const transactions = loadAllTransactions();
-    const tx = transactions.find(t => String(t.id) === String(id));
-
-    if (!tx) return showNotFound(id);
-
-    renderTransaction(tx);
-
-    document.getElementById('back-to-history').addEventListener('click', () => {
-      window.location.href = 'sales_history.html';
-    });
+  let tax = Number(transaction.tax ?? transaction.pajak ?? 0);
+  if (!tax) {
+    const taxPercent = Number(transaction.taxPercent ?? transaction.pajakPercent ?? 11) || 11;
+    tax = Math.round(subtotal * (taxPercent/100));
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-})();
+  let total = Number(transaction.total ?? transaction.amountPaid ?? (subtotal + tax)) || (subtotal + tax);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const transactionId = urlParams.get('id');
-    
-    if (!transactionId) {
-        alert('ID Transaksi tidak ditemukan');
-        window.location.href = '../sales_history/sales_history.html';
-        return;
-    }
+  // Fill totals
+  $('#subtotal').text(formatRupiah(subtotal));
+  $('#tax').text(formatRupiah(tax));
+  $('#total').text(formatRupiah(total));
 
-    loadTransactionDetail(transactionId);
+  // Back button
+  $('#btnBack').on('click', () => {
+    window.location.href = '../sales_history/sales_history.html';
+  });
+
 });
-
-function loadTransactionDetail(transactionId) {
-    const salesHistory = Storage.getLocal('salesHistory', []);
-    const transaction = salesHistory.find(sale => sale.id === transactionId);
-
-    if (!transaction) {
-        alert('Data transaksi tidak ditemukan');
-        window.location.href = '../sales_history/sales_history.html';
-        return;
-    }
-
-    // Format date and time
-    const dateTime = new Date(transaction.date || transaction.datetime || transaction.createdAt);
-    const formattedDate = dateTime.toLocaleDateString('id-ID', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    });
-    const formattedTime = dateTime.toLocaleTimeString('id-ID');
-
-    // Display transaction info
-    document.getElementById('transactionId').textContent = transaction.id;
-    document.getElementById('transactionDate').textContent = formattedDate;
-    document.getElementById('transactionTime').textContent = formattedTime;
-
-    // Display items
-    const itemsList = document.getElementById('itemsList');
-    itemsList.innerHTML = '';
-    
-    const items = transaction.items || transaction.cart || [];
-    items.forEach(item => {
-        const row = document.createElement('tr');
-        const itemTotal = item.price * (item.quantity || item.qty || 1);
-        
-        row.innerHTML = `
-            <td>${item.name || item.product}</td>
-            <td>Rp ${Number(item.price).toLocaleString('id-ID')}</td>
-            <td>${item.quantity || item.qty || 1}</td>
-            <td>Rp ${itemTotal.toLocaleString('id-ID')}</td>
-        `;
-        itemsList.appendChild(row);
-    });
-
-    // Calculate and display totals
-    const subtotal = items.reduce((sum, item) => 
-        sum + (item.price * (item.quantity || item.qty || 1)), 0);
-    const tax = Math.round(subtotal * 0.11); // 11% tax
-    const total = subtotal + tax;
-
-    document.getElementById('subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-    document.getElementById('tax').textContent = `Rp ${tax.toLocaleString('id-ID')}`;
-    document.getElementById('total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-    document.getElementById('paymentMethod').textContent = transaction.paymentMethod || 'Tunai';
-}
