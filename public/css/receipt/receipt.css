@@ -110,17 +110,15 @@
     padding: 0 16px;
 }
 .action-link {
-    /* Reset button styles */
     background: transparent;
     border: none;
     padding: 0;
 
-    /* Layout and styling */
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Space between icon and text */
+    gap: 8px;
     
-    color: var(--color-text-highlight); /* Use your theme's highlight color */
+    color: var(--color-text-highlight);
     font-size: 16px;
     font-weight: 600;
     font-family: var(--font-family);
@@ -129,5 +127,5 @@
 }
 
 .action-link:hover {
-    color: var(--color-text); /* Darken on hover */
+    color: var(--color-text);
 }
