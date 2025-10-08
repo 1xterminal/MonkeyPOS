@@ -36,7 +36,7 @@ $(document).ready(() => {
         }
 
         $productList.removeClass('empty-state');
-        
+
         productData.forEach(product => {
             const imageUrl = product.image || 'https://via.placeholder.com/150/EEEEEE/000000/?text=No+Image';
             const $productCard = $(`
@@ -82,8 +82,22 @@ $(document).ready(() => {
             cart.forEach(item => {
                 const $cartItem = $(`
                     <div class="cart-item">
-                        <div class="cart-item-details"><p class="cart-item-name">${item.name}</p><p class="cart-item-price">${formatRupiah(item.price)}</p></div>
-                        <div class="cart-item-actions"><button class="qty-btn qty-minus" data-sku="${item.sku}">-</button><input type="number" class="item-quantity" value="${item.quantity}" min="1" data-sku="${item.sku}"><button class="qty-btn qty-plus" data-sku="${item.sku}">+</button><button class="remove-item-btn" data-sku="${item.sku}">×</button></div>
+                        <div class="cart-item-details">
+                            <p class="cart-item-name">${item.name}</p>
+                            <p class="cart-item-price">${formatRupiah(item.price)}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn qty-minus" data-sku="${item.sku}">
+                                <span class="material-symbols-outlined small">remove</span>
+                            </button>
+                            <input type="number" class="item-quantity" value="${item.quantity}" min="1" data-sku="${item.sku}">
+                            <button class="qty-btn qty-plus" data-sku="${item.sku}">
+                                <span class="material-symbols-outlined small">add</span>
+                            </button>
+                            <button class="remove-item-btn" data-sku="${item.sku}">
+                                <span class="material-symbols-outlined small">close</span>
+                            </button>
+                        </div>
                     </div>
                 `);
                 $cartItems.append($cartItem);
@@ -126,7 +140,7 @@ $(document).ready(() => {
 
         renderCart();
     }
-    
+
     // --- EVENT LISTENERS ---
     $searchInput.on('input', (e) => {
         const searchTerm = $(e.target).val().toLowerCase();
@@ -134,16 +148,16 @@ $(document).ready(() => {
         renderProducts(filteredProducts);
     });
 
-    $cartItems.on('click', '.remove-item-btn', function() { 
-        handleCartActions($(this).data('sku'), 'remove'); 
+    $cartItems.on('click', '.remove-item-btn', function() {
+        handleCartActions($(this).data('sku'), 'remove');
     });
 
-    $cartItems.on('click', '.qty-plus', function() { 
-        handleCartActions($(this).data('sku'), 'plus'); 
+    $cartItems.on('click', '.qty-plus', function() {
+        handleCartActions($(this).data('sku'), 'plus');
     });
 
-    $cartItems.on('click', '.qty-minus', function() { 
-        handleCartActions($(this).data('sku'), 'minus'); 
+    $cartItems.on('click', '.qty-minus', function() {
+        handleCartActions($(this).data('sku'), 'minus');
     });
 
     $cartItems.on('change', '.item-quantity', function() {
@@ -153,7 +167,7 @@ $(document).ready(() => {
         const itemInCart = cart.find(item => item.sku === sku);
         const originalProduct = products.find(p => p.sku === sku);
         const maxStock = originalProduct ? originalProduct.stock : 0;
-        
+
         if (newQuantity > maxStock) {
             alert(`Stok tidak mencukupi! (Maks: ${maxStock})`);
             newQuantity = maxStock;

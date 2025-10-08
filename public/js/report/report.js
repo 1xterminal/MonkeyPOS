@@ -43,7 +43,7 @@ function generateIncomeSummary(container, data) {
             $("<span>", { "class": "total-label", text: "Total Pemasukan " }),
             $("<span>", { "class": "total-amount", text: convertCurrency(totalIncome) })
         ]),
-        $("<button>", { "class": "add-report-btn" })
+        $("<button>", { "class": "add-report-btn filled" })
             .append([
                 $("<span>", { "class": "material-symbols-outlined", text: "add" }),
                 $("<span>", { text: "Tambah Laporan" })
