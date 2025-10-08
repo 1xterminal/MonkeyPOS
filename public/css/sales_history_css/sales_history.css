@@ -42,17 +42,17 @@
 .filter-box input {
   flex: 1;
   min-width: 220px;
-  padding: 10px 12px;
+  /* padding: 10px 12px;
   border-radius: var(--border-radius);
   border: 1px solid #ccc;
   outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition: border 0.2s, box-shadow 0.2s; */
 }
 
-.filter-box input:focus {
+/* .filter-box input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 4px rgba(243,166,43,0.5);
-}
+} */
 
 /* === Table styling === */
 .sales-table {
