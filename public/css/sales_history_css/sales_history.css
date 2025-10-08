@@ -56,19 +56,20 @@
 
 /* === Table styling === */
 .sales-table {
+  --table-border: var(--color-text);
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse: collapse;
   font-size: 14px;
   border-radius: var(--border-radius);
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .sales-table thead th {
   background: var(--color-text-highlight);
   color: #fff;
-  padding: 14px;
+  /* padding: 14px;
   text-align: left;
-  font-weight: 600;
+  font-weight: 600; */
 }
 
 .sales-table tbody tr {
@@ -79,25 +80,29 @@
   background: #fafafa;
 }
 
-.sales-table tbody tr:hover {
+/* .sales-table tbody tr:hover {
   background: var(--color-secondary-highlight);
-}
+} */
 
 .sales-table td {
-  padding: 14px;
-  border-bottom: 1px solid #eee;
+  /* padding: 14px;
+  border-bottom: 1px solid #eee; */
   color: var(--color-text);
 }
 
+.sales-table tr:nth-child(even) td {
+    background: var(--color-background-offset);
+}
+
 .sales-table a {
-  color: var(--color-primary-shadow);
+  color: var(--color-text);
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s;
+  /* transition: color 0.2s; */
 }
 
 .sales-table a:hover {
-  color: var(--color-primary);
+  color: var(--color-text-highlight);
   text-decoration: underline;
 }
 

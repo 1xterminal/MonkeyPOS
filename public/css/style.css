@@ -46,7 +46,7 @@ body {
 }
 
 /* --- TABLE --- */
-.data-table {
+/* .data-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -59,7 +59,7 @@ body {
 }
 
 .table-container-wrapper {
-    max-height: 500px; /* Adjust as needed */
+    max-height: 500px; * Adjust as needed *
     overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -102,14 +102,18 @@ body {
 
 .data-table thead th {
     border-top: none;
-}
+} */
 
 /* --- ACTION BUTTONS --- */
 .data-table .table-actions {
     display: flex;
-    gap: 12px;
+    gap: 0;
     align-items: center;
     justify-content: flex-start;
+}
+
+.data-table .table-actions .action-btn {
+    flex: 1;
 }
 
 /* .data-table .action-btn {
