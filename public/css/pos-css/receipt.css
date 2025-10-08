@@ -7,6 +7,14 @@
     border: 1px solid #e0e0e0;
     text-align: center;
 }
+
+#cash-details-receipt {
+    display: none;
+    border-top: 1px dashed #ccc;
+    margin-top: 12px;
+    padding-top: 12px;
+}
+
 .receipt-header { 
     margin-bottom: 24px; 
 }

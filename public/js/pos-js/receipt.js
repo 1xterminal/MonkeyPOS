@@ -3,7 +3,7 @@ $(document).ready(() => {
         return `Rp ${number.toLocaleString('id-ID')}`;
     }
 
-    // 1. Dapatkan ID transaksi dari URL
+    // ambil ID transaksi dari URL
     const urlParams = new URLSearchParams(window.location.search);
     const transactionId = urlParams.get('id');
 
@@ -13,10 +13,10 @@ $(document).ready(() => {
         return;
     }
 
-    // 2. Ambil seluruh riwayat penjualan
+    // Ambil seluruh riwayat penjualan
     const salesHistory = Storage.getLocal('salesHistory', []);
     
-    // 3. Cari transaksi yang sesuai dengan ID
+    // Cari transaksi yang sesuai dengan ID
     const transaction = salesHistory.find(sale => sale.id === transactionId);
 
     if (!transaction) {
@@ -25,7 +25,7 @@ $(document).ready(() => {
         return;
     }
 
-    // 4. Tampilkan data ke elemen HTML
+    // Tampilkan data ke elemen HTML
     $('#receipt-id').text(transaction.id);
     $('#receipt-date').text(new Date(transaction.date).toLocaleString('id-ID'));
     $('#receipt-cashier').text(transaction.cashier);
@@ -44,7 +44,14 @@ $(document).ready(() => {
         $itemsTable.append(itemRow);
     });
 
-    // 5. Atur event listener untuk tombol
+    // Logika untuk menampilkan detail pembayaran tunai
+    if (transaction.paymentMethod === 'cash') {
+        $('#receipt-amount-received').text(formatRupiah(transaction.amountReceived || 0));
+        $('#receipt-change').text(formatRupiah(transaction.change || 0));
+        $('#cash-details-receipt').show();
+    }
+
+    // event listener untuk tombol
     $('#print-receipt-btn').on('click', () => {
         alert("Fitur cetak struk sedang dalam pengembangan!");
         // window.print(); // Kode untuk cetak nyata
