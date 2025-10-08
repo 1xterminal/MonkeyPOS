@@ -1,0 +1,19 @@
+input {
+    appearance: none;
+
+    padding: 8px 10px;
+
+    font-size: 1rem;
+
+    border: 2px solid hsla(0, 0%, 0%, 0.25);
+    border-radius: 5px;
+
+    outline-color: transparent;
+
+    transition: .2s ease-out;
+}
+
+input:focus-within {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary-highlight);
+}

@@ -15,8 +15,8 @@ $(document).ready(() => {
 
     let currentOrder = null;
 
-    function formatRupiah(number) { 
-        return `Rp ${number.toLocaleString('id-ID')}`; 
+    function formatRupiah(number) {
+        return `Rp ${number.toLocaleString('id-ID')}`;
     }
 
     function validatePaymentCompletion() {
@@ -47,7 +47,7 @@ $(document).ready(() => {
         $taxEl.text(formatRupiah(tax));
         $grandTotalEl.text(formatRupiah(total));
         Storage.setLocal('currentOrder', currentOrder);
-        validatePaymentCompletion(); 
+        validatePaymentCompletion();
     }
 
     function renderAll() {
@@ -71,10 +71,23 @@ $(document).ready(() => {
             const itemTotal = item.price * item.quantity;
             const $cartItemDiv = $(`
                 <div class="cart-item-payment">
-                    <div class="item-info"><span class="name">${item.name}</span><span class="price">${formatRupiah(item.price)}</span></div>
-                    <div class="item-actions"><button class="qty-btn-payment qty-minus-payment" data-sku="${item.sku}">-</button><span class="qty">x${item.quantity}</span><button class="qty-btn-payment qty-plus-payment" data-sku="${item.sku}">+</button></div>
+                    <div class="item-info">
+                        <span class="name">${item.name}</span>
+                        <span class="price">${formatRupiah(item.price)}</span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="qty-btn-payment qty-minus-payment" data-sku="${item.sku}">
+                            <span class="material-symbols-outlined small">remove</span>
+                        </button>
+                        <span class="qty">x${item.quantity}</span>
+                        <button class="qty-btn-payment qty-plus-payment" data-sku="${item.sku}">
+                            <span class="material-symbols-outlined small">add</span>
+                        </button>
+                    </div>
                     <span class="total">${formatRupiah(itemTotal)}</span>
-                    <button class="remove-item-btn-payment" data-sku="${item.sku}">×</button>
+                    <button class="remove-item-btn-payment" data-sku="${item.sku}">
+                        <span class="material-symbols-outlined small">close</span>
+                    </button>
                 </div>
             `);
             $cartItemsEl.append($cartItemDiv);
@@ -102,7 +115,7 @@ $(document).ready(() => {
         }
         renderAll();
     }
-    
+
     function handleRemoveItem(sku) {
         currentOrder.cart = currentOrder.cart.filter(item => item.sku !== sku);
         if (currentOrder.cart.length === 0) {
@@ -134,29 +147,29 @@ $(document).ready(() => {
         validatePaymentCompletion();
     }
 
-    $cartItemsEl.on('click', '.remove-item-btn-payment', function() { 
+    $cartItemsEl.on('click', '.remove-item-btn-payment', function() {
         handleRemoveItem($(this).data('sku'));
     });
 
-    $cartItemsEl.on('click', '.qty-plus-payment', function() { 
-        handleQuantityChange($(this).data('sku'), 'plus'); 
+    $cartItemsEl.on('click', '.qty-plus-payment', function() {
+        handleQuantityChange($(this).data('sku'), 'plus');
     });
 
-    $cartItemsEl.on('click', '.qty-minus-payment', function() { 
-        handleQuantityChange($(this).data('sku'), 'minus'); 
+    $cartItemsEl.on('click', '.qty-minus-payment', function() {
+        handleQuantityChange($(this).data('sku'), 'minus');
     });
 
     $paymentMethodRadios.on('change', handlePaymentMethodChange);
 
     $amountReceivedInput.on('input', calculateChange);
 
-    $cancelButton.on('click', () => { 
-        window.location.href = 'pos_terminal.html'; 
+    $cancelButton.on('click', () => {
+        window.location.href = 'pos_terminal.html';
     });
 
     $completeSaleButton.on('click', () => {
-        const currentUser = Storage.getSession('currentUser', { 
-            name: 'Unknown' 
+        const currentUser = Storage.getSession('currentUser', {
+            name: 'Unknown'
         });
 
         const paymentMethod = $('input[name="payment-method"]:checked').val();
@@ -195,7 +208,8 @@ $(document).ready(() => {
         salesHistory.unshift(newTransaction);
         Storage.setLocal('salesHistory', salesHistory);
         Storage.removeLocal('currentOrder');
-        window.location.href = `receipt.html?id=${newTransaction.id}`;
+
+        window.location.href = `../receipt/transaction_receipt.html?id=${newTransaction.id}`;
 
     });
 

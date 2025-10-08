@@ -1,0 +1,63 @@
+table {
+    --table-border: var(--yellow-30);
+
+    width: 100%;
+
+    border: 1px solid var(--table-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--table-border);
+    border-right: 1px solid var(--table-border);
+}
+
+table tr {
+    background: #FFF9E9;
+}
+
+table tr:nth-child(even) {
+    background: var(--yellow-90);
+}
+
+table tr th:last-child,
+table tr td:last-child {
+    border-right: none;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table thead tr {
+    background: var(--color-primary);
+}
+
+table tr button {
+    padding: 8px 12px;
+
+    border: none;
+    border-radius: 0;
+
+    background: none;
+
+    box-shadow: none;
+
+    cursor: pointer;
+}
+table tr button:hover {
+    background: var(--yellow-80);
+    box-shadow: none;
+}
+table tr td:has(button) {
+    padding: 0;
+}
+
+table .num { text-align: end; }
