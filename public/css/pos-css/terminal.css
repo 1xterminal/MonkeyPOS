@@ -20,6 +20,8 @@
     border-radius: var(--border-radius);
     padding:  15px 24px 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    overflow-y: hidden;
 }
 
 .product-header {
@@ -31,11 +33,11 @@
 
 .search-container input {
     width: 100%;
-    padding: 12px 16px;
+    /* padding: 12px 16px;
     border-radius: 8px;
     border: none;
     background-color:#FFFBE7;
-    font-size: 1rem;
+    font-size: 1rem; */
     margin-top: 16px;
 }
 
@@ -184,24 +186,28 @@
 }
 
 .cart-item-actions .qty-btn {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    /* height: 24px; */
     border: 1px solid #ccc;
     background-color: #f5f5f5;
     cursor: pointer;
     font-weight: bold;
+    padding: 0;
+    aspect-ratio: 1 / 1;
 }
 
 .remove-item-btn {
     background: #ff4d4d;
     color: var(--color-background);
     border: none;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    /* height: 24px; */
     border-radius: 50%;
     cursor: pointer;
     font-weight: bold;
     margin-left: 9px;
+    padding: 0;
+    aspect-ratio: 1 / 1;
 }
 
 .cart-footer {
