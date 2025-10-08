@@ -1,28 +1,3 @@
-:root {
-    /* primary colors */
-    --color-primary: #FFCD42;
-    --color-primary-shadow: #F3A62B;
-    --color-primary-highlight: #FFEC70;
-
-    /* secondary colors */
-    --color-secondary: #FFE8BD;
-    --color-secondary-shadow: #EFCE9E;
-    --color-secondary-highlight: #FFF6C7;
-
-    /* background */
-    --color-background: #FFFFFF;
-    --color-background-offset: #EEF7FD;
-
-    /* text */
-    --color-text: #082C4C;
-    --color-text-shadow: #000000;
-    --color-text-highlight: #225F74;
-
-    /* other variables */
-    --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --border-radius: 12px;
-}
-
 /* basic reset */
 * {
     margin: 0;
@@ -39,7 +14,7 @@ body {
 }
 
 /* --- main app layout --- */
-.dashboard-container {
+.container {
     display: flex;
     height: 100%;
     gap: 24px;
@@ -50,92 +25,37 @@ body {
     margin-top: 20px;
 }
 
-/* Dashboard Page */
-/* Tombol Logout */
-.logout-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-color: #dc3545;
-    background-color: var(--color-background-offset);
-    color: #dc3545;
-    border-radius: var(--border-radius);
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.logout-button:hover {
-    border-color: #ff7784;
-    background-color: var(--color-background-offset);
-    color: #ff5062;
-    border-radius: var(--border-radius);
-}
-
-.logout-button i {
-    font-size: 1rem;
-}
-
-/* Konten di kanan */
-.dashboard-main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.dashboard-header-title h1 {
-    font-size: 2.3rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin: 0;
-}
-
-.dashboard-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.dashboard-welcome-message {
-    font-size: 1rem;
-    color: var(--color-text-highlight);
-    font-weight: 500;
-}
 
 /* Status card */
 .dashboard-stats-cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
-    flex-direction: column;
+    margin-top: 3.5rem;
 }
 
 .dashboard-card {
-    padding: 2rem;
+    padding: 1.5rem;
     border: 1px solid var(--color-background-offset);
     border-left: 6px solid var(--color-primary);
-    border-bottom: 8px solid var(--color-primary);
     border-radius: var(--border-radius);
     background-color: var(--color-background);
     transition: all 0.3s ease;
 }
 
 .dashboard-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 4px 15px rgba(8, 44, 76, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(8, 44, 76, 0.1);
 }
 
 .dashboard-card-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--color-text-highlight);
     margin-bottom: 0.5rem;
 }
 
 .dashboard-card-value {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
     color: var(--color-text);
 }
@@ -144,31 +64,29 @@ body {
 .filter-group {
     margin-top: 2.5rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 0.75rem;
 }
 
 .dashboard-filter-button {
     padding: 0.6rem 1.2rem;
-    margin-left: 4px;
-    padding: 0.6rem 1.2rem;
-    border: 1px solid var(--color-secondary-shadow);
-    border-radius: var(--border-radius);
-    background-color: transparent;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    background-color: var(--color-background);
     color: var(--color-text-highlight);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.7 ease;
+    transition: all 0.2s ease;
 }
 
 .dashboard-filter-button:hover {
-    transform: translateY(-2px);
+    background-color: var(--color-background-offset);
+    border-color: var(--color-primary);
 }
 
-.dashboard-filter-button.active,
-.dashboard-filter-button:not(.active):hover {
-     background: linear-gradient(180deg, #FFFBE7, #FDF0CB);
+.dashboard-filter-button.active {
+     background-color: var(--color-primary);
      color: var(--color-text);
      border-color: var(--color-primary-shadow);
 }

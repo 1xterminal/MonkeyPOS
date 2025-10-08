@@ -195,7 +195,8 @@ $(document).ready(() => {
         salesHistory.unshift(newTransaction);
         Storage.setLocal('salesHistory', salesHistory);
         Storage.removeLocal('currentOrder');
-        window.location.href = `receipt.html?id=${newTransaction.id}`;
+        
+        window.location.href = `../receipt/transaction_receipt.html?id=${newTransaction.id}`;
 
     });
 
