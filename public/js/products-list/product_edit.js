@@ -51,7 +51,7 @@ $(document).ready(() => {
                     sku: $('#product-sku').val(),
                     category: $('#product-category').val(),
                     price: parseFloat($('#product-price').val()),
-                    stock: parseInt($('#product-stock').val(), 10),
+                    stock: parseInt($('#product-stock').val(), 10),
                     image: products[productIndex].image
                 };
                 Storage.setLocal("products", products);
