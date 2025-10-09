@@ -124,9 +124,9 @@
   color: var(--color-text);
 }
 
-.sales-table tr:nth-child(even) td {
+/* .sales-table tr:nth-child(even) td {
     background: var(--color-background-offset);
-}
+} */
 
 .sales-table a {
   color: var(--color-text);

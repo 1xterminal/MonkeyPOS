@@ -22,7 +22,8 @@ $(document).ready(() => {
             tax,
             total,
             amountReceived,
-            change
+            change,
+            discount
         } = transaction;
 
         const formattedDate = new Date(date).toLocaleDateString('id-ID', {
@@ -63,6 +64,14 @@ $(document).ready(() => {
         $('#payment-total').text(formatRupiah(total));
         $('#payment-received').text(formatRupiah(amountReceived || 0));
         $('#payment-change').text(formatRupiah(change || 0));
+
+        const $paymentDiscount = $('#payment-discount');
+        if (discount && discount > 0) {
+            $paymentDiscount.text(`- ${formatRupiah(discount)}`);
+            $('.discount').show();
+        } else {
+            $('.discount').hide();
+        }
     }
 
     $('#back-to-pos').on('click', () => {

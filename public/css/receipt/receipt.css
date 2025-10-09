@@ -103,6 +103,11 @@
     font-weight: 700;
     font-size: 20px;
 }
+.receipt .details .payment > div.discount {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--color-accent);
+}
 
 /* Update this existing rule */
 .receipt-actions {
