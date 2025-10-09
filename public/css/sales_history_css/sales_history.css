@@ -16,6 +16,18 @@
   gap: 12px;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.filter-box button {
+    padding: 10px 20px;
+    border: 2px solid var(--color-primary-shadow);
+    border-radius: var(--border-radius);
+    background: var(--color-background);
+    color: var(--color-text);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 /* Tombol filter */
@@ -49,19 +61,32 @@
   transition: border 0.2s, box-shadow 0.2s; */
 }
 
+.filter-box button:hover,
+.filter-box button.active { /* 'active' class untuk filter yang dipilih */
+    background: var(--color-primary);
+}
+
 /* .filter-box input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 4px rgba(243,166,43,0.5);
 } */
 
 /* === Table styling === */
+.table-wrapper {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
 .sales-table {
-  --table-border: var(--color-text);
-  width: 100%;
-  /* border-collapse: collapse;
-  font-size: 14px;
-  border-radius: var(--border-radius);
-  overflow: hidden; */
+    width: 100%;
+    border-collapse: separate; /* Penting untuk border-radius */
+    border-spacing: 0;
+    font-size: 15px;
+    border: 1px solid var(--color-primary-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
 
 .sales-table thead th {
@@ -83,6 +108,13 @@
 /* .sales-table tbody tr:hover {
   background: var(--color-secondary-highlight);
 } */
+
+.sales-table th,
+.sales-table td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-primary-shadow);
+}
 
 .sales-table td {
   padding: 12px;
@@ -106,6 +138,55 @@
 .sales-table a:hover {
   color: var(--color-text-highlight);
   text-decoration: underline;
+}
+
+.sales-table tr:last-child td {
+    border-bottom: none; /* Hapus border di baris terakhir */
+}
+
+/* Header Tabel (Kuning) */
+.sales-table thead th {
+    background: var(--color-primary);
+    color: var(--color-text);
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primary-shadow);
+}
+
+/* Baris Tabel (Belang-belang Krem) */
+.sales-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.sales-table tbody tr:nth-child(odd) {
+    background-color: var(--color-secondary-highlight); /* Krem sangat muda */
+}
+
+.sales-table tbody tr:nth-child(even) {
+    background-color: #FFF8E7; /* Krem sedikit lebih gelap */
+}
+
+.sales-table tbody tr:hover {
+    background-color: var(--color-primary-highlight); /* Kuning highlight saat di-hover */
+}
+
+/* Tombol Aksi "Lihat" */
+.sales-table .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-highlight);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sales-table .action-link .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.sales-table .action-link:hover {
+    color: var(--color-primary-shadow);
+    text-decoration: underline;
 }
 
 /* Button view tambahan */

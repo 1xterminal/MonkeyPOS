@@ -1,200 +1,171 @@
 $(document).ready(() => {
-    //getting the member form and inputs
-    var memberAddForm = $("#members-add-form");
-    var memberNameInput = $("#members-add-name");
-    var memberPhoneInput = $("#members-add-phone");
-    var memberEmailInput = $("#members-add-email");
+    // === ELEMEN DOM ===
+    const memberAddForm = document.getElementById("members-add-form");
+    const memberNameInput = document.getElementById("members-add-name");
+    const memberPhoneInput = document.getElementById("members-add-phone");
+    const memberEmailInput = document.getElementById("members-add-email");
+    const tableContainer = document.querySelector(".members-table");
 
-    //getting the members list
-    var members;
+    // Popup Edit
+    const editPopup = document.getElementById("members-edit-popup");
+    const editCloseBtn = document.getElementById("members-edit-close-button");
+    const editForm = document.getElementById("members-edit-form");
 
-    //getting the edit popup
-    var editPopup = $("#members-edit-popup");
-    var editPopupClose = $("#members-edit-close-button");
-    var memberEditForm = $("#members-edit-form");
-    var editMemberOriginalEmail = $("#members-edit-original-email");
-    var editMemberName = $("#members-edit-name");
-    var editMemberPhone = $("#members-edit-phone");
-    var editMemberEmail = $("#members-edit-email");
+    // Search
+    const searchInput = document.getElementById("member-search-input");
+    const searchButton = document.getElementById("member-search-button");
 
-    //getting the search bar and button
-    var searchInput = $("#member-search-input");
-    var searchButton = $("#member-search-button");
+    // === STATE ===
+    // DIUBAH: Menggunakan Storage helper
+    let members = Storage.getLocal("members", []);
 
-    if(localStorage.getItem("members") != null){
-        members = JSON.parse(localStorage.getItem("members"));
-    }
-    else{
-        members = [];
+    // === FUNGSI ===
+
+    // DIUBAH: Menggunakan Storage helper
+    function saveMembers() {
+        Storage.setLocal("members", members);
     }
 
-    //getting the table container
-    const tableContainer = $(".members-table");
+    function renderTable(dataToRender) {
+        // Hapus tabel lama jika ada
+        if (tableContainer.firstChild) {
+            tableContainer.removeChild(tableContainer.firstChild);
+        }
 
-    //save members to localStorage
-    function saveMembers(){
-        localStorage.setItem("members", JSON.stringify(members));
+        const table = document.createElement('table');
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Member</th>
+                    <th>Nomor Telepon</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${dataToRender.length === 0 
+                    ? `<tr><td colspan="5" style="text-align: center;">Tidak ada member.</td></tr>`
+                    : dataToRender.map((member, index) => `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${member.name}</td>
+                            <td>${member.phone}</td>
+                            <td>${member.email}</td>
+                            <td class="table-actions">
+                                <button class="action-btn btn-edit" data-email="${member.email}"><span class="material-symbols-outlined small">edit</span> Ubah</button>
+                                <button class="action-btn btn-delete" data-email="${member.email}"><span class="material-symbols-outlined small">delete</span> Hapus</button>
+                            </td>
+                        </tr>
+                    `).join('')
+                }
+            </tbody>
+        `;
+        tableContainer.appendChild(table);
     }
 
-    //render table
-    function renderMembersTable(membersRendered){
-        //define columns for the member table
-        const tableColumns = [
-            { key: "name", label: "Nama Member" },
-            { key: "phone", label: "Nomor Telepon" },
-            { key: "email", label: "Email" }
-        ];
-
-        //define the table actions (buttons for each row)
-        const tableActions = [
-            {
-                label: "Ubah",
-                icon: "edit",
-                className: "members-list-edit-button",
-                onClick: (row) => renderEditPopup(row.email)
-            },
-            {
-                label: "Hapus",
-                icon: "delete",
-                className: "members-list-delete-button",
-                onClick: (row) => deleteMember(row.email)
-            }
-        ];
-        
-        //create table using the external component
-        createTable(tableContainer, tableColumns, membersRendered, tableActions);
-    }
-
-    //adds a new member
-    function addMember(name, email, phone){
-        //check if theres duplicate members
+    function addMember(name, email, phone) {
         const isDuplicate = members.some(m => m.email.toLowerCase() === email.toLowerCase() || m.phone === phone);
         if (isDuplicate) {
             alert("Member dengan email atau nomor telepon tersebut sudah ada.");
             return;
         }
-
-        //creates a new member
-        var newMember = { name, email, phone };
-
-        //add new member to beginning of the members array
-        members.unshift(newMember);
+        members.unshift({ name, email, phone });
         saveMembers();
-        renderMembersTable(members);
+        renderTable(members);
+        memberAddForm.reset();
     }
 
-    //event listener for the add form submission
-    memberAddForm.on("submit", function(e){
-        e.preventDefault();
-        
-        //getting the values from the form
-        var name = memberNameInput.val();
-        var email = memberEmailInput.val();
-        var phone = memberPhoneInput.val();
-
-        //add member
-        addMember(name, email, phone);
-
-        //clear all form fields
-        memberAddForm[0].reset();
-    });
-
-    //edit popup controller
-    function renderEditPopup(email){
-        //finds the member
-        const memberToEdit = members.find(member => member.email === email);
-        if(memberToEdit){
-            //get the form fields and populate them
-            editMemberOriginalEmail.val(memberToEdit.email);
-            editMemberName.val(memberToEdit.name);
-            editMemberPhone.val(memberToEdit.phone);
-            editMemberEmail.val(memberToEdit.email);
-
-            //show the popup
-            editPopup.show();
-        }
-    }
-
-    //close the edit popup
-    function closeEditPopup(){
-        editPopup.hide();
-    }
-
-    //delete member
-    function deleteMember(email){
+    function deleteMember(email) {
         if (confirm("Apakah Anda yakin ingin menghapus member ini?")) {
-            //replace old array with a new one excluding the deleted member
             members = members.filter(m => m.email !== email);
-            //save new array
             saveMembers();
-            renderMembersTable(members);
+            renderTable(members);
         }
     }
 
-    //event listener for the edit form
-    memberEditForm.on("submit", function(e){
-        e.preventDefault();
+    function openEditPopup(email) {
+        const member = members.find(m => m.email === email);
+        if (member) {
+            $("#members-edit-original-email").val(member.email);
+            $("#members-edit-name").val(member.name);
+            $("#members-edit-email").val(member.email);
+            $("#members-edit-phone").val(member.phone);
+            editPopup.style.display = 'flex';
+        }
+    }
 
-        const originalEmail = editMemberOriginalEmail.val();
-        const newName = editMemberName.val();
-        const newPhone = editMemberPhone.val();
-        const newEmail = editMemberEmail.val();
+    function closeEditPopup() {
+        editPopup.style.display = 'none';
+    }
 
-        //validation, make sure theres no duplicates with the other members
-        const isDuplicate = members.some(member => 
-            member.email !== originalEmail && (member.email.toLowerCase() === newEmail.toLowerCase() || member.phone === newPhone)
+    function updateMember(originalEmail, newData) {
+        const isDuplicate = members.some(m => 
+            m.email !== originalEmail && (m.email.toLowerCase() === newData.email.toLowerCase() || m.phone === newData.phone)
         );
-
-        if(isDuplicate){
+        if (isDuplicate) {
             alert("Informasi email atau telepon sudah digunakan oleh member lain.");
             return;
         }
-        
-        //finds the member to update for
-        const memberToUpdate = members.find(member => member.email === originalEmail);
-        if(memberToUpdate){
-            //updates the member
-            memberToUpdate.name = newName;
-            memberToUpdate.phone = newPhone;
-            memberToUpdate.email = newEmail;
+        const memberIndex = members.findIndex(m => m.email === originalEmail);
+        if (memberIndex !== -1) {
+            members[memberIndex] = { ...members[memberIndex], ...newData };
             saveMembers();
-            renderMembersTable(members);
+            renderTable(members);
             closeEditPopup();
         }
-    });
-
-    //event listener for the edit popup close button
-    editPopupClose.on("click", closeEditPopup);
-
-    //closes the popup when clicking outside of the popup
-    $(window).on("click", function(event){
-        if($(event.target).is(editPopup)){
-            closeEditPopup();
-        }
-    });
-
-    //search function
-    function searchMembers(){
-        var searchTerm = searchInput.val().toLowerCase();
-
-        //if the search bar is empty
-        if(searchTerm === ''){
-            renderMembersTable(members);
-            return;
-        }
-
-        var filteredMembers = members.filter(member => 
-            member.name.toLowerCase().includes(searchTerm)
+    }
+    
+    function searchMembers() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filtered = members.filter(m => 
+            m.name.toLowerCase().includes(searchTerm) ||
+            m.email.toLowerCase().includes(searchTerm) ||
+            m.phone.includes(searchTerm)
         );
-
-        renderMembersTable(filteredMembers);
+        renderTable(filtered);
     }
 
-    //search using button
-    searchButton.on("click", searchMembers);
+    // === EVENT LISTENERS ===
+    
+    memberAddForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        addMember(memberNameInput.value, memberEmailInput.value, memberPhoneInput.value);
+    });
 
-    //live searching
-    searchInput.on("keyup", searchMembers);
+    editForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        updateMember(
+            $("#members-edit-original-email").val(),
+            {
+                name: $("#members-edit-name").val(),
+                email: $("#members-edit-email").val(),
+                phone: $("#members-edit-phone").val()
+            }
+        );
+    });
+    
+    tableContainer.addEventListener('click', (e) => {
+        const target = e.target.closest('.action-btn');
+        if (!target) return;
 
-    renderMembersTable(members);
+        const email = target.dataset.email;
+        if (target.classList.contains('btn-edit')) {
+            openEditPopup(email);
+        }
+        if (target.classList.contains('btn-delete')) {
+            deleteMember(email);
+        }
+    });
+
+    editCloseBtn.addEventListener('click', closeEditPopup);
+    editPopup.addEventListener('click', (e) => {
+        if (e.target === editPopup) closeEditPopup();
+    });
+    
+    searchButton.addEventListener('click', searchMembers);
+    searchInput.addEventListener('keyup', searchMembers);
+
+    // === INISIALISASI ===
+    renderTable(members);
 });

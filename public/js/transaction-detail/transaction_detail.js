@@ -1,117 +1,73 @@
-// public/js/transaction/transaction_detail.js (rapi & kompatibel)
 $(document).ready(() => {
+    // Helper untuk format mata uang
+    function formatRupiah(value) {
+        const number = Number(value) || 0;
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(number);
+    }
 
-  function formatRupiahNumber(value) {
-    const n = Number(value) || 0;
-    return new Intl.NumberFormat('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n).replace(',', '.').replace(/\.(?=.*\.)/g, ',');
-    // NOTE: above replace attempts to keep thousands & decimal in id-ID style.
-  }
-  function formatRupiah(value) {
-    return `Rp ${formatRupiahNumber(value)}`;
-  }
+    // 1. Ambil ID transaksi dari URL
+    const params = new URLSearchParams(window.location.search);
+    const transactionId = params.get('id');
 
-  function readHistory() {
-    try {
-      if (window.Storage && typeof Storage.getLocal === 'function') return Storage.getLocal('salesHistory', []) || [];
-    } catch(e){}
-    try {
-      const raw = localStorage.getItem('salesHistory');
-      return raw ? JSON.parse(raw) : [];
-    } catch(e){ return []; }
-  }
+    if (!transactionId) {
+        alert("ID Transaksi tidak ditemukan.");
+        window.location.href = '../sales_history/sales_history.html';
+        return;
+    }
 
-  const params = new URLSearchParams(window.location.search);
-  const txIdParam = params.get('id');
-  if (!txIdParam) {
-    console.warn('No transaction id in URL');
-    return;
-  }
+    // 2. Ambil data dari localStorage
+    const salesHistory = Storage.getLocal('salesHistory', []);
+    const transaction = salesHistory.find(t => t.id === transactionId);
 
-  const salesHistory = readHistory();
+    if (!transaction) {
+        $('.transaction-card').html('<h1>Transaksi tidak ditemukan.</h1>');
+        return;
+    }
 
-  const transaction = salesHistory.find(t => {
-    const ids = [t.id, t.transactionId, t.invoiceId, t.code, t.transactionID, t.transaction_id, t.invoice_id];
-    return ids.some(i => (i != null) && String(i) === String(txIdParam));
-  });
-
-  if (!transaction) {
-    console.warn('Transaction not found for id', txIdParam);
-    // show friendly message in page if needed
-    $('#itemsList').html('<tr><td colspan="4" style="text-align:center; padding:18px">Transaksi tidak ditemukan.</td></tr>');
-    return;
-  }
-
-  // Normalize values
-  const txId = transaction.id ?? transaction.transactionId ?? transaction.invoiceId ?? transaction.code ?? '';
-  const rawDate = transaction.date ?? transaction.datetime ?? transaction.createdAt ?? '';
-  const dt = rawDate ? new Date(rawDate) : null;
-  const dateStr = dt && !isNaN(dt.getTime()) ? dt.toLocaleDateString('id-ID') : (typeof rawDate === 'string' ? rawDate.split(' ')[0] : rawDate);
-  const timeStr = dt && !isNaN(dt.getTime()) ? dt.toLocaleTimeString('id-ID') : (transaction.time ?? '');
-
-  const cashier = transaction.cashier ?? transaction.kasir ?? transaction.user ?? '-';
-  const paymentMethod = transaction.paymentMethod ?? transaction.payment ?? transaction.method ?? transaction.metodePembayaran ?? '-';
-
-  // Write header info
-  $('#transactionId').text(txId);
-  $('#transactionDate').text(dateStr);
-  $('#transactionTime').text(timeStr);
-
-  $('#paymentMethod').text(paymentMethod);
-  $('#transCashier').text(cashier);
-
-  // get items
-  let items = [];
-  if (Array.isArray(transaction.items)) items = transaction.items;
-  else if (Array.isArray(transaction.cart)) items = transaction.cart;
-  else if (Array.isArray(transaction.products)) items = transaction.products;
-  else if (Array.isArray(transaction.details)) items = transaction.details;
-  else if (Array.isArray(transaction.lineItems)) items = transaction.lineItems;
-
-  if (!items || items.length === 0) {
-    $('#itemsList').html('<tr><td colspan="4" style="text-align:center; padding:18px">Tidak ada item untuk transaksi ini.</td></tr>');
-  } else {
-    $('#itemsList').empty();
-    items.forEach(it => {
-      const name = it.name ?? it.product ?? it.title ?? it.nama ?? '-';
-      const qty = Number(it.qty ?? it.quantity ?? it.q) || 0;
-      const price = Number(it.price ?? it.harga ?? it.unitPrice) || 0;
-      const subtotal = Number(it.subtotal ?? (price * qty)) || (price * qty);
-      const row = `<tr>
-        <td>${name}</td>
-        <td class="text-right">${formatRupiah(price)}</td>
-        <td class="text-center">${qty}</td>
-        <td class="text-right">${formatRupiah(subtotal)}</td>
-      </tr>`;
-      $('#itemsList').append(row);
+    // 3. Isi semua informasi ke elemen HTML
+    // Informasi Header
+    const transactionDate = new Date(transaction.date);
+    $('#transactionId').text(transaction.id);
+    $('#transactionDate').text(transactionDate.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' }));
+    $('#transactionTime').text(transactionDate.toLocaleTimeString('id-ID'));
+    
+    // Informasi Item
+    const $itemsList = $('#itemsList');
+    $itemsList.empty();
+    transaction.items.forEach(item => {
+        const row = `
+            <tr>
+                <td>${item.name}</td>
+                <td class="text-right">${formatRupiah(item.price)}</td>
+                <td class="text-center">${item.quantity}</td>
+                <td class="text-right">${formatRupiah(item.price * item.quantity)}</td>
+            </tr>`;
+        $itemsList.append(row);
     });
-  }
 
-  // compute totals if missing
-  let subtotal = Number(transaction.subtotal ?? transaction.subTotal ?? 0);
-  if ((!subtotal || subtotal === 0) && items.length > 0) {
-    subtotal = items.reduce((s, it) => {
-      const p = Number(it.price ?? it.harga ?? 0) || 0;
-      const q = Number(it.qty ?? it.quantity ?? it.q) || 0;
-      return s + (p * q);
-    }, 0);
-  }
+    // Informasi Pembayaran
+    $('#paymentMethod').text(transaction.paymentMethod);
+    $('#cashier').text(transaction.cashier);
+    $('#subtotal').text(formatRupiah(transaction.subtotal));
+    $('#tax').text(formatRupiah(transaction.tax));
+    $('#total').text(formatRupiah(transaction.total));
 
-  let tax = Number(transaction.tax ?? transaction.pajak ?? 0);
-  if (!tax) {
-    const taxPercent = Number(transaction.taxPercent ?? transaction.pajakPercent ?? 11) || 11;
-    tax = Math.round(subtotal * (taxPercent/100));
-  }
-
-  let total = Number(transaction.total ?? transaction.amountPaid ?? (subtotal + tax)) || (subtotal + tax);
-
-  // Fill totals
-  $('#subtotal').text(formatRupiah(subtotal));
-  $('#tax').text(formatRupiah(tax));
-  $('#total').text(formatRupiah(total));
-
-  // Back button
-  $('#btnBack').on('click', () => {
-    window.location.href = '../sales_history/sales_history.html';
-  });
-
+    // Logika untuk pembayaran tunai
+    if (transaction.paymentMethod === 'cash') {
+        $('#amountReceived').text(formatRupiah(transaction.amountReceived));
+        $('#change').text(formatRupiah(transaction.change));
+        $('.cash-detail').show(); // Tampilkan detail tunai
+    } else {
+        $('.cash-detail').hide(); // Sembunyikan jika bukan tunai
+    }
+    
+    // 4. Atur tombol kembali
+    $('#btnBack').on('click', () => {
+        window.location.href = '../sales_history/sales_history.html';
+    });
 });

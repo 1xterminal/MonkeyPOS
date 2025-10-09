@@ -70,7 +70,7 @@
       // Tombol "Lihat"
       const actionTd = document.createElement('td');
       const detailUrl = `../transaction_detail/transaction_detail.html?id=${encodeURIComponent(tr.getAttribute('data-id'))}`;
-      actionTd.innerHTML = `<a class="btn-small" href="${detailUrl}">Lihat</a>`;
+      actionTd.innerHTML = `<a class="action-link" href="${detailUrl}"><span class="material-symbols-outlined">visibility</span>Lihat</a>`;
       tr.appendChild(actionTd);
 
       // Klik baris = buka detail
