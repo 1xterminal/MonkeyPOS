@@ -47,16 +47,7 @@ $(document).ready(() => {
                     </div>
                     <span class="total-price">${formatRupiah(item.price * item.quantity)}</span>
                 </div>
-
-            ` + (
-                item.discount
-                ? `
-                <div class="discount">
-                    <span class="discount-amount">Diskon ${item.discount * 100}%</span>
-                    <span class="discount-after">${formatRupiah(item.price - (item.price * item.discount))}</span>
-                </div>
-                `
-                : ""));
+            `);
             $carts.append($cartItem);
         });
 
