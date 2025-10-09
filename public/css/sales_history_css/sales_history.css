@@ -19,7 +19,7 @@
   margin-bottom: 24px;
 }
 
-.filter-box button {
+/* .filter-box button {
     padding: 10px 20px;
     border: 2px solid var(--color-primary-shadow);
     border-radius: var(--border-radius);
@@ -28,7 +28,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-}
+} */
 
 /* Tombol filter */
 /* .filter-box button,
@@ -84,45 +84,45 @@
     border-collapse: separate; /* Penting untuk border-radius */
     border-spacing: 0;
     font-size: 15px;
-    border: 1px solid var(--color-primary-shadow);
-    border-radius: var(--border-radius);
+    /* border: 1px solid var(--color-primary-shadow);
+    border-radius: var(--border-radius); */
     overflow: hidden;
 }
 
-.sales-table thead th {
+/* .sales-table thead th {
   background: var(--color-text-highlight);
   color: #fff;
-  /* padding: 14px;
+  padding: 14px;
   text-align: left;
-  font-weight: 600; */
-}
+  font-weight: 600;
+} */
 
-.sales-table tbody tr {
+/* .sales-table tbody tr {
   transition: background 0.25s;
 }
 
 .sales-table tbody tr:nth-child(odd) {
   background: #fafafa;
-}
+} */
 
 /* .sales-table tbody tr:hover {
   background: var(--color-secondary-highlight);
 } */
 
-.sales-table th,
+/* .sales-table th,
 .sales-table td {
     padding: 14px 20px;
     text-align: left;
     border-bottom: 1px solid var(--color-primary-shadow);
-}
+} */
 
-.sales-table td {
+/* .sales-table td {
   padding: 12px;
   text-align: left;
   vertical-align: middle;
   border-bottom: 1px solid #eee;
   color: var(--color-text);
-}
+} */
 
 /* .sales-table tr:nth-child(even) td {
     background: var(--color-background-offset);
@@ -145,29 +145,29 @@
 }
 
 /* Header Tabel (Kuning) */
-.sales-table thead th {
+/* .sales-table thead th {
     background: var(--color-primary);
     color: var(--color-text);
     font-weight: 600;
     border-bottom: 2px solid var(--color-primary-shadow);
-}
+} */
 
 /* Baris Tabel (Belang-belang Krem) */
-.sales-table tbody tr {
+/* .sales-table tbody tr {
     transition: background-color 0.2s ease;
 }
 
 .sales-table tbody tr:nth-child(odd) {
-    background-color: var(--color-secondary-highlight); /* Krem sangat muda */
+    background-color: var(--color-secondary-highlight); /* Krem sangat muda
 }
 
 .sales-table tbody tr:nth-child(even) {
-    background-color: #FFF8E7; /* Krem sedikit lebih gelap */
+    background-color: #FFF8E7; /* Krem sedikit lebih gelap
 }
 
 .sales-table tbody tr:hover {
-    background-color: var(--color-primary-highlight); /* Kuning highlight saat di-hover */
-}
+    background-color: var(--color-primary-highlight); /* Kuning highlight saat di-hover
+} */
 
 /* Tombol Aksi "Lihat" */
 .sales-table .action-link {

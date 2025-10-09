@@ -281,24 +281,24 @@ body {
 }
 
 .logout-btn {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     width: 42px;
     height: 42px;
-    border: 2px solid #d9534f;
+    /* border: 2px solid #d9534f;
     border-radius: 10px;
     color: #d9534f;
     text-decoration: none;
     background-color: transparent;
-    transition: all 0.25s ease;
+    transition: all 0.25s ease; */
 }
 
-.logout-btn:hover {
+/* .logout-btn:hover {
     background-color: #fef2f2;
     border-color: #c53030;
     color: #c53030;
-}
+} */
 
 .material-symbols-outlined {
     font-size: 24px;

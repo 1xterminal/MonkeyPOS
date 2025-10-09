@@ -45,6 +45,17 @@ button.flat:hover, .button.flat:hover {
     background-color: color-mix(in srgb, var(--yellow-90) 50%, transparent);
 }
 
+button.destructive, .button.destructive {
+    background-color: var(--red-50);
+    color: #d9534f;
+    border-color: #d9534f;
+    box-shadow: 0 2px 8px 0 color-mix(in srgb, #d9534f 25%, transparent);
+}
+button.destructive:hover, .button.destructive:hover {
+    background-color: var(--red-70);
+    box-shadow: 0 3px 12px 0 color-mix(in srgb, #d9534f 50%, transparent);
+}
+
 button:disabled, .button:disabled {
     cursor: not-allowed;
 

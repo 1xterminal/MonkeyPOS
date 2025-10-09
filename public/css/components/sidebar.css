@@ -71,12 +71,14 @@ a {
 
 .sidebar .menus .menu.active {
     color: #442E00;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-highlight);
 
     outline: 2px solid var(--yellow-50);
     outline-offset: -2px;
 
     font-weight: 600;
+
+    box-shadow: 0 2px 8px 0 color-mix(in srgb, var(--yellow-20) 25%, transparent);
 
     cursor: default;
 }
