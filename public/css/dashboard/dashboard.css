@@ -90,3 +90,21 @@ body {
      color: var(--color-text);
      border-color: var(--color-primary-shadow);
 }
+
+@media (max-width: 480px) {
+    .dashboard-stats-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card-title {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-card-value {
+        font-size: 1.5rem;
+    }
+
+    .filter-group {
+        flex-wrap: wrap;
+    }
+}

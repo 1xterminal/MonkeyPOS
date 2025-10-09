@@ -45,17 +45,17 @@ function createTable(root, columns, dataRows, actions = []) {
         const tableRow = $("<tr>");
 
         // Add "No" cell
-        tableRow.append($("<td>", { text: index + 1, "class": "num" }));
+        tableRow.append($("<td>", { text: index + 1, "class": "num", "data-label": "No" }));
 
         // Add data cells
         $.map(columns, (col) => {
           const cellData = row[col.key] !== undefined ? row[col.key] : '';
-          tableRow.append($("<td>", { text: cellData }));
+          tableRow.append($("<td>", { text: cellData, "data-label": col.label }));
         });
 
         // Add Action buttons
         if (actions.length > 0) {
-          const actionCell = $("<td>", { "class": "table-actions" });
+          const actionCell = $("<td>", { "class": "table-actions", "data-label": "Actions" });
           $.map(actions, (action) => {
             const button = $("<button>", {
             "class": `action-btn ${action.className || ''}`,
