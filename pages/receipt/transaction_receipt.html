@@ -14,15 +14,15 @@
     <div class="container">
         <main class="receipt-container">
           <div class="receipt-wrapper">
-                          <div class="receipt-actions">
-                <button id="back-to-pos" class="action-link">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                    Back
-                </button>
-                <button id="print-receipt" class="action-link">
-                    <span class="material-symbols-outlined">print</span>
-                    Cetak
-                </button>
+            <div class="receipt-actions">
+              <button id="back-to-pos" class="flat action-link">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back
+              </button>
+              <button id="print-receipt" class="flat action-link">
+                <span class="material-symbols-outlined">print</span>
+                Cetak
+              </button>
             </div>
             <div class="receipt">
               <img src="../../public/img/logo/logo.svg" alt="logo">
@@ -47,13 +47,17 @@
               <div class="details">
                 <div id="carts"></div>
                 <div class="payment">
-                  <div class="total">
-                    <span class="label">Total</span>
-                    <span class="val" id="payment-total"></span>
+                  <div class="tax">
+                    <span class="label">Pajak</span>
+                    <span class="val" id="payment-tax"></span>
                   </div>
                   <div class="discount">
                     <span class="label">Diskon</span>
                     <span class="val" id="payment-discount"></span>
+                  </div>
+                  <div class="total">
+                    <span class="label">Total</span>
+                    <span class="val" id="payment-total"></span>
                   </div>
                   <div class="receive">
                     <span class="label">Bayar</span>
@@ -71,11 +75,11 @@
     </div>
 
     <script src="../../public/js/helpers/storage.js"></script>
-    
+
     <script src="../../public/js/components/header.js"></script>
-    
-    
-    
+
+
+
     <script src="../../public/js/receipt/receipt.js"></script>
 </body>
 </html>

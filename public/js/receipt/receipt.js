@@ -19,6 +19,7 @@ $(document).ready(() => {
         const {
             date,
             items,
+            tax,
             total,
             amountReceived,
             change,
@@ -50,9 +51,13 @@ $(document).ready(() => {
             $carts.append($cartItem);
         });
 
+        $('#payment-tax').text(formatRupiah(tax));
         $('#payment-total').text(formatRupiah(total));
         $('#payment-received').text(formatRupiah(amountReceived || 0));
         $('#payment-change').text(formatRupiah(change || 0));
+
+        if (discount == 0)
+            $('#payment-discount').hide();
 
         const $paymentDiscount = $('#payment-discount');
         if (discount && discount > 0) {
