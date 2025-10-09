@@ -56,6 +56,9 @@ $(document).ready(() => {
         $('#payment-received').text(formatRupiah(amountReceived || 0));
         $('#payment-change').text(formatRupiah(change || 0));
 
+        if (discount == 0)
+            $('#payment-discount').hide();
+
         const $paymentDiscount = $('#payment-discount');
         if (discount && discount > 0) {
             $paymentDiscount.text(`- ${formatRupiah(discount)}`);

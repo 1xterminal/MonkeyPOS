@@ -47,6 +47,9 @@
 
     font-family: 600;
 }
+.receipt .datetime .time {
+    font-variant-numeric: tabular-nums;
+}
 .receipt .datetime > div {
     display: inline-flex;
     gap: 8px;
@@ -75,10 +78,12 @@
 }
 .receipt .details #carts > .cart .cart-detail .product-price {
     opacity: .5;
+    font-variant-numeric: tabular-nums;
 }
 .receipt .details #carts > .cart .total-price {
     font-size: 20px;
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
 }
 
 .receipt .details .payment {
@@ -98,15 +103,11 @@
 }
 .receipt .details .payment > div .val {
     width: 120px;
+    font-variant-numeric: tabular-nums;
 }
 .receipt .details .payment > div.total {
     font-weight: 700;
     font-size: 20px;
-}
-.receipt .details .payment > div.discount {
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--color-accent);
 }
 
 /* Update this existing rule */
