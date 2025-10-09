@@ -87,14 +87,6 @@ a {
     flex: 1;
 }
 
-.hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--color-text);
-    cursor: pointer;
-}
-
 .sidebar-close-btn {
     display: none;
     position: absolute;
@@ -132,10 +124,6 @@ a {
 
     body.sidebar-open .sidebar {
         left: 10px;
-    }
-
-    .hamburger-menu {
-        display: block;
     }
 
     .sidebar-close-btn {

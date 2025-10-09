@@ -424,6 +424,17 @@ body {
     display: inline-flex !important;
 }
 
+.hamburger-menu {
+    display: none;
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -446,5 +457,9 @@ body {
 
     .content {
         width: 100%;
+    }
+
+    .hamburger-menu {
+        display: block;
     }
 }

@@ -24,20 +24,6 @@ function createHeader(root, userData) {
     )
   ]);
 
-  const $hamburger = $('<button class="hamburger-menu"><span class="material-symbols-outlined">menu</span></button>');
-  header.prepend($hamburger);
-
-  const $overlay = $('<div class="sidebar-overlay"></div>');
-  $('body').append($overlay);
-
-  $hamburger.on('click', () => {
-    $('body').addClass('sidebar-open');
-  });
-
-  $overlay.on('click', () => {
-    $('body').removeClass('sidebar-open');
-  });
-
   root.replaceWith(header);
 
   // Logout handler
@@ -58,4 +44,18 @@ $(document).ready(() => {
 
   // Render header ke elemen .header-actions lama
   createHeader($(".header-actions"), currentUser);
+
+  const $hamburger = $('<button class="hamburger-menu"><span class="material-symbols-outlined">menu</span></button>');
+  $('.content').prepend($hamburger);
+
+  const $overlay = $('<div class="sidebar-overlay"></div>');
+  $('body').append($overlay);
+
+  $hamburger.on('click', () => {
+    $('body').addClass('sidebar-open');
+  });
+
+  $overlay.on('click', () => {
+    $('body').removeClass('sidebar-open');
+  });
 });
