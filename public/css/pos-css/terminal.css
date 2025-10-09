@@ -9,6 +9,7 @@
     );
     padding: 24px;
     border-radius: var(--border-radius);
+    margin-top: 60px;
 }
 
 /* --- BAGIAN PRODUK (KIRI) --- */
@@ -253,19 +254,47 @@
 } */
 
 /* --- RESPONSIVE ADJUSTMENT --- */
+@media (max-width: 1200px) {
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
 @media (max-width: 992px) {
     .pos-container {
         flex-direction: column;
         height: auto;
     }
 
-    .product-section {
+    .product-section, .cart-section {
         flex: none;
-        order: 1;
+        width: 100%;
     }
 
-    .cart-section {
-        flex: none;
-        order: 2;
+    .product-header h1, .cart-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pos-container {
+        padding: 16px;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product-card {
+        padding: 12px;
+    }
+
+    .product-card .product-name {
+        font-size: 0.85rem;
+    }
+
+    .cart-item-actions input {
+        width: 35px;
     }
 }

@@ -66,3 +66,42 @@ table tr td:has(button) {
 }
 
 table .num { text-align: end; }
+
+@media (max-width: 768px) {
+    table {
+        border: none;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--table-border);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px dotted var(--table-border);
+        border-right: none;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    table .num {
+        text-align: right;
+    }
+}

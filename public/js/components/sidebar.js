@@ -36,8 +36,7 @@ function createMenu(data) {
  * @param {Array<Object>} menus - The array of menu item data.
  */
 function createSidebar(root, menus) {
-  root.replaceWith(
-    $("<div>", {
+  const $sidebar = $("<div>", {
       "class": "sidebar",
     }).append([
       $("<div>", {
@@ -64,8 +63,16 @@ function createSidebar(root, menus) {
       }).append($.map(menus.filter((item) => item.bottom), (item) => {
         return createMenu(item);
       }))
-    ])
-  )
+    ]);
+
+  const $closeButton = $('<button class="sidebar-close-btn"><span class="material-symbols-outlined">close</span></button>');
+  $sidebar.prepend($closeButton);
+
+  $closeButton.on('click', () => {
+    $('body').removeClass('sidebar-open');
+  });
+
+  root.replaceWith($sidebar);
 }
 
 // This block runs when the page is ready
