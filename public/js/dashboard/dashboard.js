@@ -19,10 +19,11 @@ $(document).ready(function() {
     /* Fungsi untuk menghitung data berdasarkan periode */
     const calculateDataByPeriod = (period) => {
         // Ambil semua transaksi dari localStorage
-        const allTransactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        const salesHistoryJSON = localStorage.getItem('salesHistory');
+        const allSales = JSON.parse(salesHistoryJSON) || [];
         
         // Filter transaksi berdasarkan ID user
-        const userTransactions = allTransactions.filter(tx => tx.cashierId === currentUser.id);
+        const userSales = allSales.filter(tx => tx.cashier === currentUser.id);
         
         const today = new Date();
         let startDate = new Date();
@@ -45,28 +46,28 @@ $(document).ready(function() {
                 break;
         }
         
-        // Filter transaksi berdasarkan periode
-        const filteredTransactions = userTransactions.filter(tx => {
+        // Filter transaksi berdasarkan periode tanggal
+        const filteredSales = userSales.filter(tx => {
             const transactionDate = new Date(tx.date);
             return transactionDate >= startDate && transactionDate <= today;
         });
+
+        // Menghitung total penjualan dari (subtotal + tax)
+        const totalSales = filteredSales.reduce((sum, tx) => {
+            const transactionTotal = (tx.subtotal || 0) + (tx.tax || 0);
+            return sum + transactionTotal;
+        }, 0);
         
-        // Hitung total penjualan
-        const totalSales = filteredTransactions.reduce((sum, tx) => sum + tx.amount, 0);
-        
-        // Hitung jumlah transaksi
-        const transactionCount = filteredTransactions.length;
-        
-        return {
-            totalSales,
-            transactionCount
-        };
+        const transactionCount = filteredSales.length;
+
+        return { totalSales, transactionCount };
     };
 
     /* Fungsi untuk menghitung stok rendah */
     const calculateLowStock = () => {
         // Mengambil data produk dari localStorage
-        const allProducts = JSON.parse(localStorage.getItem('products')) || [];
+        const productsJSON = localStorage.getItem('products');
+        const allProducts = JSON.parse(productsJSON) || [];
 
         // Filter stok produk yang dibawah 10
         const lowStockProducts = allProducts.filter(product => 
@@ -79,10 +80,6 @@ $(document).ready(function() {
 
     /* Proses Data Dashboard */
     const updateDashboard = (period = 'hariini') => {
-        /* Pesan selamat datang */
-        headerTitle.text(`Selamat Datang, ${currentUser.name}`);
-        welcomeMessage.text(`Selamat Datang, ${currentUser.name}`);
-
         /* Hitung data berdasarkan periode */
         const { totalSales, transactionCount } = calculateDataByPeriod(period);
         
@@ -95,9 +92,6 @@ $(document).ready(function() {
         lowStockCard.text(`${lowStockCount} Produk`);
     };
 
-    // Atur tombol filter hari ini menjadi default
-    $('.dashboard-filter-button[data-period="hariini"]').addClass('active');
-
     // Filter button events
     filterButtons.click(function() {
         const period = $(this).data('period');
@@ -108,6 +102,8 @@ $(document).ready(function() {
         updateDashboard(period);
     });
 
+    // Atur tombol filter hari ini menjadi default
+    $('.dashboard-filter-button[data-period="hariini"]').addClass('active');
     updateDashboard();
 
     /* Fungsi Logout Button */
