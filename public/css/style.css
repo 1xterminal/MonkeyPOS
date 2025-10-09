@@ -262,6 +262,15 @@ body {
     gap: 24px;
 }
 
+.page-actions {
+    position: absolute;
+    top: 80px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 .user-profile {
     display: flex;
     align-items: center;
@@ -406,4 +415,8 @@ body {
 #members-edit-button {
     margin: 10px;
     width: calc(100% - 20px);
+}
+
+#print-report-btn {
+    display: inline-flex !important;
 }
