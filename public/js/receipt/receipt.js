@@ -19,6 +19,7 @@ $(document).ready(() => {
         const {
             date,
             items,
+            tax,
             total,
             amountReceived,
             change
@@ -45,10 +46,20 @@ $(document).ready(() => {
                     </div>
                     <span class="total-price">${formatRupiah(item.price * item.quantity)}</span>
                 </div>
-            `);
+
+            ` + (
+                item.discount
+                ? `
+                <div class="discount">
+                    <span class="discount-amount">Diskon ${item.discount * 100}%</span>
+                    <span class="discount-after">${formatRupiah(item.price - (item.price * item.discount))}</span>
+                </div>
+                `
+                : ""));
             $carts.append($cartItem);
         });
 
+        $('#payment-tax').text(formatRupiah(tax));
         $('#payment-total').text(formatRupiah(total));
         $('#payment-received').text(formatRupiah(amountReceived || 0));
         $('#payment-change').text(formatRupiah(change || 0));

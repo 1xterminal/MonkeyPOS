@@ -36,6 +36,15 @@ button.filled:hover, .button.filled:hover {
     box-shadow: 0 3px 12px 0 rgba(185, 136, 1, 0.5);
 }
 
+button.flat, .button.flat {
+    background-color: none;
+    box-shadow: none;
+    border: none;
+}
+button.flat:hover, .button.flat:hover {
+    background-color: color-mix(in srgb, var(--yellow-90) 50%, transparent);
+}
+
 button:disabled, .button:disabled {
     cursor: not-allowed;
 
