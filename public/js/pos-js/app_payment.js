@@ -12,11 +12,25 @@ $(document).ready(() => {
     const $changeAmountEl = $('#change-amount');
     const $completeSaleButton = $('#complete-sale-button');
     const $cancelButton = $('#cancel-button');
+    const $memberSelect = $('#member-select');         
+    const $discountRow = $('#discount-row');           
+    const $discountAmount = $('#discount-amount');
 
     let currentOrder = null;
 
     function formatRupiah(number) {
         return `Rp ${number.toLocaleString('id-ID')}`;
+    }
+
+    // Function untuk memuat daftar member ke dropdown
+    function populateMembers() {
+        const members = Storage.getLocal('members', []);
+        if (members && members.length > 0) {
+            members.forEach(member => {
+                const option = `<option value="${member.name}">${member.name}</option>`;
+                $memberSelect.append(option);
+            });
+        }
     }
 
     function validatePaymentCompletion() {
@@ -39,13 +53,31 @@ $(document).ready(() => {
     function updateTotalsOnPaymentPage() {
         const subtotal = currentOrder.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const tax = subtotal * 0.11;
-        const total = subtotal + tax;
+        
+        let discount = 0;
+        const selectedMember = $memberSelect.val();
+
+        if (selectedMember) {
+            discount = subtotal * 0.05; // Hitung diskon 5% dari subtotal
+            $discountAmount.text(`- ${formatRupiah(discount)}`);
+            $discountRow.show();
+        } else {
+            $discountRow.hide();
+        }
+
+        const total = subtotal + tax - discount;
+
+        // Simpan semua nilai kalkulasi ke objek currentOrder
         currentOrder.subtotal = subtotal;
         currentOrder.tax = tax;
+        currentOrder.discount = discount;
         currentOrder.total = total;
+
+        // Tampilkan di HTML
         $subtotalEl.text(formatRupiah(subtotal));
         $taxEl.text(formatRupiah(tax));
         $grandTotalEl.text(formatRupiah(total));
+        
         Storage.setLocal('currentOrder', currentOrder);
         validatePaymentCompletion();
     }
@@ -167,6 +199,10 @@ $(document).ready(() => {
         window.location.href = 'pos_terminal.html';
     });
 
+    $memberSelect.on('change', () => {
+        updateTotalsOnPaymentPage();
+    });
+
     $completeSaleButton.on('click', () => {
         const currentUser = Storage.getSession('currentUser', {
             name: 'Unknown'
@@ -192,9 +228,18 @@ $(document).ready(() => {
         Storage.setLocal('products', allProducts);
 
         const newTransaction = {
-            id: `INV-${Date.now()}`, date: new Date().toISOString(), cashier: currentUser.name,
-            items: currentOrder.cart, subtotal: currentOrder.subtotal, tax: currentOrder.tax, total: currentOrder.total,
-            paymentMethod: paymentMethod, amountReceived: null, change: null
+            id: `INV-${Date.now()}`,
+            date: new Date().toISOString(),
+            cashier: Storage.getSession('currentUser', { name: 'Unknown' }).name,
+            items: currentOrder.cart,
+            subtotal: currentOrder.subtotal,
+            tax: currentOrder.tax,
+            discount: currentOrder.discount || 0, // Simpan diskon
+            total: currentOrder.total,
+            member: $memberSelect.val() || null, // Simpan nama member
+            paymentMethod: $('input[name="payment-method"]:checked').val(),
+            amountReceived: null,
+            change: null
         };
 
         if (paymentMethod === 'cash') {
@@ -213,6 +258,7 @@ $(document).ready(() => {
 
     });
 
+    populateMembers();
     loadOrderDetails();
     handlePaymentMethodChange();
 });

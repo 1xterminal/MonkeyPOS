@@ -245,6 +245,30 @@
     padding-top: 24px;
 }
 
+.member-selection-section {
+    margin-top: 24px;
+}
+
+.member-selection-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.input-style {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    background-color: var(--color-background-offset);
+}
+
+.discount-row {
+    display: none; /* Sembunyikan secara default */
+    color: #28a745; /* Warna hijau untuk diskon */
+    font-weight: 600;
+}
+
 
 /* PER-BUTTON BUTTON AN */
 .btn {
