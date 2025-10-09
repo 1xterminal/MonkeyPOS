@@ -110,7 +110,7 @@
     // === 🔍 Hubungkan Filter & Search dari .filter-box ===
     const filterButtons = document.querySelectorAll('.filter-box [data-filter]');
     const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.querySelector('.filter-box .btn-primary');
+    const searchBtn = document.querySelector('.filter-box .filled');
 
     // Filter tanggal
     filterButtons.forEach(btn => {

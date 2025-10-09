@@ -17,10 +17,15 @@ table td {
     padding: 8px 12px;
     border-bottom: 1px solid var(--table-border);
     border-right: 1px solid var(--table-border);
+
+    transition: .1s ease-out;
 }
 
 table tr {
     background: #FFF9E9;
+}
+table tbody tr:hover td {
+    background: var(--yellow-80);
 }
 
 table tr:nth-child(even) {

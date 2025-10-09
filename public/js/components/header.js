@@ -14,7 +14,7 @@ function createHeader(root, userData) {
       })
     ]),
     $("<a>", {
-      "class": "logout-btn",
+      "class": "button destructive logout-btn",
       "href": "#"
     }).append(
       $("<span>", {
