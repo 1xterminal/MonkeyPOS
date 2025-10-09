@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sales History</title> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <title>Sales History | MonkeyPOS</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="../../public/css/style.css"> 
-  <link rel="stylesheet" href="../../public/css/sales_history_css/sales_history.css">
   <link rel="stylesheet" href="../../public/css/components/sidebar.css">
+  <link rel="stylesheet" href="../../public/css/sales_history_css/sales_history.css">
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar -->
     <div class="sidebar"></div>
 
-    <!-- Content -->
     <main class="content">
       <div class="header-actions"></div>
       <h1>Riwayat Penjualan</h1>
-      
+
       <!-- Filter & Search -->
       <div class="filter-box">
         <button data-filter="today">Hari Ini</button>
@@ -28,42 +27,31 @@
         <button class="btn-primary">Cari</button>
       </div>
 
-      <!-- Tabel Transaksi -->
+      <!-- Tabel Riwayat -->
       <div class="table-wrapper">
         <table class="sales-table">
           <thead>
             <tr>
               <th>ID Transaksi</th>
-              <th>Tanggal & Waktu</th>
-              <th>Kasir</th>
-              <th>Jumlah Total</th>
+              <th>Tanggal</th>
+              <th>Total</th>
+              <th>Nama Produk</th>
               <th>Detail</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>INV-001</td>
-              <td>2025-10-01 13:00</td>
-              <td>Martin</td>
-              <td>Rp 5.000.000</td>
-              <td><a href="../transaction_detail/transaction_detail.html?id=INV-001">Lihat</a></td>
-            </tr>
-            <tr>
-              <td>INV-002</td>
-              <td>2025-10-02 15:30</td>
-              <td>Admin</td>
-              <td>Rp 3.000.000</td>
-              <td><a href="../transaction_detail/transaction_detail.html?id=INV-002">Lihat</a></td>
-            </tr>
+          <tbody id="sales-table-body">
+            <tr><td colspan="4" style="text-align:center;">Memuat data...</td></tr>
           </tbody>
         </table>
       </div>
     </main>
   </div>
 
+  <!-- Script -->
   <script src="../../public/js/helpers/storage.js"></script>
-  <script src="../../public/js/components/header.js"></script>
   <script src="../../public/js/components/sidebar.js"></script>
+  <script src="../../public/js/components/header.js"></script>
   <script src="../../public/js/app.js"></script>
+  <script src="../../public/js/sales-history/sales_history.js"></script>
 </body>
 </html>
