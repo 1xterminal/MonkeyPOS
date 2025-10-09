@@ -8,16 +8,16 @@ function createTable(root, columns, dataRows, actions = []) {
   const table = $("<table>", { "class": "data-table" });
 
   // 2. Define all columns that will be displayed
-  const displayColumns = [{ key: "no", label: "No" }, ...columns];
+  const displayColumns = [{ key: "no", label: "No", width: 60, class: "num" }, ...columns];
   if (actions.length > 0) {
-    displayColumns.push({ key: "actions", label: "Actions" });
+    displayColumns.push({ key: "actions", label: "Actions", width: 200 });
   }
 
   // 3. Build the table header (<thead>) - This part is always the same
   const tableHead = $("<thead>").append(
     $("<tr>").append(
       $.map(displayColumns, (col) => {
-        return $("<th>", { text: col.label });
+        return $("<th>", { text: col.label, width: col.width, "class": col.class });
       })
     )
   );
@@ -30,11 +30,11 @@ function createTable(root, columns, dataRows, actions = []) {
     // If no data, create a single row with a message
     tableBody = $("<tbody>").append(
       $("<tr>").append(
-        $("<td>", { 
+        $("<td>", {
           text: "Tidak ada data yang tersedia.",
           class: "no-data-cell",
           // The 'colspan' attribute makes this cell span all columns
-          colspan: displayColumns.length 
+          colspan: displayColumns.length
         })
       )
     );
@@ -45,7 +45,7 @@ function createTable(root, columns, dataRows, actions = []) {
         const tableRow = $("<tr>");
 
         // Add "No" cell
-        tableRow.append($("<td>", { text: index + 1 }));
+        tableRow.append($("<td>", { text: index + 1, "class": "num" }));
 
         // Add data cells
         $.map(columns, (col) => {
@@ -59,7 +59,7 @@ function createTable(root, columns, dataRows, actions = []) {
           $.map(actions, (action) => {
             const button = $("<button>", {
             "class": `action-btn ${action.className || ''}`,
-            text: action.label 
+            text: action.label
             }).prepend(
             $("<span>", {
                 "class": "material-symbols-outlined",
@@ -74,7 +74,7 @@ function createTable(root, columns, dataRows, actions = []) {
         });
         tableRow.append(actionCell);
         }
-        
+
         return tableRow;
       })
     );

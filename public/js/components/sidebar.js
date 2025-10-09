@@ -7,7 +7,7 @@
 function createMenu(data) {
   // Get the current page's filename from the browser's URL (e.g., "dashboard.html")
   const currentPage = window.location.pathname.split('/').pop();
-  
+
   // Get the menu item's filename from its URL (e.g., "dashboard.html")
   const menuFilename = data.url.split('/').pop();
 
@@ -82,27 +82,27 @@ $(document).ready(() => {
       {
         "label": "Terminal POS",
         "icon": "point_of_sale",
-        "url": "../pos/pos_terminal.html" 
+        "url": "../pos/pos_terminal.html"
       },
       {
         "label": "Daftar Produk",
         "icon": "inventory_2",
-        "url": "../products-list/products-list.html" 
+        "url": "../products-list/products-list.html"
       },
       {
         "label": "Riwayat Penjualan",
         "icon": "history",
-        "url": "../sales_history/sales_history.html" 
+        "url": "../sales_history/sales_history.html"
       },
       {
         "label": "Daftar Member",
         "icon": "badge",
-        "url": "../members-list/member_list.html" 
+        "url": "../members-list/member_list.html"
       },
       {
         "label": "Laporan",
         "icon": "insert_chart",
-        "url": "../laporan/laporan.html" 
+        "url": "../report/report.html"
       },
     ]
   );

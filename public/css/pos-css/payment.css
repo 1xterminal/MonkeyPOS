@@ -3,228 +3,283 @@
     gap: 24px;
     width: 100%;
     height: 100%;
+    background: linear-gradient(
+        180deg,
+        #FFFBE7, #FDF0CB
+    );
+    padding: 24px;
+    border-radius: var(--border-radius);
 }
 
 /* --- BAGIAN RINCIAN PESANAN --- */
 .order-details-section {
-    flex: 3; 
-    display: flex; 
+    flex: 3;
+    display: flex;
     flex-direction: column;
-    background-color: var(--color-background); 
-    border-radius: var(--border-radius); 
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
     padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.order-details-container { 
-    flex-grow: 1; 
+.order-details-container {
+    flex-grow: 1;
 }
 
-.order-details-container h3 { 
-    font-size: 1.5rem; 
-    margin-bottom: 16px; 
-    border-bottom: 1px solid #e0e0e0; 
-    padding-bottom: 16px; 
+.order-details-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--color-secondary-shadow);
+    padding-bottom: 16px;
 }
 
-.cart-items-payment { 
-    max-height: 40vh; 
-    overflow-y: auto; 
+.cart-items-payment {
+    max-height: 40vh;
+    overflow-y: auto;
 }
 
-.empty-cart-message{ 
-    text-align: center; 
-    color: #888; 
-    padding-top: 50px; 
+.empty-cart-message{
+    text-align: center;
+    color: #888;
+    padding-top: 50px;
 }
 
-.cart-item-payment { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 12px 0; 
-    border-bottom: 1px solid #f0f0f0; 
+.cart-item-payment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 15px;
 }
 
-.cart-item-payment .name { 
-    font-weight: 600; 
+.cart-item-payment .item-info {
+    flex-grow: 1;
 }
 
-.cart-item-payment .qty { 
-    color: #555; 
+.cart-item-payment .name {
+    font-weight: 600;
+    display: block;
 }
 
-.cart-item-payment .total { 
-    font-weight: 600; 
+.cart-item-payment .price {
+    font-size: 0.9em;
+    color: #666;
 }
 
-.remove-item-btn-payment { 
-    background: #ff4d4d; 
-    color: var(--color-background); 
-    border: none; 
-    width: 28px; 
-    height: 28px; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-weight: bold; 
+.cart-item-payment .item-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.order-summary { 
-    border-top: 2px solid #e0e0e0; 
-    padding-top: 20px; 
-    margin-top: auto; 
+.cart-item-payment .qty {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
 }
 
-.summary-item { 
-    display: flex; 
-    justify-content: space-between; 
-    margin-bottom: 12px; 
-    font-size: 1rem; 
+.cart-item-payment .total {
+    font-weight: 600;
+    min-width: 80px;
+    text-align: right;
 }
 
-.summary-item.total { 
-    font-weight: 700; 
-    font-size: 1.4rem; 
-    color: var(--color-text-highlight); 
-    margin-top: 12px; 
+/* Styling untuk tombol +/- di halaman payment */
+.qty-btn-payment {
+    width: 32px;
+    /* height: 28px; */
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    padding: 0;
+    aspect-ratio: 1 / 1;
+}
+
+.qty-btn-payment:hover {
+    background-color: #e0e0e0;
+}
+
+.remove-item-btn-payment {
+    background: #ff4d4d;
+    color: var(--color-background);
+    border: none;
+    width: 32px;
+    /* height: 28px;  */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+    aspect-ratio: 1 / 1;
+}
+
+.order-summary {
+    border-top: 2px solid #e0e0e0;
+    padding-top: 20px;
+    margin-top: auto;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.summary-item.total {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--color-text-highlight);
+    margin-top: 12px;
 }
 
 /* --- BAGIAN METODE PEMBAYARAN --- */
 .payment-method-section {
-    flex: 2; 
-    display: flex; 
+    flex: 2;
+    display: flex;
     flex-direction: column;
-    background-color: var(--color-background); 
-    border-radius: var(--border-radius); 
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
     padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-.payment-methods h3 { 
-    font-size: 1.5rem; 
-    margin-bottom: 16px; 
+
+.payment-methods h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-secondary-shadow);
 }
 
 .method-options {
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.method-options label { 
-    display: block; 
-    position: relative; 
+.method-options label {
+    display: block;
+    position: relative;
 }
 
-.method-options input[type="radio"] { 
-    position: absolute; 
-    opacity: 0; 
+.method-options input[type="radio"] {
+    position: absolute;
+    opacity: 0;
 }
 
-.method-options span { 
-    display: block; 
-    padding: 16px; 
-    border: 2px solid #e0e0e0; 
-    border-radius: 8px; 
-    text-align: center; 
-    cursor: pointer; 
-    transition: all 0.2s ease; 
-    font-weight: 600; 
+.method-options span {
+    display: block;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
 }
 
-.method-options input[type="radio"]:checked + span { 
-    background-color: var(--color-primary); 
-    border-color: var(--color-primary-shadow); 
-    color: var(--color-text); 
+.method-options input[type="radio"]:checked + span {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary-shadow);
+    color: var(--color-text);
 }
 
-.method-options input[type="radio"]:not(:checked) + span:hover { 
+.method-options input[type="radio"]:not(:checked) + span:hover {
     background-color: var(--color-secondary-highlight);
     border-color: var(--color-secondary-shadow);
 }
 
-.payment-details { 
-    margin-top: 24px; 
+.payment-details {
+    margin-top: 24px;
 }
 
-.form-group { 
-    margin-bottom: 16px; 
+.form-group {
+    margin-bottom: 16px;
 }
 
-.form-group label { 
-    display: block; 
-    margin-bottom: 8px; 
-    font-weight: 600; 
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
-.form-group input { 
-    width: 100%; 
-    padding: 12px; 
-    border-radius: 8px; 
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
     font-size: 1.2rem;
     border: none;
     background-color: var(--color-background-offset);
 }
 
 .form-group input:focus {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-text-highlight);
 }
 
-.change-display { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background-color: var(--color-background-offset); 
-    padding: 16px; 
-    border-radius: 8px; 
-    margin-top: 24px; 
-    font-size: 1.1rem; 
+.change-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-background-offset);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 24px;
+    font-size: 1.1rem;
 }
 
-.change-display strong { 
-    font-size: 1.5rem; 
-    color: var(--color-text-highlight); 
+.change-display strong {
+    font-size: 1.5rem;
+    color: var(--color-text-highlight);
 }
 
-.payment-footer { 
-    display: flex; 
-    gap: 16px; 
-    margin-top: auto; 
-    padding-top: 24px; 
+.payment-footer {
+    display: flex;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 24px;
 }
 
 
 /* PER-BUTTON BUTTON AN */
-.btn { 
-    flex: 1; 
-    padding: 16px; 
-    border: none; 
-    border-radius: 8px; 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: background-color 0.2s ease; 
+.btn {
+    flex: 1;
+    padding: 16px;
+    /* border: none; */
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.btn-primary { 
-    background-color: var(--color-primary); 
-    color: var(--color-text); 
+/* .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+} */
+
+/* .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-shadow);
+} */
+
+/* .btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
-.btn-primary:hover:not(:disabled) { 
-    background-color: var(--color-primary-shadow); 
-}
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+} */
 
-.btn-primary:disabled { 
-    background-color: #ccc; 
-    cursor: not-allowed; 
-}
-
-.btn-secondary { 
-    background-color: #e0e0e0; 
-    color: #333; 
-}
-
-.btn-secondary:hover { 
-    background-color: #ccc; 
-}
+/* .btn-secondary:hover {
+    background-color: #ccc;
+} */
 
 /* --- RESPONSIVE ADJUSTMENT --- */
 @media (max-width: 992px) {

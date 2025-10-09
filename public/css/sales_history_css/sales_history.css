@@ -1,5 +1,5 @@
 /* === Wrapper box untuk filter dan tabel === */
-.table-wrapper, 
+.table-wrapper,
 .filter-box {
   background: var(--color-background);
   border-radius: var(--border-radius);
@@ -19,7 +19,7 @@
 }
 
 /* Tombol filter */
-.filter-box button,
+/* .filter-box button,
 .filter-box .btn-primary {
   padding: 8px 18px;
   border: none;
@@ -36,39 +36,40 @@
 .filter-box .btn-primary:hover {
   background: var(--color-primary-highlight);
   transform: translateY(-2px);
-}
+} */
 
 /* Input search */
 .filter-box input {
   flex: 1;
   min-width: 220px;
-  padding: 10px 12px;
+  /* padding: 10px 12px;
   border-radius: var(--border-radius);
   border: 1px solid #ccc;
   outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition: border 0.2s, box-shadow 0.2s; */
 }
 
-.filter-box input:focus {
+/* .filter-box input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 4px rgba(243,166,43,0.5);
-}
+} */
 
 /* === Table styling === */
 .sales-table {
+  --table-border: var(--color-text);
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse: collapse;
   font-size: 14px;
   border-radius: var(--border-radius);
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .sales-table thead th {
   background: var(--color-text-highlight);
   color: #fff;
-  padding: 14px;
+  /* padding: 14px;
   text-align: left;
-  font-weight: 600;
+  font-weight: 600; */
 }
 
 .sales-table tbody tr {
@@ -79,9 +80,9 @@
   background: #fafafa;
 }
 
-.sales-table tbody tr:hover {
+/* .sales-table tbody tr:hover {
   background: var(--color-secondary-highlight);
-}
+} */
 
 .sales-table td {
   padding: 12px;
@@ -91,15 +92,19 @@
   color: var(--color-text);
 }
 
+.sales-table tr:nth-child(even) td {
+    background: var(--color-background-offset);
+}
+
 .sales-table a {
-  color: var(--color-primary-shadow);
+  color: var(--color-text);
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s;
+  /* transition: color 0.2s; */
 }
 
 .sales-table a:hover {
-  color: var(--color-primary);
+  color: var(--color-text-highlight);
   text-decoration: underline;
 }
 
