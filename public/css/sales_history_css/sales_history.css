@@ -4,7 +4,7 @@
   background: var(--color-background);
   border-radius: var(--border-radius);
   padding: 18px 20px;
-  margin-bottom: 24px;
+  margin-block: 24px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   border: 1px solid #e5e5e5;
 }
@@ -19,57 +19,16 @@
   margin-bottom: 24px;
 }
 
-/* .filter-box button {
-    padding: 10px 20px;
-    border: 2px solid var(--color-primary-shadow);
-    border-radius: var(--border-radius);
-    background: var(--color-background);
-    color: var(--color-text);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-} */
-
-/* Tombol filter */
-/* .filter-box button,
-.filter-box .btn-primary {
-  padding: 8px 18px;
-  border: none;
-  border-radius: var(--border-radius);
-  background: var(--color-primary);
-  color: var(--color-text);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.filter-box button:hover,
-.filter-box .btn-primary:hover {
-  background: var(--color-primary-highlight);
-  transform: translateY(-2px);
-} */
-
 /* Input search */
 .filter-box input {
   flex: 1;
   min-width: 220px;
-  /* padding: 10px 12px;
-  border-radius: var(--border-radius);
-  border: 1px solid #ccc;
-  outline: none;
-  transition: border 0.2s, box-shadow 0.2s; */
 }
 
 .filter-box button:hover,
 .filter-box button.active { /* 'active' class untuk filter yang dipilih */
     background: var(--color-primary);
 }
-
-/* .filter-box input:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 4px rgba(243,166,43,0.5);
-} */
 
 /* === Table styling === */
 .table-wrapper {
@@ -84,49 +43,8 @@
     border-collapse: separate; /* Penting untuk border-radius */
     border-spacing: 0;
     font-size: 15px;
-    /* border: 1px solid var(--color-primary-shadow);
-    border-radius: var(--border-radius); */
     overflow: hidden;
 }
-
-/* .sales-table thead th {
-  background: var(--color-text-highlight);
-  color: #fff;
-  padding: 14px;
-  text-align: left;
-  font-weight: 600;
-} */
-
-/* .sales-table tbody tr {
-  transition: background 0.25s;
-}
-
-.sales-table tbody tr:nth-child(odd) {
-  background: #fafafa;
-} */
-
-/* .sales-table tbody tr:hover {
-  background: var(--color-secondary-highlight);
-} */
-
-/* .sales-table th,
-.sales-table td {
-    padding: 14px 20px;
-    text-align: left;
-    border-bottom: 1px solid var(--color-primary-shadow);
-} */
-
-/* .sales-table td {
-  padding: 12px;
-  text-align: left;
-  vertical-align: middle;
-  border-bottom: 1px solid #eee;
-  color: var(--color-text);
-} */
-
-/* .sales-table tr:nth-child(even) td {
-    background: var(--color-background-offset);
-} */
 
 .sales-table a {
   color: var(--color-text);
@@ -144,30 +62,6 @@
     border-bottom: none; /* Hapus border di baris terakhir */
 }
 
-/* Header Tabel (Kuning) */
-/* .sales-table thead th {
-    background: var(--color-primary);
-    color: var(--color-text);
-    font-weight: 600;
-    border-bottom: 2px solid var(--color-primary-shadow);
-} */
-
-/* Baris Tabel (Belang-belang Krem) */
-/* .sales-table tbody tr {
-    transition: background-color 0.2s ease;
-}
-
-.sales-table tbody tr:nth-child(odd) {
-    background-color: var(--color-secondary-highlight); /* Krem sangat muda
-}
-
-.sales-table tbody tr:nth-child(even) {
-    background-color: #FFF8E7; /* Krem sedikit lebih gelap
-}
-
-.sales-table tbody tr:hover {
-    background-color: var(--color-primary-highlight); /* Kuning highlight saat di-hover
-} */
 
 /* Tombol Aksi "Lihat" */
 .sales-table .action-link {

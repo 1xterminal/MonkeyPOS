@@ -3,25 +3,29 @@ function createHeader(root, userData) {
     "class": "header-actions"
   }).append([
     $("<div>", {
-      "class": "user-profile"
+      "class": "right-box"
     }).append([
-      $("<span>", {
-        "class": "material-symbols-outlined",
-        text: "person"
-      }),
-      $("<span>", {
-        text: `Hello, ${userData ? userData.name : "Guest"}`
-      })
-    ]),
-    $("<a>", {
-      "class": "button destructive logout-btn",
-      "href": "#"
-    }).append(
-      $("<span>", {
-        "class": "material-symbols-outlined",
-        text: "logout"
-      })
-    )
+      $("<div>", {
+        "class": "user-profile"
+      }).append([
+        $("<span>", {
+          "class": "material-symbols-outlined",
+          text: "person"
+        }),
+        $("<span>", {
+          text: `Hello, ${userData ? userData.name : "Guest"}`
+        })
+      ]),
+      $("<a>", {
+        "class": "button destructive logout-btn",
+        "href": "#"
+      }).append(
+        $("<span>", {
+          "class": "material-symbols-outlined",
+          text: "logout"
+        })
+      )
+    ])
   ]);
 
   root.replaceWith(header);
@@ -45,7 +49,7 @@ $(document).ready(() => {
   // Render header ke elemen .header-actions lama
   createHeader($(".header-actions"), currentUser);
 
-  const $hamburger = $('<button class="hamburger-menu"><span class="material-symbols-outlined">menu</span></button>');
+  const $hamburger = $('<button class="flat hamburger-menu"><span class="material-symbols-outlined">menu</span></button>');
   $('.content').prepend($hamburger);
 
   const $overlay = $('<div class="sidebar-overlay"></div>');
