@@ -1,0 +1,17 @@
+.products-list-content{
+    font-family: var(--font-family);
+    color: var(--color-text);
+    height: 94%;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+.products-list-content input {
+    margin: 0 10px;
+    width: 60%;
+}
+
+#products-list-add-product-button {
+    margin: 20px 10px;
+}

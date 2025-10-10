@@ -1,0 +1,118 @@
+.receipt-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.receipt-wrapper {
+    width: 100%;
+    max-width: 420px;
+
+    position: relative;
+}
+
+.receipt {
+    width: 100%;
+    padding: 64px 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    border: 1px solid #E49D0080;
+
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.25);
+}
+
+.receipt img {
+    scale: 1.5;
+}
+
+.receipt .datetime {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    font-family: 600;
+}
+.receipt .datetime .time {
+    font-variant-numeric: tabular-nums;
+}
+.receipt .datetime > div {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.receipt .details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+.receipt .details #carts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.receipt .details #carts > .cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.receipt .details #carts > .cart .cart-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.receipt .details #carts > .cart .cart-detail .product-price {
+    opacity: .5;
+    font-variant-numeric: tabular-nums;
+}
+.receipt .details #carts > .cart .total-price {
+    font-size: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.receipt .details .payment {
+    display: flex;
+    flex-direction: column;
+}
+.receipt .details .payment > div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.receipt .details .payment > div span {
+    text-align: right;
+}
+.receipt .details .payment > div .label {
+    flex: 1;
+}
+.receipt .details .payment > div .val {
+    width: 120px;
+    font-variant-numeric: tabular-nums;
+}
+.receipt .details .payment > div.total {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* Update this existing rule */
+.receipt-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    position: absolute;
+    top: -20px;
+    transform: translateY(-100%);
+}

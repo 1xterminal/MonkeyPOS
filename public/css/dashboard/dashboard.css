@@ -1,28 +1,3 @@
-:root {
-    /* primary colors */
-    --color-primary: #FFCD42;
-    --color-primary-shadow: #F3A62B;
-    --color-primary-highlight: #FFEC70;
-
-    /* secondary colors */
-    --color-secondary: #FFE8BD;
-    --color-secondary-shadow: #EFCE9E;
-    --color-secondary-highlight: #FFF6C7;
-
-    /* background */
-    --color-background: #FFFFFF;
-    --color-background-offset: #EEF7FD;
-
-    /* text */
-    --color-text: #082C4C;
-    --color-text-shadow: #000000;
-    --color-text-highlight: #225F74;
-
-    /* other variables */
-    --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --border-radius: 12px;
-}
-
 /* basic reset */
 * {
     margin: 0;
@@ -39,15 +14,10 @@ body {
 }
 
 /* --- main app layout --- */
-.dashboard-container {
+.container {
     display: flex;
     height: 100%;
     gap: 24px;
-}
-
-.content {
-    flex: 1;
-    padding: 24px;
 }
 
 .card {
@@ -55,167 +25,86 @@ body {
     margin-top: 20px;
 }
 
-/* Dashboard Page */
-/* Tombol Logout */
-.logout-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: transparent;
-    border: 1px solid #dcdcdc;
-    border-radius: var(--border-radius);
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-highlight);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.logout-button:hover {
-    border-color: #dc3545;
-    background-color: #fef2f2;
-    color: #dc3545;
-}
-
-.logout-button i {
-    font-size: 1rem;
-}
-
-/* Konten di kanan */
-.dashboard-main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.dashboard-header-title h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin: 0;
-}
-
-.dashboard-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.dashboard-welcome-message {
-    font-size: 1rem;
-    color: var(--color-text-highlight);
-    font-weight: 500;
-}
-
-.dashboard-main-header h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-}
-
-.main-content {
-    flex-grow: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    border: 2px solid var(--color-background-offset);
-    border-radius: var(--border-radius);
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.25);
-}
 
 /* Status card */
 .dashboard-stats-cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
-    flex-wrap: wrap;
+    margin-top: 3.5rem;
 }
 
 .dashboard-card {
-    flex: 1;
-    min-width: 220px;
     padding: 1.5rem;
-    border: 2px solid var(--color-background-offset);
+    border: 1px solid var(--color-background-offset);
+    border-left: 6px solid var(--color-primary);
     border-radius: var(--border-radius);
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.25);
+    background-color: var(--color-background);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(8, 44, 76, 0.1);
 }
 
 .dashboard-card-title {
-    font-size: 0.9rem;
-    color: var(--color-text);
+    font-size: 1rem;
+    color: var(--color-text-highlight);
     margin-bottom: 0.5rem;
 }
 
 .dashboard-card-value {
-    font-size: 1.75rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 600;
     color: var(--color-text);
 }
 
-/* Grafik */
-.dashboard-chart-section {
+/* Filter group */
+.filter-group {
     margin-top: 2.5rem;
-}
-
-.dashboard-chart-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.dashboard-chart-title-group h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin: 0;
-}
-
-.dashboard-chart-title-group p {
-    font-size: 1rem;
-    color: var(--color-text-highlight);
-    font-weight: 600;
+    justify-content: flex-start;
+    gap: 0.75rem;
 }
 
 .dashboard-filter-button {
-    margin-left: 4px;
     padding: 0.6rem 1.2rem;
-    border: 1px solid rgba(228, 157, 0, 0.5);
-    border-radius: var(--border-radius);
-    
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    background-color: var(--color-background);
+    color: var(--color-text-highlight);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.3 ease;
+    transition: all 0.2s ease;
+}
+
+.dashboard-filter-button:hover {
+    background-color: var(--color-background-offset);
+    border-color: var(--color-primary);
 }
 
 .dashboard-filter-button.active {
-    background: linear-gradient(
-        180deg,
-        #FFFBE7,#FDF0CB
-    );
+    background-color: var(--color-primary);
     color: var(--color-text);
-    border-color: var(--color-secondary-shadow);
-    font-weight: 600;
-    position: relative;
+    border-color: var(--color-primary-shadow);
 }
 
-.dashboard-filter-button:not(.active):hover {
-    background: linear-gradient(
-        180deg,
-        #FFFBE7,#FDF0CB
-    );
-    color: var(--color-text-highlight);
-}
+@media (max-width: 480px) {
+    .dashboard-stats-cards {
+        grid-template-columns: 1fr;
+    }
 
-.dashboard-chart-placeholder {
-    height: 350px;
-    border: 1px solid var((--color-primary-highlight));
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text);
-    background-color: #fffbdd;
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.15);
+    .dashboard-card-title {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-card-value {
+        font-size: 1.5rem;
+    }
+
+    .filter-group {
+        flex-wrap: wrap;
+    }
 }

@@ -1,0 +1,47 @@
+/* --- TABLE SUMMARY FOR LAPORAN --- */
+.table-summary {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.table-summary .total-label,
+.table-summary .total-amount {
+    color: var(--color-text);
+}
+
+.table-summary .add-report-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page-actions {
+    position: absolute;
+    top: 80px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+#print-report-btn {
+    display: inline-flex !important;
+}
+
+@media (max-width: 768px) {
+    .page-actions {
+        position: revert;
+    }
+}

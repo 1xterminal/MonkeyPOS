@@ -1,69 +1,110 @@
-/* Box informasi transaksi */
-.transaction-info {
-  margin-bottom: 20px;
-  padding: 20px;
-  background: var(--color-secondary);
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  font-size: 14px;
+/* Container */
+.transaction-card {
+    background: var(--color-background);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    margin-top: 24px;
+    border: 1px solid #e5e5e5;
 }
 
-.transaction-info p {
-  margin: 6px 0;
+/* Header info */
+.transaction-header { margin-bottom: 24px; }
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    background: #FFF8E7;
+    padding: 20px;
+    border-radius: 10px;
+}
+.info-item .label {
+    font-size: 14px;
+    color: var(--color-text-highlight);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.info-item .value {
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
-/* Table styling */
-.transaction-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  border-radius: var(--border-radius);
-  overflow: hidden;
+/* Items section */
+.items-section h2 {
+    margin-bottom: 16px;
+    color: var(--color-text);
+    font-size: 1.5rem;
 }
 
-.transaction-table thead th {
-  background: var(--color-text-highlight);
-  color: #fff;
-  padding: 12px;
-  text-align: left;
+/* Table */
+.table-responsive { overflow-x: auto; }
+
+
+.items-table th,
+.items-table td {
+    text-align: left;
 }
 
-.transaction-table tbody tr:nth-child(odd) {
-  background: #f9f9f9;
+
+/* Utility classes */
+.text-right { text-align: right !important; }
+.text-center { text-align: center !important; }
+
+/* Summary area */
+.payment-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 24px;
+    align-items: flex-start;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 24px;
+}
+.summary-left {
+    flex: 1 1 200px;
+}
+.summary-left .meta {
+    margin-bottom: 8px;
+}
+.summary-right {
+    flex: 1 1 360px;
+    max-width: 400px;
+    margin-left: auto;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+.summary-row.total {
+    border-top: 2px solid #ddd;
+    margin-top: 8px;
+    padding-top: 12px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.cash-detail {
+    display: none; /* Disembunyikan oleh default, diatur oleh JS */
 }
 
-.transaction-table tbody tr:hover {
-  background: var(--color-secondary-highlight);
+/* Actions button */
+.actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.transaction-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-}
+@media screen and (max-width: 768px) {
+    .items-table th,
+    .items-table td {
+        text-align: right !important;
+    }
 
-.transaction-table tfoot td {
-  padding: 12px;
-  font-weight: bold;
-  background: #fafafa;
-}
+    .text-right { text-align: right !important; }
+    .text-center { text-align: right !important; }
 
-/* Back button */
-.back-btn {
-  display: flex;
-  justify-content: left;
-}
-
-.back-btn a {
-  display: inline-block;
-  padding: 10px 24px;
-  background: var(--color-primary);
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  color: var(--color-text);
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.back-btn a:hover {
-  background: var(--color-primary-highlight);
+    .summary-right {
+        max-width: revert;
+        margin-left: 0;
+    }
 }

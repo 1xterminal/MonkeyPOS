@@ -3,24 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Daftar Member | MonkeyPOS</title> <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
-    <link rel="stylesheet" href="../../public/css/style.css"> 
+    <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/components/sidebar.css">
+    <link rel="stylesheet" href="../../public/css/members-list/member_list.css">
 </head>
 <body>
 
     <div class="container">
-        
+
         <div class="sidebar"></div>
 
         <main class="content">
-            <h1>Daftar Produk</h1>
-            div.
+            <div class="header-actions"></div>
+            <h1>Daftar Member</h1>
+            <div class="members-list-content">
+                <div class="search-wrapper">
+                    <input type="text" id="member-search-input" placeholder="Cari Member">
+                    <button type="submit" id="member-search-button">Search</button>
+                </div>
+                <div class="members-table"></div>
+                <div class="members-add-content">
+                    <h2>Tambahkan Member Baru</h2>
+                    <form action="" id="members-add-form">
+                        <input type="text" id="members-add-name" placeholder="Nama Member" required>
+                        <input type="email" id="members-add-email" placeholder="Email" required>
+                        <input type="number" id="members-add-phone" placeholder="No. Telepon" required>
+                        <button class="filled" id="members-add-button" type="submit">Tambah</button>
+                    </form>
+                </div>
+            </div>
         </main>
+    </div>
+
+    <div class="edit-popup" id="members-edit-popup">
+        <div class="members-edit-popup-content">
+            <span class="button" id="members-edit-close-button">&times;</span>
+            <h2>Edit Member</h2>
+            <form id="members-edit-form">
+                <input type="hidden" id="members-edit-original-email">
+                <input type="text" id="members-edit-name" placeholder="Nama Member" required>
+                <input type="email" id="members-edit-email" placeholder="Email" required>
+                <input type="number" id="members-edit-phone" placeholder="No. Telepon" required>
+                <button class="filled" id="members-edit-button" type="submit">Simpan Perubahan</button>
+            </form>
         </div>
     </div>
+
+    <script src="../../public/js/helpers/storage.js"></script>
     <script src="../../public/js/components/sidebar.js"></script>
+    <script src="../../public/js/components/header.js"></script>
+    <script src="../../public/js/components/table.js"></script>
     <script src="../../public/js/app.js"></script>
+    <script src="../../public/js/members-list/member-list.js"></script>
 </body>
 </html>
