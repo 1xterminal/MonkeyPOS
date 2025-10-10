@@ -65,7 +65,7 @@ function createSidebar(root, menus) {
       }))
     ]);
 
-  const $closeButton = $('<button class="sidebar-close-btn"><span class="material-symbols-outlined">close</span></button>');
+  const $closeButton = $('<button class="flat sidebar-close-btn"><span class="material-symbols-outlined">close</span></button>');
   $sidebar.prepend($closeButton);
 
   $closeButton.on('click', () => {

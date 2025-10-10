@@ -86,9 +86,9 @@ body {
 }
 
 .dashboard-filter-button.active {
-     background-color: var(--color-primary);
-     color: var(--color-text);
-     border-color: var(--color-primary-shadow);
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border-color: var(--color-primary-shadow);
 }
 
 @media (max-width: 480px) {

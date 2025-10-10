@@ -84,6 +84,10 @@ table .num { text-align: end; }
         overflow: hidden;
     }
 
+    table tr:nth-child(even) {
+        background: #FFF9E9;
+    }
+
     table td {
         display: block;
         text-align: right;
@@ -99,6 +103,22 @@ table .num { text-align: end; }
         content: attr(data-label);
         float: left;
         font-weight: bold;
+    }
+
+    table td.table-actions button {
+        padding-block: 12px;
+    }
+
+    table td.table-actions::before {
+        content: '';
+    }
+
+    table tr:last-child td {
+        border-bottom: 1px dotted var(--table-border) !important;
+    }
+
+    table tr:last-child td:last-child {
+        border-bottom: none !important;
     }
 
     table .num {

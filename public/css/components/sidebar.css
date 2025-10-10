@@ -87,22 +87,15 @@ a {
     flex: 1;
 }
 
-.hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--color-text);
-    cursor: pointer;
-}
-
 .sidebar-close-btn {
     display: none;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     background: none;
     border: none;
     color: var(--color-text);
+    padding: 8px;
     cursor: pointer;
 }
 
@@ -131,15 +124,11 @@ a {
     }
 
     body.sidebar-open .sidebar {
-        left: 10px;
-    }
-
-    .hamburger-menu {
-        display: block;
+        display: flex;
     }
 
     .sidebar-close-btn {
-        display: block;
+        display: flex;
     }
 
     body.sidebar-open .sidebar-overlay {
