@@ -1,26 +1,9 @@
 // Pakai jQuery
 $(document).ready(() => {
+    // ambil data produk dari localStorage.
+    const products = Storage.getLocal("products", []);
 
-    // --- DATA DUMMY PRODUK (masih hardcode, masih menunggu product page & functionalities nya jadi(di kerjakan javier))---
-    const products = [
-        { id: 1, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
-        { id: 2, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 3, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 4, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 5, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 6, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 7, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 8, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 9, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 10, name: "Cappuccino", sku: "CP002", price: 25000, image: "../../public/img/products/cappuccino.jpg" },
-        { id: 11, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
-        { id: 12, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
-        { id: 13, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
-        { id: 14, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
-        { id: 15, name: "Kopi Hitam", sku: "KH001", price: 15000, image: "../../public/img/products/kopi-hitam.png" },
-    ];
-
-    // --- VARIABEL & ELEMEN DOM (jQuery style) ---
+    // --- VARIABEL & ELEMEN DOM ---
     const $productList = $('#product-list');
     const $cartItems = $('#cart-items');
     const $subtotalEl = $('#subtotal');
@@ -32,34 +15,62 @@ $(document).ready(() => {
     let cart = [];
 
 
-    // --- FUNCTION FUNCTION ---
+    // --- FUNGSI-FUNGSI ---
     function formatRupiah(number) {
         return `Rp ${number.toLocaleString('id-ID')}`;
     }
 
     function renderProducts(productData) {
         $productList.empty();
+
+        if (!productData || productData.length === 0) {
+            $productList.addClass('empty-state');
+            $productList.html(`
+                <div class="empty-state-content">
+                    <span class="material-symbols-outlined">sentiment_dissatisfied</span>
+                    <p>Belum Ada Produk</p>
+                    <span>Silakan tambahkan produk baru di halaman "Daftar Produk" untuk memulai penjualan.</span>
+                </div>
+            `);
+            return;
+        }
+
+        $productList.removeClass('empty-state');
+
         productData.forEach(product => {
+            const imageUrl = product.image || 'https://via.placeholder.com/150/EEEEEE/000000/?text=No+Image';
             const $productCard = $(`
                 <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${imageUrl}" alt="${product.name}">
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-price">${formatRupiah(product.price)}</p>
                 </div>
             `);
-            // event listener untuk menambah product ke keranjang
+
             $productCard.on('click', () => addProductToCart(product));
             $productList.append($productCard);
         });
     }
 
     function addProductToCart(product) {
-        const existingItem = cart.find(item => item.id === product.id);
+        const existingItem = cart.find(item => item.sku === product.sku);
+        const originalProduct = products.find(p => p.sku === product.sku);
+        const maxStock = originalProduct ? originalProduct.stock : 0;
+
         if (existingItem) {
-            existingItem.quantity++;
+            if (existingItem.quantity < maxStock) {
+                existingItem.quantity++;
+            } else {
+                alert(`Stok untuk ${product.name} tidak mencukupi! (Maks: ${maxStock})`);
+            }
         } else {
-            cart.push({ ...product, quantity: 1 });
+            if (maxStock > 0) {
+                cart.push({ ...product, quantity: 1 });
+            } else {
+                alert(`Stok untuk ${product.name} sudah habis!`);
+            }
         }
+
         renderCart();
     }
 
@@ -76,14 +87,23 @@ $(document).ready(() => {
                             <p class="cart-item-price">${formatRupiah(item.price)}</p>
                         </div>
                         <div class="cart-item-actions">
-                            <input type="number" class="item-quantity" value="${item.quantity}" min="1" data-id="${item.id}">
-                            <button class="remove-item-btn" data-id="${item.id}">×</button>
+                            <button class="qty-btn qty-minus" data-sku="${item.sku}">
+                                <span class="material-symbols-outlined small">remove</span>
+                            </button>
+                            <input type="number" class="item-quantity" value="${item.quantity}" min="1" data-sku="${item.sku}">
+                            <button class="qty-btn qty-plus" data-sku="${item.sku}">
+                                <span class="material-symbols-outlined small">add</span>
+                            </button>
+                            <button class="remove-item-btn" data-sku="${item.sku}">
+                                <span class="material-symbols-outlined small">close</span>
+                            </button>
                         </div>
                     </div>
                 `);
                 $cartItems.append($cartItem);
             });
         }
+
         updateTotals();
         updateCheckoutButtonState();
     }
@@ -92,7 +112,6 @@ $(document).ready(() => {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const tax = subtotal * 0.11;
         const total = subtotal + tax;
-
         $subtotalEl.text(formatRupiah(subtotal));
         $taxEl.text(formatRupiah(tax));
         $totalPriceEl.text(formatRupiah(total));
@@ -102,41 +121,64 @@ $(document).ready(() => {
         $checkoutButton.prop('disabled', cart.length === 0);
     }
 
-    function handleCartActions(event) {
-        const $target = $(event.target);
-        const productId = parseInt($target.data('id'));
+    function handleCartActions(sku, action) {
+        const itemInCart = cart.find(item => item.sku === sku);
+        if (!itemInCart) return;
 
-        if ($target.hasClass('remove-item-btn')) {
-            cart = cart.filter(item => item.id !== productId);
+        const originalProduct = products.find(p => p.sku === sku);
+        const maxStock = originalProduct ? originalProduct.stock : 0;
+
+        switch (action) {
+            case 'remove': cart = cart.filter(item => item.sku !== sku); break;
+            case 'plus':
+                if (itemInCart.quantity < maxStock) { itemInCart.quantity++; } else { alert(`Stok untuk ${itemInCart.name} tidak mencukupi! (Maks: ${maxStock})`); }
+                break;
+            case 'minus':
+                if (itemInCart.quantity > 1) { itemInCart.quantity--; } else { cart = cart.filter(item => item.sku !== sku); }
+                break;
         }
 
-        if ($target.hasClass('item-quantity')) {
-            const newQuantity = parseInt($target.val());
-            const itemInCart = cart.find(item => item.id === productId);
-            if (itemInCart && newQuantity > 0) {
-                itemInCart.quantity = newQuantity;
-            } else {
-                cart = cart.filter(item => item.id !== productId);
-            }
-        }
         renderCart();
     }
-    
 
     // --- EVENT LISTENERS ---
     $searchInput.on('input', (e) => {
         const searchTerm = $(e.target).val().toLowerCase();
-        const filteredProducts = products.filter(product => 
-            product.name.toLowerCase().includes(searchTerm) ||
-            product.sku.toLowerCase().includes(searchTerm)
-        );
+        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm));
         renderProducts(filteredProducts);
     });
-    
-    // event delegation untuk item yang dinamis
-    $cartItems.on('change', '.item-quantity', handleCartActions);
-    $cartItems.on('click', '.remove-item-btn', handleCartActions);
 
+    $cartItems.on('click', '.remove-item-btn', function() {
+        handleCartActions($(this).data('sku'), 'remove');
+    });
+
+    $cartItems.on('click', '.qty-plus', function() {
+        handleCartActions($(this).data('sku'), 'plus');
+    });
+
+    $cartItems.on('click', '.qty-minus', function() {
+        handleCartActions($(this).data('sku'), 'minus');
+    });
+
+    $cartItems.on('change', '.item-quantity', function() {
+
+        const sku = $(this).data('sku');
+        let newQuantity = parseInt($(this).val());
+        const itemInCart = cart.find(item => item.sku === sku);
+        const originalProduct = products.find(p => p.sku === sku);
+        const maxStock = originalProduct ? originalProduct.stock : 0;
+
+        if (newQuantity > maxStock) {
+            alert(`Stok tidak mencukupi! (Maks: ${maxStock})`);
+            newQuantity = maxStock;
+            $(this).val(newQuantity);
+        }
+
+        if (itemInCart) {
+            if (newQuantity > 0) { itemInCart.quantity = newQuantity; } else { cart = cart.filter(item => item.sku !== sku); }
+            renderCart();
+        }
+    });
     $checkoutButton.on('click', () => {
         if (cart.length > 0) {
             const orderDetails = {
@@ -145,7 +187,8 @@ $(document).ready(() => {
                 tax: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 0.11,
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.11,
             };
-            localStorage.setItem('currentOrder', JSON.stringify(orderDetails));
+
+            Storage.setLocal('currentOrder', orderDetails);
             window.location.href = 'pos_payment.html';
         }
     });

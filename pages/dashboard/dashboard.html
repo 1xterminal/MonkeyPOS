@@ -6,72 +6,50 @@
     <title>Dashboard | MonkeyPOS</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+    <link rel="stylesheet" href="../../public/css/style.css"> 
     <link rel="stylesheet" href="../../public/css/dashboard/dashboard.css"> 
     <link rel="stylesheet" href="../../public/css/components/sidebar.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <div class="dashboard-container">
+    <div class="container">
 
         <!-- Sidebar -->
         <div class="sidebar"></div>
 
         <!-- Isi Content -->
-        <main class="main-content">
-            <header class="dashboard-main-header">
-                <div class="dashboard-header-title">
-                    <h1>Dashboard</h1>
-                </div>
-            
-                <div class="dashboard-header-actions">
-                    <div class="dashboard-welcome-group">
-                        <i class='bx bxs-user'></i>
-                        <span class="welcome-message">Selamat Datang, EMP1234</span>
-                    </div>
-                    <button class="logout-button" title="Log Out">
-                        <i class='bx bx-log-out'></i>
-                    </button>
-                </div>
-                </header>
+        <main class="content">
+            <div class="header-actions"></div>
 
             <section class="dashboard-stats-cards">
                 <div class="dashboard-card">
-                    <p class="dashboard-card-title">Total penjualan hari ini</p>
+                    <p class="dashboard-card-title">Total penjualan</p>
                     <p class="dashboard-card-value">Rp. 0</p>
                 </div>
                 <div class="dashboard-card">
-                    <p class="dashboard-card-title">Total transaksi hari ini</p>
+                    <p class="dashboard-card-title">Total transaksi</p>
                     <p class="dashboard-card-value">0 Transaksi</p>
                 </div>
                 <div class="dashboard-card">
-                    <p class="dashboard-card-title">Peringatan stok rendah</p>
+                    <p class="dashboard-card-title">Peringatan stok rendah <10</p>
                     <p class="dashboard-card-value">0 Produk</p>
                 </div>
             </section>
 
-            <section class="dashboard-chart-section">
-                <div class="dashboard-chart-header">
-                    <div class="dashboard-chart-title-group">
-                        <h3>Total Penjualan</h3>
-                        <p>Belum ada penjualan</p>
-                    </div>
-                    <div class="filter-group">
-                        <button class="dashboard-filter-button">3 Bulan Lalu</button>
-                        <button class="dashboard-filter-button">30 Hari Lalu</button>
-                        <button class="dashboard-filter-button">7 Hari Lalu</button>
-                    </div>
-                </div>
-            
-                <div class="dashboard-chart-placeholder">
-                    <span>grafik penjualan</span>
-                </div>
-            </section>
-        </main>
-        </main>
+            <div class="filter-group">
+                <button class="dashboard-filter-button"data-period="3bulan">3 Bulan Lalu</button>
+                <button class="dashboard-filter-button" data-period="30hari">30 Hari Lalu</button>
+                <button class="dashboard-filter-button" data-period="7hari">7 Hari Lalu</button>
+                <button class="dashboard-filter-button" data-period="hariini">Hari ini</button>
+            </div>
 
+        </main>
     </div>
+
+    <script src="../../public/js/helpers/storage.js"></script>
     <script src="../../public/js/components/sidebar.js"></script>
+    <script src="../../public/js/components/header.js"></script>
     <script src="../../public/js/dashboard/dashboard.js"></script>
+    <script src="../../public/js/app.js"></script>
 </body>
 </html>

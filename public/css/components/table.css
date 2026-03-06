@@ -1,0 +1,127 @@
+table {
+    --table-border: var(--yellow-30);
+
+    width: 100%;
+
+    border: 1px solid var(--table-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--table-border);
+    border-right: 1px solid var(--table-border);
+
+    transition: .1s ease-out;
+}
+
+table tr {
+    background: #FFF9E9;
+}
+table tbody tr:hover td {
+    background: var(--yellow-80);
+}
+
+table tr:nth-child(even) {
+    background: var(--yellow-90);
+}
+
+table tr th:last-child,
+table tr td:last-child {
+    border-right: none;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table thead tr {
+    background: var(--color-primary);
+}
+
+table tr button {
+    padding: 8px 12px;
+
+    border: none;
+    border-radius: 0;
+
+    background: none;
+
+    box-shadow: none;
+
+    cursor: pointer;
+}
+table tr button:hover {
+    background: var(--yellow-80);
+    box-shadow: none;
+}
+table tr td:has(button) {
+    padding: 0;
+}
+
+table .num { text-align: end; }
+
+@media (max-width: 768px) {
+    table {
+        border: none;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--table-border);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    table tr:nth-child(even) {
+        background: #FFF9E9;
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px dotted var(--table-border);
+        border-right: none;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    table td.table-actions button {
+        padding-block: 12px;
+    }
+
+    table td.table-actions::before {
+        content: '';
+    }
+
+    table tr:last-child td {
+        border-bottom: 1px dotted var(--table-border) !important;
+    }
+
+    table tr:last-child td:last-child {
+        border-bottom: none !important;
+    }
+
+    table .num {
+        text-align: right;
+    }
+}

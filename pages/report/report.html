@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Kinerja - MonkeyPOS</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/components/sidebar.css">
+    <link rel="stylesheet" href="../../public/css/components/table.css">
+    <link rel="stylesheet" href="../../public/css/report/report.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar"></div>
+
+        <main class="content">
+            <div class="header-actions"></div>
+            <h1>Laporan Kinerja Kasir</h1>
+
+            <div class="performance-summary">
+                <div class="summary-item">
+                    <span class="label">Nama Kasir:</span>
+                    <span id="cashier-name" class="value">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Total Penjualan (7 Hari Terakhir):</span>
+                    <span id="total-sales" class="value">Rp 0</span>
+                </div>
+            </div>
+
+            <h2>Rincian Penjualan Produk</h2>
+            <div id="product-sales-table-container"></div>
+
+            <div class="page-actions">
+                <button id="print-report-btn" class="filled">
+                    <span class="material-symbols-outlined">print</span>
+                    Cetak Laporan
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../../public/js/helpers/storage.js"></script>
+    <script src="../../public/js/components/sidebar.js"></script>
+    <script src="../../public/js/components/header.js"></script>
+    <script src="../../public/js/components/table.js"></script>
+    <script src="../../public/js/report/report.js"></script>
+    <script src="../../public/js/app.js"></script>
+</body>
+</html>

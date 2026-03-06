@@ -1,10 +1,10 @@
 /* === Wrapper box untuk filter dan tabel === */
-.table-wrapper, 
+.table-wrapper,
 .filter-box {
   background: var(--color-background);
   border-radius: var(--border-radius);
   padding: 18px 20px;
-  margin-bottom: 24px;
+  margin-block: 24px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   border: 1px solid #e5e5e5;
 }
@@ -16,88 +16,85 @@
   gap: 12px;
   align-items: center;
   justify-content: space-between;
-}
-
-/* Tombol filter */
-.filter-box button,
-.filter-box .btn-primary {
-  padding: 8px 18px;
-  border: none;
-  border-radius: var(--border-radius);
-  background: var(--color-primary);
-  color: var(--color-text);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.filter-box button:hover,
-.filter-box .btn-primary:hover {
-  background: var(--color-primary-highlight);
-  transform: translateY(-2px);
+  margin-bottom: 24px;
 }
 
 /* Input search */
 .filter-box input {
   flex: 1;
   min-width: 220px;
-  padding: 10px 12px;
-  border-radius: var(--border-radius);
-  border: 1px solid #ccc;
-  outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
 }
 
-.filter-box input:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 4px rgba(243,166,43,0.5);
+.filter-box button:hover,
+.filter-box button.active { /* 'active' class untuk filter yang dipilih */
+    background: var(--color-primary);
 }
 
 /* === Table styling === */
+.table-wrapper {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
 .sales-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.sales-table thead th {
-  background: var(--color-text-highlight);
-  color: #fff;
-  padding: 14px;
-  text-align: left;
-  font-weight: 600;
-}
-
-.sales-table tbody tr {
-  transition: background 0.25s;
-}
-
-.sales-table tbody tr:nth-child(odd) {
-  background: #fafafa;
-}
-
-.sales-table tbody tr:hover {
-  background: var(--color-secondary-highlight);
-}
-
-.sales-table td {
-  padding: 14px;
-  border-bottom: 1px solid #eee;
-  color: var(--color-text);
+    width: 100%;
+    border-collapse: separate; /* Penting untuk border-radius */
+    border-spacing: 0;
+    font-size: 15px;
+    overflow: hidden;
 }
 
 .sales-table a {
-  color: var(--color-primary-shadow);
+  color: var(--color-text);
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s;
+  /* transition: color 0.2s; */
 }
 
 .sales-table a:hover {
-  color: var(--color-primary);
+  color: var(--color-text-highlight);
   text-decoration: underline;
+}
+
+.sales-table tr:last-child td {
+    border-bottom: none; /* Hapus border di baris terakhir */
+}
+
+
+/* Tombol Aksi "Lihat" */
+.sales-table .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-highlight);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sales-table .action-link .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.sales-table .action-link:hover {
+    color: var(--color-primary-shadow);
+    text-decoration: underline;
+}
+
+/* Button view tambahan */
+.btn-view {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-view:hover {
+    background-color: #45a049;
 }
 
